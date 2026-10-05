@@ -13,7 +13,7 @@ objectifs:
   - "Calculer une énergie de liaison à partir des masses atomiques mesurées (AME2020)."
   - "Lire la courbe B/A : son maximum en Ni-62, et pourquoi fission et fusion libèrent de l'énergie."
   - "Interpréter les termes de la goutte liquide et repérer ce qu'elle ignore."
-  - "Mettre en évidence les nombres magiques directement dans les masses, avec S₂ₙ."
+  - 'Mettre en évidence les nombres magiques directement dans les masses, avec \(S_{2n}\).'
 prerequis: []
 code: [donnees_liaison.py, analyse_liaison.py, trace_liaison.py, energies_liaison.csv]
 sources: >-
@@ -174,9 +174,9 @@ de Namibie (Meija *et al.*, *Pure Appl. Chem.* 88 (2016) 293).
 
 ### Le calcul
 
-```
-B(A,Z) = [ Z·m(¹H) + N·m(n) − M_atomique(A,Z) ] × 931,494 MeV/u
-```
+$$
+B(A,Z) = \bigl[\, Z\,m({}^{1}\mathrm{H}) + N\,m_n - M_{\text{atomique}}(A,Z) \,\bigr] \times 931{,}494~\text{MeV/u}
+$$
 
 On utilise la masse **atomique** de ¹H et celle du nuclide : les Z électrons
 se compensent. On néglige ainsi l'énergie de liaison électronique (~0,8 MeV
@@ -214,9 +214,9 @@ les 289 isotopes naturels, tous mesurés. La source est rappelée en pied de
 figure. Courbe rouge : le modèle de la goutte liquide, tracé le long de la
 vallée de stabilité qu'il prédit lui-même,
 
-```
-Z₀(A) = A / (2 + (a_C / 2a_A) · A^(2/3))
-```
+$$
+Z_0(A) = \frac{A}{2 + \dfrac{a_C}{2 a_A}\, A^{2/3}}
+$$
 
 c'est-à-dire le Z qui maximise B à A fixé (on annule dB/dZ).
 
@@ -398,7 +398,7 @@ où le modèle vaut 0,03 MeV/nucléon.
 
 Comment prouver que le noyau a une structure en couches, **sans aucun modèle** ?
 En suivant l'énergie de séparation de **deux** neutrons,
-`S_2n = B(A,Z) − B(A−2,Z)`, le long d'une chaîne isotopique. On en prend deux
+$$S_{2n} = B(A,Z) - B(A-2,Z)$$, le long d'une chaîne isotopique. On en prend deux
 à la fois pour éliminer l'oscillation pair-impair.
 
 | chaîne | N | S_2n (MeV) | chute |
@@ -437,17 +437,17 @@ mesurées.**
 
 ## À retenir
 
-- `B(A,Z) = [Z·m(¹H) + N·m(n) − M(A,Z)]·c²` : l'énergie de liaison se calcule
+- $$B(A,Z) = \bigl[Z\,m({}^{1}\mathrm{H}) + N\,m_n - M(A,Z)\bigr]\,c^2$$ : l'énergie de liaison se calcule
   directement à partir des masses atomiques mesurées (AME2020, 2450 masses
   mesurées sur 2825 nucléides retenus).
-- `B/A` culmine à **Ni-62** (8,7946 MeV), pas à Fe-56 : couper un noyau lourd
+- $$B/A$$ culmine à **Ni-62** (8,7946 MeV), pas à Fe-56 : couper un noyau lourd
   (fission) ou réunir des noyaux légers (fusion) libère de l'énergie.
 - La **goutte liquide** (volume, surface, Coulomb, asymétrie, appariement)
-  reproduit `B/A` à ~0,03 MeV par nucléon au voisinage de la vallée de
+  reproduit $$B/A$$ à ~0,03 MeV par nucléon au voisinage de la vallée de
   stabilité ; le maximum
   naît du duel surface contre Coulomb.
 - Ce qu'elle ignore se lit dans les données : des bosses en N = 50, 82, 126
-  et des chutes de `S₂ₙ` juste après les **nombres magiques**. Le noyau a une
+  et des chutes de $$S_{2n}$$ juste après les **nombres magiques**. Le noyau a une
   structure en couches.
 
 ---

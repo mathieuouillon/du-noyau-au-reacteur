@@ -36,6 +36,21 @@ au début du texte, puis, à la fin, une section `## Bibliographie` suivie de
 l'article doit suivre l'ordre des leçons. Le plan du cours, la navigation et
 la page Code se mettent à jour d'eux-mêmes.
 
+## Écrire une formule
+
+Les formules sont rendues par MathJax (activé pour toutes les leçons et tous
+les onglets dans `_config.yml`). On écrit du LaTeX entre `$$ … $$` :
+
+- **dans le texte** : `l'énergie $$B/A$$ culmine…` ;
+- **en bloc** : `$$` seul sur une ligne, la formule, puis `$$`, avec une ligne
+  vide avant et après.
+
+Quelques règles : virgule décimale `0{,}726` ; valeur absolue `\lvert x \rvert`
+(jamais `|`, qui casse les tableaux) ; ne jamais écrire deux accolades
+ouvrantes collées, réservées à Liquid ; `\begin{aligned}` ou
+`\begin{gathered}` pour couper une formule trop large. Les noms de fichiers,
+de variables du code et les commandes restent entre accents graves.
+
 ## Ajouter une référence
 
 Ajouter une entrée à `_data/bibliographie.yml` (`type` : `livre`, `article`,

@@ -49,47 +49,47 @@ _Flux rapide, flux thermique et source de fission du cœur réfléchi._
 
 ### 1.1 What the flux actually is
 
-Everything is built on the **scalar flux** `phi(r, E)`. The name is misleading:
+Everything is built on the **scalar flux** $$\phi(\boldsymbol{r}, E)$$. The name is misleading:
 it is not a flow of anything, and it has no direction. It is
 
-```
-phi = n * v          [neutrons/cm^2/s]
-```
+$$
+\phi = n\, v \qquad [\text{neutrons/cm}^2\text{/s}]
+$$
 
 the neutron density times their speed. The reason it is the useful variable is
 that reaction rates are linear in it:
 
-```
-reaction rate density = Sigma_x * phi     [reactions/cm^3/s]
-```
+$$
+\text{reaction rate density} = \Sigma_x\, \phi \qquad [\text{reactions/cm}^3\text{/s}]
+$$
 
-where `Sigma_x` is a **macroscopic cross section** in 1/cm — the probability of
-reaction type `x` per unit path length. A better mental model for `phi` is
+where $$\Sigma_x$$ is a **macroscopic cross section** in 1/cm — the probability of
+reaction type $$x$$ per unit path length. A better mental model for $$\phi$$ is
 *total neutron track length per unit volume per unit time*. Reaction rate =
 track length × probability per length. That framing makes the units obvious and
 makes Monte Carlo track-length estimators intuitive later.
 
 Consequence worth internalizing: **flux is not power**. Power follows the
-fission rate `Sigma_f * phi`. In a core with a water reflector the thermal flux
+fission rate $$\Sigma_f\, \phi$$. In a core with a water reflector the thermal flux
 peaks *outside* the fuel, where the power is exactly zero. You will see this in
 Test 4.
 
 ### 1.2 Where diffusion comes from
 
 The honest equation is the **neutron transport equation**, which tracks
-`psi(r, E, Omega)` — flux resolved by direction `Omega`, a 6-D problem. Nobody
+$$\psi(\boldsymbol{r}, E, \boldsymbol{\Omega})$$ — flux resolved by direction $$\boldsymbol{\Omega}$$, a 6-D problem. Nobody
 wants to solve that if they can avoid it.
 
 Diffusion theory is what you get by expanding the angular dependence in
 spherical harmonics and truncating after the linear term (the "P1"
 approximation). The result is **Fick's law**:
 
-```
-J = -D grad(phi)
-```
+$$
+\boldsymbol{J} = -D\, \nabla\phi
+$$
 
-Net current flows down the flux gradient. `D` is the diffusion coefficient in
-cm, roughly `1/(3 Sigma_tr)`.
+Net current flows down the flux gradient. $$D$$ is the diffusion coefficient in
+cm, roughly $$1/(3\Sigma_{\text{tr}})$$.
 
 This is an *approximation*, and knowing when it breaks is most of the skill:
 
@@ -108,38 +108,39 @@ correct one.
 
 ### 1.3 The balance equation
 
-Write the neutron balance for one energy group `g`, in steady state. Every term
+Write the neutron balance for one energy group $$g$$, in steady state. Every term
 is neutrons/cm³/s:
 
-```
--div(D_g grad phi_g)  +  Sigma_r,g phi_g  =  sum_{g'!=g} Sigma_s,g'->g phi_g'  +  chi_g/k * sum_g' nu_Sigma_f,g' phi_g'
-\__________________/     \______________/     \_________________________/     \___________________________________/
-     leakage                 removal                  in-scattering                      fission
-```
+$$
+\underbrace{-\nabla\cdot\left(D_g \nabla\phi_g\right)}_{\text{leakage}}
++ \underbrace{\Sigma_{r,g}\, \phi_g}_{\text{removal}}
+= \underbrace{\sum_{g' \neq g} \Sigma_{s,g'\to g}\, \phi_{g'}}_{\text{in-scattering}}
++ \underbrace{\frac{\chi_g}{k} \sum_{g'} \nu\Sigma_{f,g'}\, \phi_{g'}}_{\text{fission}}
+$$
 
 - **Leakage** — net flow out of a volume, from Fick's law.
-- **Removal** — everything that takes a neutron out of group `g` *here*:
+- **Removal** — everything that takes a neutron out of group $$g$$ *here*:
   absorption, plus scattering to any other group.
 - **In-scattering** — neutrons arriving from other groups.
 - **Fission** — neutrons born from fissions in all groups, distributed over
-  energy by the fission spectrum `chi_g`.
+  energy by the fission spectrum $$\chi_g$$.
 
 #### The self-scatter subtlety
 
-Why is the removal term `Sigma_a + Sigma_s,out` and not the total cross section?
+Why is the removal term $$\Sigma_a + \Sigma_{s,\text{out}}$$ and not the total cross section?
 Start from the honest form, with total cross section on the left and *all*
-in-scattering including `g -> g` on the right:
+in-scattering including $$g \to g$$ on the right:
 
-```
-... + Sigma_t,g phi_g = ... + Sigma_s,g->g phi_g + sum_{g'!=g} Sigma_s,g'->g phi_g' + fission
-```
+$$
+\dots + \Sigma_{t,g}\, \phi_g = \dots + \Sigma_{s,g\to g}\, \phi_g + \sum_{g' \neq g} \Sigma_{s,g'\to g}\, \phi_{g'} + \text{fission}
+$$
 
-The `Sigma_s,g->g phi_g` term appears on both sides — a neutron that scatters
+The $$\Sigma_{s,g\to g}\, \phi_g$$ term appears on both sides — a neutron that scatters
 within its own group has not changed group, so it is not a loss. Move it left:
 
-```
-(Sigma_t,g - Sigma_s,g->g) phi_g = Sigma_a,g + sum_{g'!=g} Sigma_s,g->g'
-```
+$$
+\Sigma_{t,g} - \Sigma_{s,g\to g} = \Sigma_{a,g} + \sum_{g' \neq g} \Sigma_{s,g\to g'} \;\equiv\; \Sigma_{r,g}
+$$
 
 which is exactly `Material.sigma_r`. This is why the code ignores the diagonal
 of `sigma_s`. It genuinely does not matter what you put there.
@@ -151,9 +152,9 @@ def sigma_r(self):
     return self.sigma_a + out_scatter + self.D * self.buckling_b2
 ```
 
-The third term is a trick: `D*B^2` is a *pseudo-absorption* representing leakage
-in the un-modeled z direction. If the axial flux is a cosine of buckling `B^2`,
-the axial leakage is exactly `D B^2 phi`, so a 2-D solve with this term
+The third term is a trick: $$D B^2$$ is a *pseudo-absorption* representing leakage
+in the un-modeled z direction. If the axial flux is a cosine of buckling $$B^2$$,
+the axial leakage is exactly $$D B^2 \phi$$, so a 2-D solve with this term
 approximates a 3-D core. Cheap and surprisingly effective.
 
 ### 1.4 Multigroup: discretizing energy
@@ -184,31 +185,31 @@ the README warns that the data pipeline usually outweighs the solver.
 Look at the balance equation again. There is no external source — fission is
 proportional to the flux itself. So the equation is homogeneous:
 
-```
-A phi = (1/k) F phi
-```
+$$
+A\, \phi = \frac{1}{k}\, F\, \phi
+$$
 
-A homogeneous system has only the trivial solution `phi = 0` *unless* the
-operator is singular in just the right way. Generically no `phi` balances
+A homogeneous system has only the trivial solution $$\phi = 0$$ *unless* the
+operator is singular in just the right way. Generically no $$\phi$$ balances
 exactly: a reactor is either subcritical (dying) or supercritical (growing).
 
-`k` is the fudge factor that forces balance. Divide the fission source by `k`
+$$k$$ is the fudge factor that forces balance. Divide the fission source by $$k$$
 and there is exactly one value that admits a steady, everywhere-positive
 solution. Physically:
 
-```
-k = neutron production rate / neutron loss rate
-```
+$$
+k = \frac{\text{neutron production rate}}{\text{neutron loss rate}}
+$$
 
-- `k = 1` — critical, self-sustaining.
-- `k > 1` — supercritical.
-- `k < 1` — subcritical.
+- $$k = 1$$ — critical, self-sustaining.
+- $$k > 1$$ — supercritical.
+- $$k < 1$$ — subcritical.
 
-`k` is reported in **pcm** (per cent mille, 1e-5) because reactor design
+$$k$$ is reported in **pcm** (per cent mille, 1e-5) because reactor design
 cares about differences of a few hundred pcm.
 
 So the code is not solving a linear system. It is finding the **fundamental
-eigenpair** — the largest `k` and its associated flux shape. Everything in
+eigenpair** — the largest $$k$$ and its associated flux shape. Everything in
 `solve()` follows from that.
 
 ---
@@ -217,57 +218,56 @@ eigenpair** — the largest `k` and its associated flux shape. Everything in
 
 ### 2.1 Finite volume: integrate, don't differentiate
 
-Integrate the balance equation over cell `(i,j)` and apply the divergence
+Integrate the balance equation over cell $$(i, j)$$ and apply the divergence
 theorem to the leakage term:
 
-```
-integral of -div(D grad phi) dV  =  -integral of D grad(phi) . n dS  =  sum over 4 faces of J_face * A_face
-```
+$$
+\int_V -\nabla\cdot(D\nabla\phi)\, dV = -\oint_S D\, \nabla\phi\cdot\boldsymbol{n}\, dS = \sum_{\text{4 faces}} J_{\text{face}}\, A_{\text{face}}
+$$
 
 The volume integral of a divergence became a **sum of surface currents**. This
 is the whole idea, and it is why finite volume is the right choice here:
 
-**It is conservative by construction.** Whatever leaves cell `i` through the
-right face enters cell `i+1` through its left face — the same number, with
+**It is conservative by construction.** Whatever leaves cell $$i$$ through the
+right face enters cell $$i+1$$ through its left face — the same number, with
 opposite sign, because it is literally the same matrix entry. Neutrons cannot
 be created or destroyed by discretization error. With a finite-difference
 scheme written directly on the derivatives you have to work for that.
 
-Every remaining term is assumed constant over the cell, giving `Sigma * phi * V`.
+Every remaining term is assumed constant over the cell, giving $$\Sigma\, \phi\, V$$.
 
 ### 2.2 The interface coupling coefficient
 
 This is the most important derivation in the code. Two adjacent cells with
 different materials — how much current crosses the interface?
 
-Let `phi_s` be the (unknown) flux at the interface. Assume linear flux in each
-half-cell. Current from the left, using Fick's law over distance `h_1/2`:
+Let $$\phi_s$$ be the (unknown) flux at the interface. Assume linear flux in each
+half-cell. Current from the left, using Fick's law over distance $$h_1/2$$:
 
-```
-J = 2 D_1 (phi_1 - phi_s) / h_1        =  a (phi_1 - phi_s),    a = 2 D_1 / h_1
-```
+$$
+J = \frac{2 D_1 (\phi_1 - \phi_s)}{h_1} = a\, (\phi_1 - \phi_s), \qquad a = \frac{2 D_1}{h_1}
+$$
 
 And from the right:
 
-```
-J = 2 D_2 (phi_s - phi_2) / h_2        =  b (phi_s - phi_2),    b = 2 D_2 / h_2
-```
+$$
+J = \frac{2 D_2 (\phi_s - \phi_2)}{h_2} = b\, (\phi_s - \phi_2), \qquad b = \frac{2 D_2}{h_2}
+$$
 
 **Current must be continuous** across the interface — neutrons don't pile up on
 a surface. Setting these equal:
 
-```
-a phi_1 - a phi_s = b phi_s - b phi_2
-phi_s = (a phi_1 + b phi_2) / (a + b)
-```
+$$
+a\phi_1 - a\phi_s = b\phi_s - b\phi_2 \quad\Longrightarrow\quad \phi_s = \frac{a\phi_1 + b\phi_2}{a + b}
+$$
 
 Substitute back:
 
-```
-J = a (phi_1 - phi_s) = (a b / (a + b)) (phi_1 - phi_2)
-```
+$$
+J = a\, (\phi_1 - \phi_s) = \frac{ab}{a+b}\, (\phi_1 - \phi_2)
+$$
 
-So the coupling is the **harmonic mean** `ab/(a+b)`. Expanding `a` and `b`:
+So the coupling is the **harmonic mean** $$ab/(a+b)$$. Expanding $$a$$ and $$b$$:
 
 ```python
 def _interior_coupling(D1, h1, D2, h2):
@@ -276,41 +276,41 @@ def _interior_coupling(D1, h1, D2, h2):
 
 Two things to notice:
 
-1. **Harmonic, not arithmetic.** Averaging `D` arithmetically across a
+1. **Harmonic, not arithmetic.** Averaging $$D$$ arithmetically across a
    fuel/reflector interface would be flatly wrong. The harmonic mean is
-   dominated by the *smaller* `D` — the more diffusion-resistant material
+   dominated by the *smaller* $$D$$ — the more diffusion-resistant material
    controls the flow, exactly like resistors in series. This is why the code
    handles material discontinuities correctly with no special-case logic.
-2. **The interface flux `phi_s` was eliminated.** It never enters the matrix.
+2. **The interface flux $$\phi_s$$ was eliminated.** It never enters the matrix.
    It was a scaffold used to enforce continuity and then discarded.
 
 ### 2.3 Boundary conditions
 
-At a domain boundary there is no neighbor, so `phi_s` is set by physics instead.
+At a domain boundary there is no neighbor, so $$\phi_s$$ is set by physics instead.
 
 **Vacuum (Marshak).** No neutrons come back in from outside. In diffusion theory
-the partial inward current is `J- = phi/4 + (D/2) dphi/dx`. Setting it to zero:
+the partial inward current is $$J^- = \phi/4 + (D/2)\, d\phi/dx$$. Setting it to zero:
 
-```
-dphi/dx = -phi / (2D)
-```
+$$
+\frac{d\phi}{dx} = -\frac{\phi}{2D}
+$$
 
-A flux with that slope hits zero a distance `d = 2D` beyond the surface. So
-extrapolate linearly to zero at `h/2 + 2D` from the cell center:
+A flux with that slope hits zero a distance $$d = 2D$$ beyond the surface. So
+extrapolate linearly to zero at $$h/2 + 2D$$ from the cell center:
 
-```
-J = D phi / (h/2 + 2D) = 2 D phi / (h + 4 D)
-```
+$$
+J = \frac{D\, \phi}{h/2 + 2D} = \frac{2 D\, \phi}{h + 4D}
+$$
 
-(Exact transport theory gives `d = 0.7104 * lambda_tr ≈ 2.13 D`, so even this
+(Exact transport theory gives $$d = 0.7104\, \lambda_{\text{tr}} \approx 2.13\, D$$, so even this
 "exact" BC is a diffusion-theory approximation. It is a boundary, and Part 1.2
 warned that diffusion is worst at boundaries.)
 
-**Zero flux:** the same with `d = 0`, giving `2D/h`. Not physical for a real
+**Zero flux:** the same with $$d = 0$$, giving $$2D/h$$. Not physical for a real
 surface, but it matches the textbook analytic solution exactly, which is why
 Test 1 uses it — see Part 4.
 
-**Reflective:** zero net current, so the coupling is `0`. The cell simply has no
+**Reflective:** zero net current, so the coupling is $$0$$. The cell simply has no
 term for that face. This is how the quarter-core symmetry in Test 2 works: a
 reflective plane is indistinguishable from an identical core mirrored across it.
 
@@ -336,30 +336,30 @@ The `+cc` on the diagonal and `-cc` off-diagonal are the same number. That
 pairing *is* neutron conservation, expressed in linear algebra.
 
 In-scattering goes on the **left** with a minus sign, because everything except
-fission belongs in `A`:
+fission belongs in $$A$$:
 
 ```python
 add(r, gp * N + c, -s * V[j, i])
 ```
 
 Note `gp * N + c` — same cell `c`, different group. Scattering couples groups at
-a point; leakage couples cells within a group. **`A` is not block diagonal**,
+a point; leakage couples cells within a group. **$$A$$ is not block diagonal**,
 and that is deliberate. Many textbook codes solve group-by-group with an outer
-"scattering iteration" loop; by putting scattering inside `A` and factorizing
+"scattering iteration" loop; by putting scattering inside $$A$$ and factorizing
 the whole thing, up-scattering (thermal neutrons gaining energy, essential
 below ~1 eV) needs no extra machinery at all. Put entries in the lower triangle
 of `sigma_s` and it just works.
 
-Fission goes into a separate matrix `F`:
+Fission goes into a separate matrix $$F$$:
 
 ```python
 fvals.append(m.chi[g] * m.nu_sigma_f[gp] * V[j, i])
 ```
 
-Structurally `F` is, per cell, the outer product `chi ⊗ nu_Sigma_f` — a **rank-1
+Structurally $$F$$ is, per cell, the outer product $$\chi \otimes \nu\Sigma_f$$ — a **rank-1
 matrix**. Every fission neutron forgets the energy of the neutron that caused
-it; only the total production rate survives, redistributed by `chi`. That rank-1
-structure is why a single scalar `k` can characterize the whole reactor.
+it; only the total production rate survives, redistributed by $$\chi$$. That rank-1
+structure is why a single scalar $$k$$ can characterize the whole reactor.
 
 ---
 
@@ -367,18 +367,18 @@ structure is why a single scalar `k` can characterize the whole reactor.
 
 ### 3.1 Power iteration
 
-We want the largest `k` in `A phi = (1/k) F phi`. Rearrange:
+We want the largest $$k$$ in $$A\phi = \tfrac{1}{k} F \phi$$. Rearrange:
 
-```
-A^-1 F phi = k phi
-```
+$$
+A^{-1} F\, \phi = k\, \phi
+$$
 
-So `k` is an ordinary eigenvalue of `M = A^-1 F`, and the classic algorithm
-applies: repeatedly apply `M` and renormalize. Any starting vector is a mix of
-eigenvectors; each application multiplies component `j` by `k_j`, so the largest
+So $$k$$ is an ordinary eigenvalue of $$M = A^{-1} F$$, and the classic algorithm
+applies: repeatedly apply $$M$$ and renormalize. Any starting vector is a mix of
+eigenvectors; each application multiplies component $$j$$ by $$k_j$$, so the largest
 one takes over.
 
-The code never forms `M`. It factorizes `A` once with a sparse LU and reuses it:
+The code never forms $$M$$. It factorizes $$A$$ once with a sparse LU and reuses it:
 
 ```python
 lu = spla.splu(Acsc)
@@ -389,21 +389,21 @@ for it in range(1, max_iter + 1):
     src = src_raw / k_new
 ```
 
-Why is `k` just `src_raw.sum()`? Because `src` is normalized to unit sum each
-pass, so the growth of the fission source over one application of `M` is the
+Why is $$k$$ just `src_raw.sum()`? Because `src` is normalized to unit sum each
+pass, so the growth of the fission source over one application of $$M$$ is the
 eigenvalue directly. No multiplicative bookkeeping — and getting that wrong was
 one of the two real bugs in this build.
 
 Physically, this is not a numerical trick. It is a **simulated neutron
 generation**: start with a guessed fission source, transport those neutrons to
-where they get absorbed (`A^-1`), see how many new fissions result (`F`). The
+where they get absorbed ($$A^{-1}$$), see how many new fissions result ($$F$$). The
 ratio is neutrons this generation over neutrons last generation, which is the
-definition of `k`. Power iteration is watching a reactor settle into its natural
+definition of $$k$$. Power iteration is watching a reactor settle into its natural
 flux shape.
 
 #### The dominance ratio
 
-Convergence is geometric at the **dominance ratio** `k_1/k_0`. For the example
+Convergence is geometric at the **dominance ratio** $$k_1/k_0$$. For the example
 core, computed directly:
 
 ```
@@ -411,7 +411,7 @@ leading k eigenvalues: [1.365785, 1.324577, 1.324577, 1.285605]
 dominance ratio = 0.9698
 ```
 
-That `k_1` appearing **twice** is not a numerical accident. `k_0` is the smooth
+That $$k_1$$ appearing **twice** is not a numerical accident. $$k_0$$ is the smooth
 fundamental mode peaked at the core center; the first harmonics are the modes
 with one sign change, tilted along x or along y. The square core cannot tell
 those two apart, so they are exactly degenerate. Geometric symmetry becomes
@@ -425,23 +425,23 @@ talk to each other), and that is precisely when you need the answer most.
 
 Standard fix. Move part of the fission term to the left:
 
-```
-(A - F/ke) phi = lambda F phi,      lambda = 1/k - 1/ke
-```
+$$
+\left(A - \frac{F}{k_e}\right) \phi = \lambda\, F\, \phi, \qquad \lambda = \frac{1}{k} - \frac{1}{k_e}
+$$
 
-Same eigenvectors, same `k` values — only the *spacing* changes. The eigenvalues
+Same eigenvectors, same $$k$$ values — only the *spacing* changes. The eigenvalues
 of the shifted operator are
 
-```
-1/lambda_j = k_j * ke / (ke - k_j)
-```
+$$
+\frac{1}{\lambda_j} = \frac{k_j\, k_e}{k_e - k_j}
+$$
 
-As `ke` approaches `k_0` from above, the denominator for `j=0` goes to zero and
+As $$k_e$$ approaches $$k_0$$ from above, the denominator for $$j = 0$$ goes to zero and
 that mode blows up relative to everything else. The new dominance ratio is
 
-```
-[k_1 (ke - k_0)] / [k_0 (ke - k_1)]
-```
+$$
+\frac{k_1\, (k_e - k_0)}{k_0\, (k_e - k_1)}
+$$
 
 Plugging in the real numbers:
 
@@ -453,9 +453,9 @@ Plugging in the real numbers:
 
 Observed: 507, 41, 31. The right order, and the mechanism is confirmed. (Plain
 iteration beats its estimate because the stopping test measures the *change* in
-`k` between iterations, not the true error.)
+$$k$$ between iterations, not the true error.)
 
-The cost: `A - F/ke` must be refactorized whenever `ke` moves. That is why the
+The cost: $$A - F/k_e$$ must be refactorized whenever $$k_e$$ moves. That is why the
 code only retargets after the shift has drifted:
 
 ```python
@@ -468,19 +468,19 @@ Trading a handful of factorizations for hundreds of avoided iterations.
 
 ### 3.3 The trap that cost me an hour
 
-Everything above assumes **`ke` sits above the true `k_0`**. If it doesn't,
-modes with `k_j > ke` get *negative* `lambda`, the ordering of `|1/lambda|`
+Everything above assumes **$$k_e$$ sits above the true $$k_0$$**. If it doesn't,
+modes with $$k_j > k_e$$ get *negative* $$\lambda$$, the ordering of $$\lvert 1/\lambda \rvert$$
 scrambles, and power iteration happily converges to the wrong mode — then
 reports success, because the iterates genuinely stop changing.
 
-That is exactly what happened. With `shift=0.02` starting from `k=1.0`, the
-initial `ke = 1.02` sat far below the true 1.366, and the solver returned
+That is exactly what happened. With `shift=0.02` starting from $$k = 1.0$$, the
+initial $$k_e = 1.02$$ sat far below the true 1.366, and the solver returned
 **1.3248 instead of 1.3658** with every convergence flag green. Note that 1.3248
-is suspiciously close to `k_1 = 1.324577` — it had locked onto a first harmonic.
+is suspiciously close to $$k_1 = 1.324577$$ — it had locked onto a first harmonic.
 
 Two defenses, both in the code:
 
-**1. Warm up unshifted.** Take 15 plain power iterations first, so `k` is a
+**1. Warm up unshifted.** Take 15 plain power iterations first, so $$k$$ is a
 decent estimate before any shift is applied.
 
 **2. Verify the eigenpair independently.** This is the one that matters:
@@ -515,13 +515,13 @@ place. Always verify against the problem you actually meant to solve.
 
 For a bare homogeneous rectangle, separation of variables gives an exact answer:
 
-```
-k = nu_Sigma_f / (Sigma_a + D B^2),    B^2 = (pi/a)^2 + (pi/b)^2
-```
+$$
+k = \frac{\nu\Sigma_f}{\Sigma_a + D B^2}, \qquad B^2 = \left(\frac{\pi}{a}\right)^2 + \left(\frac{\pi}{b}\right)^2
+$$
 
-`B^2` is the **geometric buckling** — pure geometry, no materials. It measures
+$$B^2$$ is the **geometric buckling** — pure geometry, no materials. It measures
 how sharply the flux must curve to vanish at the boundary. Small reactor →
-large buckling → more leakage → smaller `k`. The equation says criticality is a
+large buckling → more leakage → smaller $$k$$. The equation says criticality is a
 race between production and (absorption + leakage), which is the whole of
 reactor design in one line.
 
@@ -538,12 +538,12 @@ Look at Test 1(b), the vacuum-BC table:
    n= 160    error = -0.588 pcm    ratio  0.56
 ```
 
-At `n=80` the error is 0.3 pcm and it looks like the code is superb. It is not.
-The interior discretization and the Marshak boundary term each carry `O(h^2)`
-error with **opposite signs**; near `n=80` they cancel. Refine further and the
+At $$n = 80$$ the error is 0.3 pcm and it looks like the code is superb. It is not.
+The interior discretization and the Marshak boundary term each carry $$O(h^2)$$
+error with **opposite signs**; near $$n = 80$$ they cancel. Refine further and the
 error changes sign and grows again.
 
-Had I validated at a single mesh I might have picked `n=80`, declared 0.3 pcm
+Had I validated at a single mesh I might have picked $$n = 80$$, declared 0.3 pcm
 accuracy, and shipped a code whose real error is several pcm. This is the most
 transferable lesson here: **a single accurate result proves nothing.** What you
 verify is the *rate* — the error must fall by 4× per halving for a second-order
@@ -609,13 +609,13 @@ python run_tests.py
 
 Solves the multigroup diffusion equation
 
-```
--div(D_g grad phi_g) + Sigma_r,g phi_g
-    = sum_{g'!=g} Sigma_s,g'->g phi_g'  +  (chi_g / k) sum_g' nu_Sigma_f,g' phi_g'
-```
+$$
+-\nabla\cdot\left(D_g \nabla\phi_g\right) + \Sigma_{r,g}\, \phi_g
+= \sum_{g' \neq g} \Sigma_{s,g'\to g}\, \phi_{g'} + \frac{\chi_g}{k} \sum_{g'} \nu\Sigma_{f,g'}\, \phi_{g'}
+$$
 
 - **Mesh-centered finite volume** on a structured, possibly non-uniform,
-  Cartesian grid. Interface coupling `2 D1 D2 / (D1 h2 + D2 h1)` comes from
+  Cartesian grid. Interface coupling $$2 D_1 D_2 / (D_1 h_2 + D_2 h_1)$$ comes from
   requiring continuity of flux and current, so material discontinuities are
   handled correctly without extra treatment.
 - **Boundary conditions:** `reflective`, `vacuum` (Marshak / linear

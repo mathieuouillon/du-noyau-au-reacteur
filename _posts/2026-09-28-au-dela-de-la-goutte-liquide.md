@@ -80,12 +80,14 @@ moindres carrés exact, sans hasard ni réglage. M4 est un apprentissage
 automatique. Les sections 1 à 3 détaillent la physique de chaque terme, les
 sections 4 et 5 les mathématiques de l'ajustement.
 
-En notant `I = (N − Z)/A`, et en comptant `B > 0` pour un noyau lié, M2 s'écrit :
+En notant $$I = (N-Z)/A$$, et en comptant $$B > 0$$ pour un noyau lié, M2 s'écrit :
 
-```
-B(Z, N) = a_V A − a_S A^(2/3) − a_C Z(Z−1)/A^(1/3) − J (N−Z)²/A + δ_pair
-          + Q (N−Z)²/A^(4/3) + c_ex Z^(4/3)/A^(1/3) − W |N−Z|/A
-```
+$$
+\begin{aligned}
+B(Z,N) = {} & a_V A - a_S A^{2/3} - a_C \frac{Z(Z-1)}{A^{1/3}} - J \frac{(N-Z)^2}{A} + \delta_{\text{pair}} \\
+& + Q \frac{(N-Z)^2}{A^{4/3}} + c_{\text{ex}} \frac{Z^{4/3}}{A^{1/3}} - W \frac{\lvert N-Z \rvert}{A}
+\end{aligned}
+$$
 
 ---
 
@@ -94,61 +96,63 @@ B(Z, N) = a_V A − a_S A^(2/3) − a_C Z(Z−1)/A^(1/3) − J (N−Z)²/A + δ_
 **Volume : la saturation.** La force nucléaire est attractive mais de
 **courte portée** (~1 fm) et répulsive à très courte distance. Chaque nucléon
 n'interagit donc qu'avec un nombre fixe de voisins, et la densité au centre des
-noyaux est la même pour tous : `ρ₀ ≈ 0,16 nucléon/fm³`. L'énergie de liaison
-est alors proportionnelle au nombre de nucléons, `a_V A`, et le rayon croît
-comme `R = r₀ A^(1/3)`. Si la force agissait entre toutes les paires, comme la
-gravitation, l'énergie croîtrait comme `A²` et les noyaux s'effondreraient.
+noyaux est la même pour tous : $$\rho_0 \approx 0{,}16~\text{nucléon/fm}^3$$. L'énergie de liaison
+est alors proportionnelle au nombre de nucléons, $$a_V A$$, et le rayon croît
+comme $$R = r_0 A^{1/3}$$. Si la force agissait entre toutes les paires, comme la
+gravitation, l'énergie croîtrait comme $$A^2$$ et les noyaux s'effondreraient.
 
 **Surface : la tension superficielle.** Un nucléon de surface a moins de
-voisins : on retire une énergie proportionnelle à l'aire, `4πR² σ = a_S A^(2/3)`.
-Avec `a_S` = 17,36 MeV (M1) et le `r₀` déduit ci-dessous, la **tension de
-surface** nucléaire vaut `σ = a_S / 4πr₀²` = **0,92 MeV/fm²**. C'est la
+voisins : on retire une énergie proportionnelle à l'aire, $$4\pi R^2 \sigma = a_S A^{2/3}$$.
+Avec $$a_S$$ = 17,36 MeV (M1) et le $$r_0$$ déduit ci-dessous, la **tension de
+surface** nucléaire vaut $$\sigma = a_S / 4\pi r_0^2$$ = **0,92 MeV/fm²**. C'est la
 grandeur qui fixe le coût d'une déformation et la barrière de fission
 ([leçon 6]({{ '/posts/barrieres-de-fission/' | relative_url }})).
 
-**Coulomb : la sphère chargée.** Construisons une sphère de charge `Q`
-uniforme couche par couche. Quand le rayon vaut `r`, la charge déjà en place
-est `q(r) = Q (r/R)³`, et apporter la couche suivante `dq = 3Q r² dr / R³`
-coûte `q(r) dq / r` :
+**Coulomb : la sphère chargée.** Construisons une sphère de charge $$Q$$
+uniforme couche par couche. Quand le rayon vaut $$r$$, la charge déjà en place
+est $$q(r) = Q\,(r/R)^3$$, et apporter la couche suivante $$dq = 3Q\, r^2\, dr / R^3$$
+coûte $$q(r)\, dq / r$$ :
 
-```
-E_C = ∫₀^R q(r) dq / r = (3Q²/R⁶) ∫₀^R r⁴ dr = (3/5) Q²/R
-```
+$$
+E_C = \int_0^R \frac{q(r)\, dq}{r} = \frac{3Q^2}{R^6} \int_0^R r^4\, dr = \frac{3}{5}\,\frac{Q^2}{R}
+$$
 
-Avec `Q = Ze`, on remplace `Z²` par `Z(Z − 1)` : un proton ne se repousse
-pas lui-même. Donc `a_C = (3/5) e²/r₀`, avec `e² = 1,44 MeV·fm`. Le
-coefficient ajusté de M1, `a_C` = 0,705 MeV, donne `r₀` = **1,225 fm**. On
+Avec $$Q = Ze$$, on remplace $$Z^2$$ par $$Z(Z-1)$$ : un proton ne se repousse
+pas lui-même. Donc $$a_C = \tfrac{3}{5}\, e^2/r_0$$, avec $$e^2 = 1{,}44~\text{MeV·fm}$$. Le
+coefficient ajusté de M1, $$a_C$$ = 0,705 MeV, donne $$r_0$$ = **1,225 fm**. On
 peut le comparer au rayon de charge mesuré du plomb 208, 5,50 fm en moyenne
 quadratique (Angeli et Marinova) : la sphère uniforme équivalente a pour rayon
-`√(5/3) × 5,50 = 7,10 fm`, soit `r₀ = 7,10 / 208^(1/3)` = 1,20 fm. Un
+$$\sqrt{5/3} \times 5{,}50 = 7{,}10~\text{fm}$$, soit $$r_0 = 7{,}10 / 208^{1/3}$$ = 1,20 fm. Un
 ajustement sur les seules masses retrouve donc la taille des noyaux à 2 % près.
 
 **Asymétrie : le principe de Pauli.** Les protons et les neutrons remplissent
 chacun leurs niveaux jusqu'à un niveau de Fermi. Dans le modèle du gaz de
-Fermi, `n` nucléons d'une espèce dans un volume `V` ont une énergie cinétique
-`(3/5) n ε_F(n)`, avec `ε_F ∝ (n/V)^(2/3)`. Écrivons `N = (A/2)(1 + I)` et
-`Z = (A/2)(1 − I)` :
+Fermi, $$n$$ nucléons d'une espèce dans un volume $$V$$ ont une énergie cinétique
+$$\tfrac{3}{5}\, n\, \varepsilon_F(n)$$, avec $$\varepsilon_F \propto (n/V)^{2/3}$$. Écrivons $$N = \tfrac{A}{2}(1+I)$$ et
+$$Z = \tfrac{A}{2}(1-I)$$ :
 
-```
-E_cin = (3/5)(A/2) ε_F [ (1 + I)^(5/3) + (1 − I)^(5/3) ]
-      = (3/5) ε_F A  +  (ε_F / 3) A I²  +  O(I⁴)
-```
+$$
+\begin{aligned}
+E_{\text{cin}} &= \frac{3}{5}\,\frac{A}{2}\,\varepsilon_F \Bigl[ (1+I)^{5/3} + (1-I)^{5/3} \Bigr] \\
+&= \frac{3}{5}\,\varepsilon_F A + \frac{\varepsilon_F}{3}\, A I^2 + O(I^4)
+\end{aligned}
+$$
 
-Le second terme est le terme d'asymétrie, `(ε_F/3)(N − Z)²/A`. À la densité
-de saturation, `k_F = (3π² ρ₀/2)^(1/3)` = 1,333 fm⁻¹ et
-`ε_F = ħ²k_F²/2m` = 36,8 MeV : la seule énergie cinétique donne **12,3 MeV**.
-L'ajustement en demande 22,9 (M1), et même `J` = 28,9 MeV une fois la surface
+Le second terme est le terme d'asymétrie, $$(\varepsilon_F/3)\,(N-Z)^2/A$$. À la densité
+de saturation, $$k_F = (3\pi^2 \rho_0/2)^{1/3}$$ = 1,333 fm⁻¹ et
+$$\varepsilon_F = \hbar^2 k_F^2 / 2m$$ = 36,8 MeV : la seule énergie cinétique donne **12,3 MeV**.
+L'ajustement en demande 22,9 (M1), et même $$J$$ = 28,9 MeV une fois la surface
 séparée (M3). Le reste vient de l'**interaction** : la force entre un proton
 et un neutron est plus attractive qu'entre deux nucléons identiques (le
-deutéron est lié, le dineutron ne l'est pas), et un noyau `N = Z` en profite
+deutéron est lié, le dineutron ne l'est pas), et un noyau $$N = Z$$ en profite
 au maximum.
 
 **Appariement.** Les nucléons identiques gagnent de l'énergie à se grouper
 par paires de moments opposés (leçon 4, BCS). D'où un terme
-`δ_pair = +a_P / A^(1/2)` pour les noyaux pair-pair, 0 pour `A` impair, et
-`−a_P / A^(1/2)` pour les noyaux impair-impair. La loi en `A^(−1/2)` est
-empirique : c'est celle du gap moyen `Δ ≈ 12/√A` MeV de Bohr et Mottelson,
-et l'ajustement redonne bien `a_P` ≈ 12 MeV.
+$$\delta_{\text{pair}} = +a_P / A^{1/2}$$ pour les noyaux pair-pair, 0 pour $$A$$ impair, et
+$$-a_P / A^{1/2}$$ pour les noyaux impair-impair. La loi en $$A^{-1/2}$$ est
+empirique : c'est celle du gap moyen $$\Delta \approx 12/\sqrt{A}$$ MeV de Bohr et Mottelson,
+et l'ajustement redonne bien $$a_P$$ ≈ 12 MeV.
 
 ---
 
@@ -156,44 +160,49 @@ et l'ajustement redonne bien `a_P` ≈ 12 MeV.
 
 **Le développement leptoderme.** Un noyau lourd est une goutte « à peau
 fine » : l'épaisseur de surface (~2 fm) est petite devant le rayon. Toute
-grandeur extensive se développe alors en puissances de `A^(−1/3)`, un terme
-de volume (`∝ A`), puis un terme de surface (`∝ A^(2/3)`), puis de courbure
-(`∝ A^(1/3)`). La goutte à cinq termes applique ce développement à l'énergie
+grandeur extensive se développe alors en puissances de $$A^{-1/3}$$, un terme
+de volume ($$\propto A$$), puis un terme de surface ($$\propto A^{2/3}$$), puis de courbure
+($$\propto A^{1/3}$$). La goutte à cinq termes applique ce développement à l'énergie
 de liaison, mais **pas** à l'énergie d'asymétrie, qui n'a qu'une partie de
 volume.
 
 **Symétrie de surface.** Appliquer le même développement à l'asymétrie
 donne :
 
-```
-E_sym = (J A − Q A^(2/3)) I²  =  J (N−Z)²/A − Q (N−Z)²/A^(4/3)
-      =  a_sym(A) (N−Z)²/A,     a_sym(A) = J − Q A^(−1/3)
-```
+$$
+\begin{aligned}
+E_{\text{sym}} &= \bigl(J A - Q A^{2/3}\bigr)\, I^2 = J\,\frac{(N-Z)^2}{A} - Q\,\frac{(N-Z)^2}{A^{4/3}} \\
+&= a_{\text{sym}}(A)\,\frac{(N-Z)^2}{A}, \qquad a_{\text{sym}}(A) = J - Q\,A^{-1/3}
+\end{aligned}
+$$
 
-`Q > 0` : l'asymétrie coûte **moins** cher en surface. L'excès de neutrons
+$$Q > 0$$ : l'asymétrie coûte **moins** cher en surface. L'excès de neutrons
 s'y loge et forme une **peau de neutrons**. Le coefficient effectif d'un
-noyau fini est donc plus petit que celui de la matière nucléaire infinie, `J`.
+noyau fini est donc plus petit que celui de la matière nucléaire infinie, $$J$$.
 
 **Échange coulombien.** Le principe de Pauli tient les protons de même spin
 à distance : ils se repoussent un peu moins que des charges classiques. Pour
 une sphère uniforme, l'approximation de Slater donne :
 
-```
-E_ex = −(3/4) (3/2π)^(2/3) e² Z^(4/3) / R   →   c_ex = (3/4)(3/2π)^(2/3) e²/r₀ = 0,54 MeV
-```
+$$
+\begin{gathered}
+E_{\text{ex}} = -\frac{3}{4}\left(\frac{3}{2\pi}\right)^{2/3} \frac{e^2 Z^{4/3}}{R} \\[4pt]
+\Longrightarrow\quad c_{\text{ex}} = \frac{3}{4}\left(\frac{3}{2\pi}\right)^{2/3} \frac{e^2}{r_0} = 0{,}54~\text{MeV}
+\end{gathered}
+$$
 
 L'ajustement donne 0,96 MeV (M2) et 1,16 MeV (M3), environ le double. Le
-terme en `Z^(4/3)/A^(1/3)` absorbe donc d'autres effets que la seule forme
+terme en $$Z^{4/3}/A^{1/3}$$ absorbe donc d'autres effets que la seule forme
 fonctionnelle ne permet pas de distinguer, comme la diffusivité de la surface
 de charge. C'est un premier exemple de ce que montre la section 4 : un bon
 ajustement ne garantit pas que chaque coefficient ait le sens physique qu'on
 lui prête.
 
-**Terme de Wigner.** Pour `N ≈ Z`, protons et neutrons occupent les mêmes
+**Terme de Wigner.** Pour $$N \approx Z$$, protons et neutrons occupent les mêmes
 orbitales et forment des paires proton-neutron. Wigner (1937) a montré qu'une
 interaction indépendante du spin et de l'isospin regroupe les états en
-« supermultiplets », avec une énergie qui varie en `|N − Z|` et non en
-`(N − Z)²`. D'où une **pointe** de liaison en `N = Z`, `−W |N − Z|/A`. Son
+« supermultiplets », avec une énergie qui varie en $$\lvert N-Z \rvert$$ et non en
+$$(N-Z)^2$$. D'où une **pointe** de liaison en $$N = Z$$, $$-W \lvert N-Z \rvert / A$$. Son
 coefficient change beaucoup d'un modèle à l'autre (39 MeV dans M2, 24 MeV
 dans M3) : il est porté par une poignée de noyaux légers, où il absorbe aussi
 des effets de couches.
@@ -203,31 +212,31 @@ des effets de couches.
 ## 3. Les couches, avec trois nombres (M3)
 
 **La variable de valence.** Pour chaque type de nucléon, situé dans une
-couche `[M_bas, M_haut[` de dégénérescence `D = M_haut − M_bas`, avec
-`ν = n − M_bas` nucléons de valence et `D − ν` trous :
+couche $$[M_{\text{bas}},\, M_{\text{haut}}[$$ de dégénérescence $$D = M_{\text{haut}} - M_{\text{bas}}$$, avec
+$$\nu = n - M_{\text{bas}}$$ nucléons de valence et $$D - \nu$$ trous :
 
-```
-x = ν (D − ν) / D
-```
+$$
+x = \frac{\nu\,(D-\nu)}{D}
+$$
 
 C'est le produit du nombre de particules par le nombre de trous, normalisé.
-`x` est **symétrique** particule-trou (ν ↔ D − ν), nul sur une couche fermée,
-et maximal à mi-couche, où il vaut `D/4`. Près d'une fermeture, `x ≈ ν` ou
-`x ≈ D − ν` : il compte le plus petit des deux nombres (idée de Casten, forme
-de Dieperink et Van Isacker). Exemple : l'U-238 a `N = 146` neutrons dans la
-couche `[126, 184[`, donc `D = 58`, `ν = 20` et `x_n = 20 × 38 / 58` = 13,10.
+$$x$$ est **symétrique** particule-trou (ν ↔ D − ν), nul sur une couche fermée,
+et maximal à mi-couche, où il vaut $$D/4$$. Près d'une fermeture, $$x \approx \nu$$ ou
+$$x \approx D - \nu$$ : il compte le plus petit des deux nombres (idée de Casten, forme
+de Dieperink et Van Isacker). Exemple : l'U-238 a $$N = 146$$ neutrons dans la
+couche $$[126,\, 184[$$, donc $$D = 58$$, $$\nu = 20$$ et $$x_n = 20 \times 38 / 58$$ = 13,10.
 
-**Trois termes.** Avec `S = x_p + x_n` :
+**Trois termes.** Avec $$S = x_p + x_n$$ :
 
-```
-B_couches = a₁ S + a₂ S² + a₃ x_p x_n
-```
+$$
+B_{\text{couches}} = a_1 S + a_2 S^2 + a_3\, x_p x_n
+$$
 
-- `a₁ S` (`a₁` = −1,34 MeV) : un noyau perd de la liaison en s'éloignant des
+- $$a_1 S$$ ($$a_1$$ = −1,34 MeV) : un noyau perd de la liaison en s'éloignant des
   couches fermées, ce qui est la définition même d'une couche ;
-- `a₂ S²` (0,021 MeV) : une courbure, qui sature la pénalité en milieu de
+- $$a_2 S^2$$ (0,021 MeV) : une courbure, qui sature la pénalité en milieu de
   couche ;
-- `a₃ x_p x_n` (0,061 MeV) : l'interaction entre **protons et neutrons de
+- $$a_3\, x_p x_n$$ (0,061 MeV) : l'interaction entre **protons et neutrons de
   valence**. C'est elle qui, en milieu de couche pour les deux types de
   nucléons, rend la forme sphérique instable et **déforme** le noyau.
 
@@ -239,26 +248,27 @@ neutrons au-delà de 126 (actinides).
 
 ## 4. Ajuster : les moindres carrés
 
-**Le problème.** Chaque modèle M0 à M3 s'écrit `B ≈ X a`, où `X` est une
-matrice `n × p` (une ligne par noyau, une colonne par terme : `A`,
-`−A^(2/3)`, …) et `a` le vecteur des `p` coefficients. On minimise la somme
+**Le problème.** Chaque modèle M0 à M3 s'écrit $$B \approx X a$$, où $$X$$ est une
+matrice $$n \times p$$ (une ligne par noyau, une colonne par terme : $$A$$,
+$$-A^{2/3}$$, …) et $$a$$ le vecteur des $$p$$ coefficients. On minimise la somme
 des carrés des écarts :
 
-```
-a* = argmin ‖B − X a‖²
-
-⇔   (Xᵀ X) a* = Xᵀ B          (équations normales)
-```
+$$
+\begin{gathered}
+a^* = \underset{a}{\operatorname{argmin}}\ \lVert B - X a \rVert^2 \\[4pt]
+\Longleftrightarrow\quad X^\mathsf{T} X\, a^* = X^\mathsf{T} B \qquad \text{(équations normales)}
+\end{gathered}
+$$
 
 Le problème est **convexe** : la solution est unique, sans point de départ ni
-hasard. On ne forme pas `XᵀX`, ce qui élèverait au carré les erreurs
+hasard. On ne forme pas $$X^\mathsf{T} X$$, ce qui élèverait au carré les erreurs
 d'arrondi : `np.linalg.lstsq` passe par la décomposition en valeurs
-singulières de `X`. La qualité se mesure par l'écart quadratique moyen,
-`RMS = √( Σᵢ (B_i − B_i^modèle)² / n )`.
+singulières de $$X$$. La qualité se mesure par l'écart quadratique moyen,
+$$\mathrm{RMS} = \sqrt{\tfrac{1}{n} \sum_i \bigl(B_i - B_i^{\text{modèle}}\bigr)^2}$$.
 
 **Ce que les masses ne savent pas séparer.** Les erreurs formelles des
-coefficients s'obtiennent par `cov(a) = s² (XᵀX)⁻¹`, avec
-`s² = Σ résidus² / (n − p)`. Elles supposent des écarts indépendants. Ici,
+coefficients s'obtiennent par $$\operatorname{cov}(a) = s^2\, (X^\mathsf{T} X)^{-1}$$, avec
+$$s^2 = \sum \text{résidus}^2 / (n-p)$$. Elles supposent des écarts indépendants. Ici,
 les écarts sont des erreurs de **modèle**, corrélées sur la carte : ces
 erreurs sont donc des bornes inférieures. Mais les **corrélations** entre
 coefficients sont instructives :
@@ -269,14 +279,14 @@ coefficients sont instructives :
 | corrélation (surface, Coulomb) | +0,96 | +0,95 | +0,93 |
 | corrélation (volume, surface) | +0,99 | +0,26 | +0,26 |
 | corrélation (asymétrie, symétrie de surface) | — | +0,95 | +0,94 |
-| `a_S` (MeV) | 17,36 ± 0,08 | 18,23 ± 0,14 | 18,42 ± 0,07 |
-| `x` de l'U-236 | 0,721 ± 0,002 | 0,727 ± 0,012 | 0,717 ± 0,006 |
+| $$a_S$$ (MeV) | 17,36 ± 0,08 | 18,23 ± 0,14 | 18,42 ± 0,07 |
+| $$x$$ de l'U-236 | 0,721 ± 0,002 | 0,727 ± 0,012 | 0,717 ± 0,006 |
 
 Surface et Coulomb sont corrélés à 0,95 : si l'un augmente, l'autre suit, et
 les masses changent à peine. Les masses fixent leur **combinaison**, pas
 chacun séparément. Or la barrière de fission dépend de leur **rapport**, le
-paramètre de fissilité `x = E_C / 2E_S`. Nos trois modèles s'accordent sur
-`x ≈ 0,72` à 0,01 près, mais les gouttes publiées étudiées à la
+paramètre de fissilité $$x = E_C / 2E_S$$. Nos trois modèles s'accordent sur
+$$x \approx 0{,}72$$ à 0,01 près, mais les gouttes publiées étudiées à la
 [leçon 6]({{ '/posts/barrieres-de-fission/' | relative_url }}), qui répartissent autrement l'énergie
 entre surface, courbure et Coulomb, vont de 0,76 à 0,84. Cet écart, bien
 au-delà des erreurs formelles, est une erreur de **modèle**, et il suffit à
@@ -286,39 +296,39 @@ doubler la barrière de fission.
 
 ## 5. M4 : la régression à noyau
 
-Le résidu de M3, `r_i = B_i − B_i^M3`, n'est pas du bruit : c'est une
+Le résidu de M3, $$r_i = B_i - B_i^{\text{M3}}$$, n'est pas du bruit : c'est une
 structure lisse sur la carte (Z, N), faite de déformations et de couches
 secondaires (carte en bas à gauche de la figure). On l'apprend par
 **régression à noyau** (*kernel ridge regression*).
 
-**Le modèle.** Avec `zᵢ = (Zᵢ, Nᵢ)` et un noyau gaussien
-`k(z, z') = exp(−|z − z'|² / 2l²)`, la correction en un point `z` est :
+**Le modèle.** Avec $$z_i = (Z_i, N_i)$$ et un noyau gaussien
+$$k(z, z') = \exp\bigl(-\lvert z - z' \rvert^2 / 2l^2\bigr)$$, la correction en un point $$z$$ est :
 
-```
-δ(z) = Σᵢ αᵢ k(z, zᵢ),        (K + λ I) α = r,        K_ij = k(zᵢ, zⱼ)
-```
+$$
+\delta(z) = \sum_i \alpha_i\, k(z, z_i), \qquad (K + \lambda I)\,\alpha = r, \qquad K_{ij} = k(z_i, z_j)
+$$
 
-C'est la fonction qui minimise `Σᵢ (rᵢ − δ(zᵢ))² + λ ‖δ‖²`, la norme étant
+C'est la fonction qui minimise $$\sum_i \bigl(r_i - \delta(z_i)\bigr)^2 + \lambda \lVert \delta \rVert^2$$, la norme étant
 celle de l'espace de fonctions engendré par le noyau (théorème du
 représentant). C'est aussi la moyenne a posteriori d'un **processus
-gaussien** de covariance `k`, avec un bruit de variance `λ`. La matrice
-`K + λI` est symétrique définie positive : on résout par une factorisation de
-Cholesky. Il y a **un poids `αᵢ` par noyau** d'entraînement : environ 2 400
+gaussien** de covariance $$k$$, avec un bruit de variance $$\lambda$$. La matrice
+$$K + \lambda I$$ est symétrique définie positive : on résout par une factorisation de
+Cholesky. Il y a **un poids $$\alpha_i$$ par noyau** d'entraînement : environ 2 400
 paramètres.
 
-**Les hyperparamètres** `l` (longueur de corrélation, en nucléons) et `λ`
+**Les hyperparamètres** $$l$$ (longueur de corrélation, en nucléons) et $$\lambda$$
 (régularisation) sont choisis par validation croisée à trois plis **sur les
-seules données d'entraînement**, parmi `l` ∈ {1,5 ; 2 ; 3 ; 4 ; 6} et
-`λ` ∈ {0,03 ; 0,3}. On obtient `l = 3` et `λ = 0,03`.
+seules données d'entraînement**, parmi $$l$$ ∈ {1,5 ; 2 ; 3 ; 4 ; 6} et
+$$\lambda$$ ∈ {0,03 ; 0,3}. On obtient $$l = 3$$ et $$\lambda = 0{,}03$$.
 
-**Pourquoi M4 n'extrapole pas.** Le poids d'un noyau connu à la distance `d`
-vaut `exp(−d²/2l²)` :
+**Pourquoi M4 n'extrapole pas.** Le poids d'un noyau connu à la distance $$d$$
+vaut $$\exp(-d^2/2l^2)$$ :
 
 | d (nucléons) | 1 | 2 | 4 | 6 | 8 |
 |---|---|---|---|---|---|
-| poids, `l = 3` | 0,95 | 0,80 | 0,41 | 0,14 | 0,03 |
+| poids, $$l = 3$$ | 0,95 | 0,80 | 0,41 | 0,14 | 0,03 |
 
-Loin des données, `δ(z) → 0` et M4 redevient M3 : la correction **s'efface**
+Loin des données, $$\delta(z) \to 0$$ et M4 redevient M3 : la correction **s'efface**
 exactement là où l'on en aurait besoin. C'est ce que mesure l'épreuve de la
 distance, plus bas. C'est la méthode de correction par fonctions de base
 radiales utilisée dans la littérature pour améliorer FRDM, HFB et les modèles
@@ -334,10 +344,10 @@ liaison **totale** B (la métrique standard du domaine), en MeV :
 
 - **Ajustement** : on ajuste sur tous les noyaux et on mesure l'erreur sur
   ces mêmes noyaux.
-- **Interpolation** (validation croisée à `K = 5` plis) : on partage les
-  noyaux au hasard en cinq groupes `G_k`, on ajuste sur quatre et on prédit le
-  cinquième, cinq fois. `RMS_CV = √( Σ_k Σ_{i ∈ G_k} (B_i − B_i^(−k))² / n )`,
-  où `B^(−k)` est le modèle ajusté sans le groupe `k`.
+- **Interpolation** (validation croisée à $$K = 5$$ plis) : on partage les
+  noyaux au hasard en cinq groupes $$G_k$$, on ajuste sur quatre et on prédit le
+  cinquième, cinq fois. $$\mathrm{RMS}_{\text{CV}} = \sqrt{\tfrac{1}{n} \sum_k \sum_{i \in G_k} \bigl(B_i - B_i^{(-k)}\bigr)^2}$$,
+  où $$B^{(-k)}$$ est le modèle ajusté sans le groupe $$k$$.
 - **Extrapolation** : on retire les 2 isotopes les plus riches et les 2 plus
   pauvres en neutrons de chaque élément (372 noyaux), puis on les prédit.
 
@@ -376,7 +386,7 @@ liaison **totale** B (la métrique standard du domaine), en MeV :
 | appariement | 11,180 | 12,121 |
 
 Les coefficients bougent peu : ceux du manuel étaient déjà ajustés, sur des
-tables plus anciennes et avec `Z²` au lieu de `Z(Z−1)`. Le gain M0 → M1 vient
+tables plus anciennes et avec $$Z^2$$ au lieu de $$Z(Z-1)$$. Le gain M0 → M1 vient
 de là, pas d'une physique nouvelle.
 
 ### Le modèle complet (M3)
@@ -398,9 +408,9 @@ de là, pas d'une physique nouvelle.
 **La symétrie.** Le volume coûte J = 28,9 MeV, mais la surface en rend
 Q = 40,2 MeV. Le coefficient effectif d'un noyau fini est donc
 
-```
-a_sym(A) = J − Q · A^(−1/3)
-```
+$$
+a_{\text{sym}}(A) = J - Q\, A^{-1/3}
+$$
 
 soit **17,1 MeV pour le calcium 40** et **22,1 MeV pour le plomb 208**. Les
 neutrons en excès se logent en surface, où ils coûtent moins cher : c'est la
@@ -436,7 +446,7 @@ liaison, et c'est elle qui pousse les noyaux de milieu de couche à se
 
 L'épreuve qui compte vraiment. Pour chaque élément ayant au moins 14 isotopes
 mesurés, on retire les **8 plus riches en neutrons**, on ajuste sur le reste,
-puis on prédit les noyaux retirés. `d` = nombre de neutrons au-delà du dernier
+puis on prédit les noyaux retirés. $$d$$ = nombre de neutrons au-delà du dernier
 isotope connu de l'élément. 696 noyaux prédits, sur 87 éléments.
 
 | d | M2 | M3 | M4 |
@@ -512,7 +522,7 @@ l'épreuve de la distance, pas sur le tableau ci-dessus.
   (r₀ = 1,225 fm), principe de Pauli (ε_F/3 = 12,3 MeV d'asymétrie
   cinétique), appariement.
 - Chaque pièce de physique paie : de la goutte liquide de manuel (M0) au
-  modèle avec couches (M3), l'erreur sur `B` passe de 3,8 à 1,2 MeV avec
+  modèle avec couches (M3), l'erreur sur $$B$$ passe de 3,8 à 1,2 MeV avec
   seulement 11 paramètres.
 - La **symétrie de surface** traduit la **peau de neutrons** : l'excès de
   neutrons coûte moins cher en surface qu'au cœur.

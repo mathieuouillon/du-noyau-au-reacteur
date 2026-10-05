@@ -55,7 +55,7 @@ _Version 3D interactive : faites tourner le nuage. [Ouvrir en plein écran]({{ '
 
 ## De l'atome au noyau
 
-Pour l'électron de l'hydrogène, on trace |ψ|² des orbitales 1s, 2p, 3d. Pour un
+Pour l'électron de l'hydrogène, on trace $$\lvert\psi\rvert^2$$ des orbitales 1s, 2p, 3d. Pour un
 nucléon, c'est le même geste, avec trois différences :
 
 1. **Le puits n'est pas coulombien.** Le potentiel moyen ressemble à un puits
@@ -76,13 +76,15 @@ nucléon, c'est le même geste, avec trois différences :
 
 Dans la base de l'oscillateur |N l j Ω⟩, avec m = Ω − σ :
 
-```
-ψ_σ(r, θ, φ) = Σ_i c_i R_nl(r/b) ⟨l m ½ σ | j Ω⟩ Y_lm(θ, φ) / b^(3/2)
-|ψ|² = |ψ_↑|² + |ψ_↓|²
-```
+$$
+\begin{gathered}
+\psi_\sigma(r, \theta, \varphi) = \frac{1}{b^{3/2}} \sum_i c_i\, R_{nl}(r/b)\, \langle l\, m\, \tfrac{1}{2}\, \sigma \mid j\, \Omega \rangle\, Y_{lm}(\theta, \varphi) \\[4pt]
+\lvert \psi \rvert^2 = \lvert \psi_\uparrow \rvert^2 + \lvert \psi_\downarrow \rvert^2
+\end{gathered}
+$$
 
 Les coefficients c_i sont les vecteurs propres du hamiltonien de Nilsson.
-`b = √(ħ/mω₀)` est la longueur de l'oscillateur, environ 1 A^(1/6) fm. La
+$$b = \sqrt{\hbar/m\omega_0}$$ est la longueur de l'oscillateur, environ 1 A^(1/6) fm. La
 densité ne dépend pas de l'angle φ (symétrie axiale) : une coupe dans un plan
 contenant l'axe suffit, et la 3D s'obtient par révolution.
 
@@ -132,7 +134,7 @@ Les déformations δ sont celles trouvées par le modèle de la [leçon 4]({{ '/
   de couches réels, en partie amplifiées par ce défaut.
 - **Pas de peau de neutrons.** Le modèle donne le même rayon aux protons et
   aux neutrons, et c'est voulu : la correction d'isospin
-  `ħω₀(1 ± (N−Z)/3A)` a été conçue pour égaliser les rayons. Or la peau de
+  $$\hbar\omega_0 \bigl(1 \pm (N-Z)/3A\bigr)$$ a été conçue pour égaliser les rayons. Or la peau de
   neutrons du plomb est mesurée positive (expérience PREX). Il faudrait un
   calcul auto-cohérent, de type Hartree-Fock, pour la prédire.
 - **Déformation de l'uranium sous-estimée** par le modèle, voir
@@ -140,7 +142,7 @@ Les déformations δ sont celles trouvées par le modèle de la [leçon 4]({{ '/
 
 ## À retenir
 
-- Chaque niveau de Nilsson a une fonction d'onde : on trace `|ψ|²` comme une
+- Chaque niveau de Nilsson a une fonction d'onde : on trace $$\lvert\psi\rvert^2$$ comme une
   orbitale électronique, et la somme des orbitales occupées donne la forme du
   noyau.
 - Trois différences avec l'atome : un puits à fond plat (niveaux de type

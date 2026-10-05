@@ -300,3 +300,12 @@
   margin-top: 1rem;
   font-size: 0.9rem;
 }
+
+/* ----- Formules (MathJax) ----- */
+
+mjx-container[display="true"] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding: 0.25rem 0;
+}

@@ -95,15 +95,15 @@ non d'une usine d'enrichissement.
 
 ## 2. Les quatre facteurs
 
-```
-k_inf = η · ε · p · f
-```
+$$
+k_\infty = \eta \cdot \varepsilon \cdot p \cdot f
+$$
 
-Le cycle du neutron, lu à l'envers : `f` il est absorbé dans le combustible
-plutôt qu'ailleurs · `p` il a survécu aux résonances · `ε` quelques fissions
-rapides l'ont précédé · `η` son absorption produit η nouveaux neutrons.
+Le cycle du neutron, lu à l'envers : $$f$$ il est absorbé dans le combustible
+plutôt qu'ailleurs · $$p$$ il a survécu aux résonances · $$\varepsilon$$ quelques fissions
+rapides l'ont précédé · $$\eta$$ son absorption produit η nouveaux neutrons.
 
-`η` ne dépend **que** de l'enrichissement, jamais de la géométrie. C'est le
+$$\eta$$ ne dépend **que** de l'enrichissement, jamais de la géométrie. C'est le
 plafond absolu :
 
 | enrichissement | η |
@@ -138,7 +138,7 @@ dans du graphite. Homogénéisée, elle n'aurait jamais divergé.
 
 ## 3. La sous-modération : le choix de sûreté fondamental
 
-Ajouter de l'eau fait monter `p` (on ralentit mieux) et baisser `f` (l'eau
+Ajouter de l'eau fait monter $$p$$ (on ralentit mieux) et baisser $$f$$ (l'eau
 absorbe). Il existe donc un optimum.
 
 | Vm/Vf | p | f | k_inf |
@@ -153,7 +153,7 @@ absorbe). Il existe donc un optimum.
 
 Ce n'est pas une contrainte subie, c'est un **choix de sûreté**. Le REP est
 volontairement **sous-modéré** : si la température monte, l'eau se dilate,
-Vm/Vf diminue, et comme on est à gauche du maximum, `k_inf` **diminue**. La
+Vm/Vf diminue, et comme on est à gauche du maximum, $$k_\infty$$ **diminue**. La
 puissance baisse d'elle-même. Le coefficient de température modérateur est
 négatif, le réacteur est intrinsèquement stable.
 
@@ -187,8 +187,8 @@ lourde.
 
 ## 5. Bouclage : d'où viennent vraiment les constantes de [`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }})
 
-[`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }}) utilisait `Σa2 = 0,082` et `νΣf2 = 0,1375` sans les justifier.
-Tentative naïve, `Σ = N·σ` avec σ à 2200 m/s :
+[`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }}) utilisait $$\Sigma_{a2} = 0{,}082$$ et $$\nu\Sigma_{f2} = 0{,}1375$$ sans les justifier.
+Tentative naïve, $$\Sigma = N\sigma$$ avec σ à 2200 m/s :
 
 | | naïf | corrigé Maxwell | [`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }}) |
 |---|---|---|---|
@@ -200,7 +200,7 @@ Facteur 2 d'écart au départ. Deux étapes manquaient :
 **(a) Moyenne sur le spectre.** La valeur à 2200 m/s est une *convention*,
 pas une moyenne. Les neutrons thermiques suivent une maxwellienne à la
 température du modérateur ; pour une section en 1/v, la moyenne vaut
-`σ(2200)·(√π/2)·√(293,6/T)`, soit **0,63** à 580 K.
+$$\sigma(2200)\cdot\frac{\sqrt{\pi}}{2}\cdot\sqrt{293{,}6/T}$$, soit **0,63** à 580 K.
 
 **(b) Facteur de désavantage.** L'homogénéisation suppose le flux uniforme.
 Il ne l'est pas : le crayon absorbe, donc le flux thermique y est déprimé.
@@ -210,7 +210,7 @@ le volume. Ce rapport vaut typiquement 1,1 à 1,3 dans un REP.
 Après correction spectrale on est dans un facteur 1,3 des valeurs réelles,
 avec un calcul de coin de table. C'est l'ordre de grandeur attendu — et c'est
 exactement pourquoi la génération des constantes de groupe est un métier à
-part entière (APOLLO, CASMO, WIMS) et non une multiplication `N·σ`.
+part entière (APOLLO, CASMO, WIMS) et non une multiplication $$N\sigma$$.
 
 **La chaîne complète :**
 
@@ -232,13 +232,13 @@ Chaque flèche est un domaine de recherche.
 - L'hydrogène ralentit le mieux (18 chocs), mais absorbe : l'**eau légère**
   impose d'enrichir, l'**eau lourde** permet l'uranium naturel au prix d'un
   cœur bien plus grand.
-- `k_inf = η · ε · p · f` ; `η` ne dépend que de l'enrichissement et fixe le
+- $$k_\infty = \eta\, \varepsilon\, p\, f$$ ; $$\eta$$ ne dépend que de l'enrichissement et fixe le
   plafond.
 - Le réseau **hétérogène** (crayons dans l'eau) gagne sur le mélange homogène
   grâce à l'autoprotection énergétique et spatiale des résonances.
 - Un REP est volontairement **sous-modéré** (Vm/Vf ≈ 2 contre un optimum à
   4,4) : son coefficient de température modérateur est négatif.
-- Uranium naturel + eau légère donne `k_inf < 1` quelle que soit la quantité
+- Uranium naturel + eau légère donne $$k_\infty < 1$$ quelle que soit la quantité
   d'eau : il faut enrichir ou changer de modérateur.
 
 ---

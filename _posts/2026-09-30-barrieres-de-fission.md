@@ -11,7 +11,7 @@ lecon: 6
 partie: "II"
 objectifs:
   - "Définir une barrière de fission comme le col d'un paysage d'énergie potentielle."
-  - "Retrouver la stabilité de la sphère et la barrière de Bohr et Wheeler, (98/135)(1−x)³ E_s."
+  - 'Retrouver la stabilité de la sphère et la barrière de Bohr et Wheeler, \(\tfrac{98}{135}(1-x)^3 E_s\).'
   - "Calculer exactement la surface et l'énergie coulombienne d'une forme à col, jusqu'à la scission."
   - "Comprendre pourquoi deux gouttes ajustées sur les mêmes masses donnent des barrières qui varient du simple au double."
   - "Expliquer la double bosse des actinides et les isomères de fission par la correction de couches."
@@ -81,8 +81,8 @@ _Figure produite par `etude_barrieres.py`. En haut : la goutte liquide seule (U-
 
 ## 1. Le paysage d'énergie potentielle
 
-On décrit la forme du noyau par quelques paramètres `q = (q₁, q₂, …)`
-(élongation, col, asymétrie) et on trace son énergie `E(q)`. Ce **paysage
+On décrit la forme du noyau par quelques paramètres $$q = (q_1, q_2, \dots)$$
+(élongation, col, asymétrie) et on trace son énergie $$E(q)$$. Ce **paysage
 d'énergie potentielle** contient tout :
 
 - l'**état fondamental** est le fond d'un puits ;
@@ -94,20 +94,20 @@ d'énergie potentielle** contient tout :
 
 La **barrière de fission** est la hauteur de ce col au-dessus du fond :
 
-```
-B_f = E(point selle) − E(état fondamental)
-```
+$$
+B_f = E(\text{point selle}) - E(\text{état fondamental})
+$$
 
 Trouver un point selle est plus subtil que trouver un minimum. Sur une surface à
-deux dimensions `E(c, h)`, on utilise la propriété suivante : tout chemin qui va
-du fond à la scission traverse chaque droite `c = cte`, donc y passe au moins par
-l'énergie `min_h E(c, h)`. D'où une borne inférieure :
+deux dimensions $$E(c, h)$$, on utilise la propriété suivante : tout chemin qui va
+du fond à la scission traverse chaque droite $$c = \text{cte}$$, donc y passe au moins par
+l'énergie $$\min_h E(c, h)$$. D'où une borne inférieure :
 
-```
-B_f ≥ max_c [ min_h E(c, h) ]
-```
+$$
+B_f \;\ge\; \max_c \Bigl[\, \min_h E(c, h) \Bigr]
+$$
 
-Elle est **exacte** quand la vallée `h*(c)` est continue, ce qui est le cas des
+Elle est **exacte** quand la vallée $$h^*(c)$$ est continue, ce qui est le cas des
 actinides. Elle n'est plus qu'une borne quand deux vallées se croisent (noyaux
 plus légers, dont le col est proche de la scission) : on s'en tiendra donc aux
 actinides.
@@ -116,90 +116,98 @@ actinides.
 
 ## 2. La goutte de Bohr et Wheeler
 
-**La stabilité de la sphère.** Déformons une sphère de rayon `R₀` à volume
-constant, `R(θ) = R₀ [1 + Σ αₙ Pₙ(cos θ)]` (à une constante près qui conserve
+**La stabilité de la sphère.** Déformons une sphère de rayon $$R_0$$ à volume
+constant, $$R(\theta) = R_0 \bigl[1 + \sum_n \alpha_n P_n(\cos\theta)\bigr]$$ (à une constante près qui conserve
 le volume). Au second ordre, Bohr et Wheeler (1939) obtiennent :
 
-```
-E_s = E_s⁰ [ 1 + Σₙ (n−1)(n+2) / (2(2n+1)) · αₙ² ]
-E_c = E_c⁰ [ 1 − Σₙ 5(n−1) / (2n+1)²    · αₙ² ]
-```
+$$
+\begin{aligned}
+E_s &= E_s^0 \Bigl[ 1 + \sum_n \frac{(n-1)(n+2)}{2(2n+1)}\, \alpha_n^2 \Bigr] \\
+E_c &= E_c^0 \Bigl[ 1 - \sum_n \frac{5(n-1)}{(2n+1)^2}\, \alpha_n^2 \Bigr]
+\end{aligned}
+$$
 
-Pour la déformation quadrupolaire (`n = 2`), avec `E_c⁰ = 2x E_s⁰` :
+Pour la déformation quadrupolaire ($$n = 2$$), avec $$E_c^0 = 2x\, E_s^0$$ :
 
-```
-ΔE = E_s⁰ [ (2/5) − (2x)(1/5) ] α₂²  =  (2/5) (1 − x) E_s⁰ α₂²
-```
+$$
+\Delta E = E_s^0 \Bigl[ \frac{2}{5} - 2x \cdot \frac{1}{5} \Bigr] \alpha_2^2 = \frac{2}{5}\,(1-x)\, E_s^0\, \alpha_2^2
+$$
 
-C'est la définition même du **paramètre de fissilité** `x = E_c⁰ / 2E_s⁰` : la
-sphère est stable tant que `x < 1`. Pour `n = 4`, les coefficients valent 1 et
+C'est la définition même du **paramètre de fissilité** $$x = E_c^0 / 2E_s^0$$ : la
+sphère est stable tant que $$x < 1$$. Pour $$n = 4$$, les coefficients valent 1 et
 5/27 : la sphère est stable contre toutes les déformations si elle l'est contre
 la déformation quadrupolaire.
 
 **La barrière.** En poussant le développement au troisième ordre en α₂ et en
-laissant α₄ s'ajuster, Bohr et Wheeler obtiennent la barrière pour `x` proche
+laissant α₄ s'ajuster, Bohr et Wheeler obtiennent la barrière pour $$x$$ proche
 de 1 :
 
-```
-B_f ≈ (98/135) (1 − x)³ E_s⁰  ≈  0,726 (1 − x)³ E_s⁰
-```
+$$
+B_f \approx \frac{98}{135}\,(1-x)^3\, E_s^0 \approx 0{,}726\,(1-x)^3\, E_s^0
+$$
 
-La barrière s'effondre comme le **cube** de `1 − x`. Pour l'uranium, `1 − x`
+La barrière s'effondre comme le **cube** de $$1 - x$$. Pour l'uranium, $$1 - x$$
 vaut 0,15 à 0,25 : la barrière ne représente que 0,3 à 1 % de l'énergie de
 surface, qui fait plusieurs centaines de MeV. D'où une barrière de quelques MeV, et une extrême
-sensibilité à `x`. On vérifie ce résultat numériquement à la section 4.
+sensibilité à $$x$$. On vérifie ce résultat numériquement à la section 4.
 
 ---
 
 ## 3. Une famille de formes jusqu'à la scission
 
 **Les formes.** On prend la famille à trois paramètres de Brack *et al.* (1972),
-en coordonnées cylindriques, longueurs en unités de `R₀` :
+en coordonnées cylindriques, longueurs en unités de $$R_0$$ :
 
-```
-ρ²(z) = (c² − z²) · (A + B z²/c² + α z/c),      −c ≤ z ≤ c
-B = 2h + (c − 1)/2
-```
+$$
+\begin{gathered}
+\rho^2(z) = (c^2 - z^2) \left( A + B\,\frac{z^2}{c^2} + \alpha\,\frac{z}{c} \right), \qquad -c \le z \le c \\[4pt]
+B = 2h + \frac{c-1}{2}
+\end{gathered}
+$$
 
-- `c` est l'**élongation** (demi-longueur ; 1 pour la sphère) ;
-- `h` contrôle le **col** : plus `h` est grand, plus la taille se creuse ;
-- `α` introduit une **asymétrie** gauche-droite, c'est-à-dire des fragments
+- $$c$$ est l'**élongation** (demi-longueur ; 1 pour la sphère) ;
+- $$h$$ contrôle le **col** : plus $$h$$ est grand, plus la taille se creuse ;
+- $$\alpha$$ introduit une **asymétrie** gauche-droite, c'est-à-dire des fragments
   de masses différentes ;
-- `A` est fixé par la **conservation du volume**. Comme
-  `∫(c² − z²) dz = 4c³/3` et `∫(c² − z²) z² dz = 4c⁵/15`, on a
-  `V = (4π/3) c³ (A + B/5)` ; `V = 4π/3` impose `A = 1/c³ − B/5`. Le terme en
-  `α`, impair en `z`, ne change pas le volume.
+- $$A$$ est fixé par la **conservation du volume**. Comme
+  $$\int (c^2 - z^2)\, dz = 4c^3/3$$ et $$\int (c^2 - z^2)\, z^2\, dz = 4c^5/15$$, on a
+  $$V = \tfrac{4\pi}{3}\, c^3 (A + B/5)$$ ; $$V = 4\pi/3$$ impose $$A = 1/c^3 - B/5$$. Le terme en
+  $$\alpha$$, impair en $$z$$, ne change pas le volume.
 
-`c = 1, h = 0` donne la sphère ; `h = −(c − 1)/4` annule `B` et donne un
-sphéroïde de demi-axes `c` et `c^(−1/2)` ; la forme se **rompt** quand
-`ρ²` s'annule à l'intérieur de `]−c, c[`.
+$$c = 1,\ h = 0$$ donne la sphère ; $$h = -(c-1)/4$$ annule $$B$$ et donne un
+sphéroïde de demi-axes $$c$$ et $$c^{-1/2}$$ ; la forme se **rompt** quand
+$$\rho^2$$ s'annule à l'intérieur de $$]-c,\, c[$$.
 
-**Les trois énergies de forme.** On écrit `f(z) = ρ²(z)`. Tout s'exprime avec
-`f`, `f'` et `f''`, ce qui évite les singularités aux pointes, où `ρ → 0` mais
-`ρρ' = f'/2` reste fini :
+**Les trois énergies de forme.** On écrit $$f(z) = \rho^2(z)$$. Tout s'exprime avec
+$$f$$, $$f'$$ et $$f''$$, ce qui évite les singularités aux pointes, où $$\rho \to 0$$ mais
+$$\rho\rho' = f'/2$$ reste fini :
 
-```
-surface   :  S = 2π ∫ √(f + f'²/4) dz                                       B_s = S / 4π
-courbure  :  ∮ (k₁ + k₂) dS = 2π ∫ [ 1 − (2 f f'' − f'²) / (4f + f'²) ] dz   B_k = … / 8π
-```
+$$
+\begin{aligned}
+\text{surface :}\quad & S = 2\pi \int \sqrt{f + f'^2/4}\; dz, \qquad B_s = \frac{S}{4\pi} \\[4pt]
+\text{courbure :}\quad & \oint (k_1 + k_2)\, dS = 2\pi \int \left[ 1 - \frac{2 f f'' - f'^2}{4f + f'^2} \right] dz \\
+& B_k = \frac{1}{8\pi} \oint (k_1 + k_2)\, dS
+\end{aligned}
+$$
 
-**L'énergie coulombienne** d'une charge uniforme de densité `ρ_q` est une
+**L'énergie coulombienne** d'une charge uniforme de densité $$\rho_q$$ est une
 intégrale de volume à six dimensions,
-`E_C = (ρ_q²/2) ∫∫ d³r d³r' / |r − r'|`. Elle se ramène à une intégrale de
-**surface** grâce à l'identité `∇²|r − r'| = 2/|r − r'|` et à deux applications
+$$E_C = \frac{\rho_q^2}{2} \iint \frac{d^3r\, d^3r'}{\lvert \boldsymbol{r} - \boldsymbol{r}' \rvert}$$. Elle se ramène à une intégrale de
+**surface** grâce à l'identité $$\nabla^2 \lvert \boldsymbol{r} - \boldsymbol{r}' \rvert = 2/\lvert \boldsymbol{r} - \boldsymbol{r}' \rvert$$ et à deux applications
 du théorème de Gauss :
 
-```
-∫_V d³r / |r − r'| = ½ ∮ dS · (r − r')/|r − r'|
-∫_V d³r' (r − r')/|r − r'| = − ∮ dS' |r − r'|
+$$
+\begin{aligned}
+\int_V \frac{d^3r}{\lvert \boldsymbol{r} - \boldsymbol{r}' \rvert} &= \frac{1}{2} \oint d\boldsymbol{S} \cdot \frac{\boldsymbol{r} - \boldsymbol{r}'}{\lvert \boldsymbol{r} - \boldsymbol{r}' \rvert} \\
+\int_V d^3r'\, \frac{\boldsymbol{r} - \boldsymbol{r}'}{\lvert \boldsymbol{r} - \boldsymbol{r}' \rvert} &= -\oint d\boldsymbol{S}'\, \lvert \boldsymbol{r} - \boldsymbol{r}' \rvert \\[4pt]
+\Longrightarrow\quad E_C &= -\frac{\rho_q^2}{4} \oint\!\!\oint (d\boldsymbol{S} \cdot d\boldsymbol{S}')\, \lvert \boldsymbol{r} - \boldsymbol{r}' \rvert
+\end{aligned}
+$$
 
-⇒   E_C = − (ρ_q²/4) ∮∮ (dS · dS') |r − r'|
-```
-
-Avec la symétrie axiale, `dS = ρ (cos φ, sin φ, −ρ') dz dφ`, et l'intégrale
-sur l'un des deux angles donne 2π. Il reste trois intégrales (`z`, `z'` et
-l'angle relatif `ψ`), dont l'intégrande est **continu** : plus de singularité
-en `1/|r − r'|`. Le changement de variable `z = c sin t` absorbe le
+Avec la symétrie axiale, $$d\boldsymbol{S} = \rho\, (\cos\varphi, \sin\varphi, -\rho')\, dz\, d\varphi$$, et l'intégrale
+sur l'un des deux angles donne 2π. Il reste trois intégrales ($$z$$, $$z'$$ et
+l'angle relatif $$\psi$$), dont l'intégrande est **continu** : plus de singularité
+en $$1/\lvert \boldsymbol{r} - \boldsymbol{r}' \rvert$$. Le changement de variable $$z = c \sin t$$ absorbe le
 comportement en racine carrée aux pointes, et une quadrature de Gauss converge
 très vite.
 
@@ -207,12 +215,12 @@ très vite.
 
 | test | calcul | attendu |
 |---|---|---|
-| sphère : `B_s`, `B_k`, `B_c` | 1,000000 ; 1,000000 ; 0,999998 | 1 |
-| sphéroïde `c = 1,5` : `B_s` | 1,059829 | 1,059829 (formule exacte) |
-| sphéroïde `c = 1,5` : `B_c` | 0,967453 | 0,967451 (formule exacte) |
-| sphéroïde `c = 2,0` : `B_c` | 0,908721 | 0,908711 |
-| `α₂ = 0,02` : `(B_s − 1)/α₂²` | 0,390 | 2/5 au second ordre |
-| `α₂ = 0,02` : `(B_c − 1)/α₂²` | −0,200 | −1/5 |
+| sphère : $$B_s$$, $$B_k$$, $$B_c$$ | 1,000000 ; 1,000000 ; 0,999998 | 1 |
+| sphéroïde $$c = 1{,}5$$ : $$B_s$$ | 1,059829 | 1,059829 (formule exacte) |
+| sphéroïde $$c = 1{,}5$$ : $$B_c$$ | 0,967453 | 0,967451 (formule exacte) |
+| sphéroïde $$c = 2{,}0$$ : $$B_c$$ | 0,908721 | 0,908711 |
+| $$\alpha_2 = 0{,}02$$ : $$(B_s - 1)/\alpha_2^2$$ | 0,390 | 2/5 au second ordre |
+| $$\alpha_2 = 0{,}02$$ : $$(B_c - 1)/\alpha_2^2$$ | −0,200 | −1/5 |
 
 La surface est exacte à la précision machine ; l'énergie coulombienne à
 quelques 10⁻⁶ près, soit **un centième de MeV** sur les ~1 000 MeV de
@@ -224,30 +232,32 @@ l'uranium. C'est largement suffisant pour des barrières de quelques MeV.
 
 **L'énergie macroscopique** d'une forme s'écrit, à partir de la sphère :
 
-```
-E_def = E_s (B_s − 1) + E_k (B_k − 1) + E_c (B_c − 1)
-E_s = b_s (1 − κ_s I²) A^(2/3),   E_k = b_k (1 − κ_k I²) A^(1/3),
-E_c = (3/5) e² Z² / (r₀ A^(1/3)),   I = (N − Z)/A
-```
+$$
+\begin{aligned}
+E_{\text{def}} &= E_s\,(B_s - 1) + E_k\,(B_k - 1) + E_c\,(B_c - 1) \\
+E_s &= b_s\,(1 - \kappa_s I^2)\, A^{2/3}, \qquad E_k = b_k\,(1 - \kappa_k I^2)\, A^{1/3}, \\
+E_c &= \frac{3}{5}\,\frac{e^2 Z^2}{r_0 A^{1/3}}, \qquad I = \frac{N-Z}{A}
+\end{aligned}
+$$
 
 On compare deux jeux de paramètres **publiés et ajustés sur les masses** :
 
-| jeu | `b_s` (MeV) | `κ_s` | `b_k` (MeV) | `κ_k` | `r₀` (fm) |
+| jeu | $$b_s$$ (MeV) | $$\kappa_s$$ | $$b_k$$ (MeV) | $$\kappa_k$$ | $$r_0$$ (fm) |
 |---|---|---|---|---|---|
 | MS-LD (Myers et Swiatecki, 1966) | 18,56 | 1,79 | — | — | 1,2049 |
 | LSD (Pomorski et Dudek, 2003) | 16,9707 | 2,2938 | 3,8602 | −2,3764 | 1,21725 |
 
 **La surface d'énergie de l'U-236** (panneau b) a la forme attendue : un
 fond près de la sphère, une vallée de fission qui monte doucement le long de
-`h ≈ 0`, un col en `c = 1,52`, `h = −0,02` (l'étoile), puis la descente vers
+$$h \approx 0$$, un col en $$c = 1{,}52$$, $$h = -0{,}02$$ (l'étoile), puis la descente vers
 la scission. La forme du point selle (panneau a, au milieu) est allongée, à
 peine creusée : un ballon de rugby aux flancs droits. Le col se creuse ensuite
 rapidement.
 
 **Bohr et Wheeler, vérifiés.** Pour une goutte sans courbure, la barrière
-réduite `ξ(x) = B_f / E_s` ne dépend que de `x` :
+réduite $$\xi(x) = B_f / E_s$$ ne dépend que de $$x$$ :
 
-| x | ξ calculé | (98/135)(1 − x)³ | rapport | `c` au point selle |
+| x | ξ calculé | (98/135)(1 − x)³ | rapport | $$c$$ au point selle |
 |---|---|---|---|---|
 | 0,75 | 0,01243 | 0,01134 | 1,096 | 1,673 |
 | 0,80 | 0,00605 | 0,00581 | 1,041 | 1,507 |
@@ -255,8 +265,8 @@ réduite `ξ(x) = B_f / E_s` ne dépend que de `x` :
 | 0,90 | 0,00072 | 0,00073 | 0,991 | 1,235 |
 | 0,95 | 0,00009 | 0,00009 | 1,008 | 1,117 |
 
-Le calcul rejoint le développement quand `x → 1`, où il est exact, et s'en
-écarte de 10 % à `x = 0,75`, où le point selle est déjà loin de la sphère.
+Le calcul rejoint le développement quand $$x \to 1$$, où il est exact, et s'en
+écarte de 10 % à $$x = 0{,}75$$, où le point selle est déjà loin de la sphère.
 Deux méthodes indépendantes donnent le même résultat : c'est le meilleur test
 du code.
 
@@ -276,7 +286,7 @@ du code.
 
 Deux gouttes qui décrivent les masses avec une précision comparable donnent des
 barrières qui varient **du simple au double**. La raison tient en une ligne :
-`B_f ∝ (1 − x)³`, et les deux jeux diffèrent sur `x` de 0,08. Ils répartissent
+$$B_f \propto (1-x)^3$$, et les deux jeux diffèrent sur $$x$$ de 0,08. Ils répartissent
 différemment l'énergie entre volume, surface, courbure et asymétrie de surface.
 Les masses contraignent mal cette répartition : Pomorski et Dudek montrent que
 la qualité de l'ajustement varie à peine quand on échange de l'énergie entre
@@ -285,13 +295,13 @@ surface et courbure. La déformation, elle, la révèle.
 C'est la leçon de Pomorski et Dudek : les masses seules fixent mal le terme de
 surface. Une fois les énergies microscopiques de l'état fondamental ajoutées,
 MS-LD surestime les barrières des noyaux lourds de 3 à 4 MeV, alors que LSD,
-qui possède un terme de **courbure** en `A^(1/3)`, les reproduit à 0,88 MeV
+qui possède un terme de **courbure** en $$A^{1/3}$$, les reproduit à 0,88 MeV
 près (écart RMS, noyaux Z > 70), sans avoir été ajustée sur elles. Les
 barrières de fission sont un **test** des modèles de masse, pas une
 conséquence automatique.
 
 > **Retour sur la leçon 4.** Les coefficients ajustés à la leçon 4 donnent
-> `x = 0,709` pour U-236, encore plus bas que MS-LD : avec des ellipsoïdes et
+> $$x = 0{,}709$$ pour U-236, encore plus bas que MS-LD : avec des ellipsoïdes et
 > un ajustement sur les seules masses, ce modèle surestimerait la barrière.
 > C'est la même difficulté, et une raison supplémentaire de ne pas lui
 > demander de barrières.
@@ -301,7 +311,7 @@ conséquence automatique.
 
 ## 5. Symétrique ou asymétrique ?
 
-Au point selle de l'U-236, on fait varier l'asymétrie `α` :
+Au point selle de l'U-236, on fait varier l'asymétrie $$\alpha$$ :
 
 | α | 0 | 0,05 | 0,10 | 0,15 | 0,20 |
 |---|---|---|---|---|---|
@@ -309,7 +319,7 @@ Au point selle de l'U-236, on fait varier l'asymétrie `α` :
 
 L'énergie **croît** avec l'asymétrie : la goutte est stable contre elle. La
 goutte liquide prédit donc une fission **symétrique**, alors que l'uranium se
-casse en fragments inégaux (`A ≈ 95` et `A ≈ 139`, [leçon 2]({{ '/posts/la-fission-de-l-uranium/' | relative_url }})).
+casse en fragments inégaux ($$A \approx 95$$ et $$A \approx 139$$, [leçon 2]({{ '/posts/la-fission-de-l-uranium/' | relative_url }})).
 
 Le désaccord n'est pas une affaire de bilan d'énergie : la leçon 2 a montré que
 le partage symétrique libère **plus** d'énergie. Il vient de la forme du
@@ -332,8 +342,7 @@ spectre se réorganise et de nouveaux trous apparaissent. Ajoutée à la goutte
 qui monte doucement, une correction qui **oscille** avec la déformation
 découpe la barrière en deux bosses séparées par un second puits.
 
-**Le calcul.** Même modèle qu'à la leçon 4 : `E(δ) = E_goutte(δ) + δE_couches(δ)
-+ δE_appariement(δ)`, sur des **sphéroïdes**, avec la goutte LSD. La correction
+**Le calcul.** Même modèle qu'à la leçon 4 : $$E(\delta) = E_{\text{goutte}}(\delta) + \delta E_{\text{couches}}(\delta) + \delta E_{\text{appariement}}(\delta)$$, sur des **sphéroïdes**, avec la goutte LSD. La correction
 microscopique de l'U-236 (panneau e) :
 
 | δ | 0 | 0,10 | 0,20 | 0,30 | 0,35 | 0,40 | 0,45 | 0,50 | 0,55 |
@@ -341,13 +350,13 @@ microscopique de l'U-236 (panneau e) :
 | couches + appariement (MeV) | +3,5 | +2,2 | −0,4 | +0,9 | +1,5 | +1,2 | −1,6 | −3,5 | −2,0 |
 
 Trois régions se dessinent : la sphère est **pénalisée** (+3,5 MeV, l'U-236
-est en milieu de couche), un **premier puits** à `δ ≈ 0,2`, l'état
-fondamental déformé de la leçon 4, une **bosse** vers `δ ≈ 0,35–0,40`, puis un
-**second puits** profond à `δ ≈ 0,5`.
+est en milieu de couche), un **premier puits** à $$\delta \approx 0{,}2$$, l'état
+fondamental déformé de la leçon 4, une **bosse** vers $$\delta \approx 0{,}35\text{–}0{,}40$$, puis un
+**second puits** profond à $$\delta \approx 0{,}5$$.
 
 **Pourquoi δ = 0,5 ?** Pour un oscillateur à symétrie axiale,
-`ω⊥² = ω₀²(1 + 2δ/3)` et `ω_z² = ω₀²(1 − 4δ/3)`. À `δ = 0,5`,
-`ω⊥/ω_z = √(4/3 ÷ 1/3) = 2` : les fréquences sont dans un **rapport
+$$\omega_\perp^2 = \omega_0^2 (1 + 2\delta/3)$$ et $$\omega_z^2 = \omega_0^2 (1 - 4\delta/3)$$. À $$\delta = 0{,}5$$,
+$$\omega_\perp/\omega_z = \sqrt{(4/3)/(1/3)} = 2$$ : les fréquences sont dans un **rapport
 rationnel**, les niveaux se regroupent en couches très dégénérées, et de
 grands trous s'ouvrent dans le spectre, comme pour la sphère. C'est la
 **superdéformation**, avec un rapport d'axes de 2 pour 1. Le spin-orbite
@@ -362,7 +371,7 @@ d'oscillateur dans la base :
 | 18 | −0,42 | 1,14 | −3,48 | −1,90 | 0,15 |
 | 20 | −0,43 | 1,18 | −3,48 | −1,96 | 0,47 |
 
-Avec `N_max = 20`, le résultat est stable à 0,1 MeV près jusqu'à `δ = 0,55`.
+Avec $$N_{\max} = 20$$, le résultat est stable à 0,1 MeV près jusqu'à $$\delta = 0{,}55$$.
 On s'arrête à 0,60.
 
 **Résultats, face aux valeurs de référence** (panneau f) :
@@ -409,7 +418,7 @@ d'un noyau superdéformé.
 ## 7. Où s'arrête ce modèle
 
 La goutte le long des sphéroïdes et la goutte dans la vallée de fission ne
-coûtent pas la même chose. À moment quadrupolaire `Q₂` égal (U-236, LSD) :
+coûtent pas la même chose. À moment quadrupolaire $$Q_2$$ égal (U-236, LSD) :
 
 | δ | Q₂ (unités réduites) | E sphéroïde | E vallée (c, h) | écart |
 |---|---|---|---|---|
@@ -420,7 +429,7 @@ coûtent pas la même chose. À moment quadrupolaire `Q₂` égal (U-236, LSD) :
 
 (MeV)
 
-Jusqu'à `δ ≈ 0,4`, l'ellipsoïde est une bonne approximation : la barrière
+Jusqu'à $$\delta \approx 0{,}4$$, l'ellipsoïde est une bonne approximation : la barrière
 interne est fiable, à la physique du modèle près. Au-delà, un noyau qui peut
 creuser un col coûte beaucoup moins cher. Le second puits est donc
 probablement **trop peu profond** dans notre calcul, et la **barrière externe**
@@ -435,12 +444,12 @@ abaisse la barrière externe.
 ## 8. Traverser la barrière
 
 Une barrière n'est pas un mur : on la traverse par effet tunnel. Pour une
-barrière parabolique de hauteur `B_f` et de courbure `ħω`, Hill et Wheeler
+barrière parabolique de hauteur $$B_f$$ et de courbure $$\hbar\omega$$, Hill et Wheeler
 (1953) donnent la probabilité de passage :
 
-```
-T(E) = 1 / (1 + exp(2π (B_f − E) / ħω))
-```
+$$
+T(E) = \frac{1}{1 + \exp\bigl[ 2\pi\,(B_f - E)/\hbar\omega \bigr]}
+$$
 
 | E − B_f (MeV) | −2 | −1 | −0,5 | 0 | +0,5 | +1 |
 |---|---|---|---|---|---|---|
@@ -466,18 +475,18 @@ C'est cette formule, appliquée à une barrière à deux bosses, que les
 
 - La barrière de fission est la hauteur du **point selle** du paysage
   d'énergie potentielle au-dessus de l'état fondamental.
-- Pour une goutte, `ΔE = (2/5)(1 − x) E_s⁰ α₂²` : la sphère est stable tant que
-  `x < 1`, et la barrière vaut `(98/135)(1 − x)³ E_s⁰` près de `x = 1`. Le
+- Pour une goutte, $$\Delta E = \tfrac{2}{5}(1-x)\, E_s^0\, \alpha_2^2$$ : la sphère est stable tant que
+  $$x < 1$$, et la barrière vaut $$\tfrac{98}{135}(1-x)^3\, E_s^0$$ près de $$x = 1$$. Le
   calcul numérique le confirme.
 - Une forme à col (c, h, α), avec l'énergie coulombienne réduite à une
   intégrale de surface, suit le noyau jusqu'à la scission. Pour l'U-236, la
-  goutte LSD place le col en `c = 1,52` et donne une barrière de 3,8 MeV.
-- La barrière dépend de `x` au cube : deux gouttes ajustées sur les masses
+  goutte LSD place le col en $$c = 1{,}52$$ et donne une barrière de 3,8 MeV.
+- La barrière dépend de $$x$$ au cube : deux gouttes ajustées sur les masses
   donnent 3,8 ou 7,2 MeV. Les barrières **testent** les modèles de masse.
 - La goutte seule préfère la fission **symétrique** ; l'asymétrie vient des
   couches des fragments.
 - La correction de couches, qui oscille avec la déformation, crée la **double
-  bosse** et un second puits superdéformé (`ω⊥/ω_z = 2`, `δ ≈ 0,5`) : les
+  bosse** et un second puits superdéformé ($$\omega_\perp/\omega_z = 2$$, $$\delta \approx 0{,}5$$) : les
   **isomères de fission**.
 
 ---

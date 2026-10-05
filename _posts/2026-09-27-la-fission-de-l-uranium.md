@@ -13,7 +13,7 @@ lecon: 2
 partie: "I"
 objectifs:
   - "Expliquer, à partir de la courbe B/A, pourquoi un noyau lourd libère de l'énergie en se cassant."
-  - "Distinguer noyau fissile et fissionnable, et relier la fissilité à l'appariement (S_n face à la barrière)."
+  - 'Distinguer noyau fissile et fissionnable, et relier la fissilité à l''appariement (\(S_n\) face à la barrière).'
   - "Calculer le Q d'une fission et détailler le bilan des ~200 MeV."
   - "Comprendre pourquoi la fission réelle est asymétrique alors que le bilan d'énergie favorise la symétrie."
 prerequis: [1]
@@ -64,7 +64,7 @@ _Figure produite par `etude_fission.py`. Le panneau en haut à gauche (courbe de
 ## 1. Pourquoi un noyau lourd libère de l'énergie en se cassant
 
 Une seule courbe explique la fission **et** la fusion : l'énergie de liaison
-par nucléon `B/A`. Elle monte de l'hydrogène jusqu'à un maximum vers A ≈ 60
+par nucléon $$B/A$$. Elle monte de l'hydrogène jusqu'à un maximum vers A ≈ 60
 (**Ni-62, 8,7946 MeV** — pas Fe-56, voir [Énergies de liaison : les données mesurées]({{ '/posts/energies-de-liaison/' | relative_url }})), puis
 redescend. Un noyau lourd qui se casse en deux morceaux plus proches du fer
 devient plus lié ; la différence est libérée.
@@ -82,9 +82,9 @@ Excellent sur les noyaux lourds, mauvais sur l'hélium 4 : le modèle ignore
 les couches nucléaires, et He-4 est doublement magique donc anormalement
 lié. Retenir cette limite, elle resservira.
 
-**Le terme coupable** est le terme coulombien, en `Z²/A^(1/3)`. Les protons
-se repoussent **tous** mutuellement (en `Z²`), alors que la force nucléaire
-ne lie qu'aux voisins immédiats (en `A`). Passé le fer, la répulsion
+**Le terme coupable** est le terme coulombien, en $$Z^2/A^{1/3}$$. Les protons
+se repoussent **tous** mutuellement (en $$Z^2$$), alors que la force nucléaire
+ne lie qu'aux voisins immédiats (en $$A$$). Passé le fer, la répulsion
 l'emporte. L'uranium est déjà presque instable ; il suffit de le déformer.
 
 ## 2. Pourquoi l'U-235 et pas l'U-238
@@ -103,7 +103,7 @@ modèle de la goutte liquide la reproduit :
 > Les barrières de ce tableau sont des valeurs typiques. La
 > [leçon 6]({{ '/posts/barrieres-de-fission/' | relative_url }}) les calcule, et donne les valeurs recommandées par
 > RIPL-3 pour U-236 : 5,67 MeV pour la bosse la plus haute, 5,00 MeV pour
-> l'autre. La conclusion ne change pas : `S_n` = 6,55 MeV passe au-dessus.
+> l'autre. La conclusion ne change pas : $$S_n$$ = 6,55 MeV passe au-dessus.
 {: .prompt-info }
 
 Le mécanisme en une phrase : **l'U-235 a un nombre impair de neutrons (143)**.
@@ -118,12 +118,12 @@ S_n.** La fissilité ne dépend donc pas de la vitesse du neutron mais de la
 sans exception.
 
 L'U-238 fissionne quand même si on lui apporte la différence en énergie
-cinétique — seuil ~1 MeV. C'est le facteur `ε ≈ 1,03` de la [leçon 7]({{ '/posts/ralentir-les-neutrons/' | relative_url }}) : 3 % des fissions
+cinétique — seuil ~1 MeV. C'est le facteur $$\varepsilon \approx 1{,}03$$ de la [leçon 7]({{ '/posts/ralentir-les-neutrons/' | relative_url }}) : 3 % des fissions
 d'un REP ont lieu sur l'U-238, par des neutrons encore rapides.
 
 ## 3. Combien d'énergie
 
-`Q = B(fragment 1) + B(fragment 2) − B(U-236)`. Les neutrons libres ont une
+$$Q = B(\text{fragment 1}) + B(\text{fragment 2}) - B(\text{U-236})$$. Les neutrons libres ont une
 énergie de liaison nulle et ne comptent pas.
 
 | partition de U-236 | Q (goutte liquide) |
@@ -167,12 +167,12 @@ nucléaires (MeV) et chimiques (eV).
 
 ## À retenir
 
-- La courbe `B/A` monte jusqu'à Ni-62 puis redescend : couper un noyau lourd
+- La courbe $$B/A$$ monte jusqu'à Ni-62 puis redescend : couper un noyau lourd
   en deux fragments de masse moyenne libère environ 0,8 MeV par nucléon.
-- Le responsable est le terme **coulombien** en `Z²/A^(1/3)` : la répulsion
+- Le responsable est le terme **coulombien** en $$Z^2/A^{1/3}$$ : la répulsion
   entre protons croît plus vite que la liaison nucléaire.
 - **Fissile** (U-235, Pu-239, U-233 : N impair) : la capture d'un neutron
-  lent apporte `S_n` > barrière, grâce à l'énergie d'appariement.
+  lent apporte $$S_n$$ > barrière, grâce à l'énergie d'appariement.
   **Fissionnable** seulement (U-238 : N pair) : il faut un neutron de plus de ~1 MeV.
 - Une fission libère ~207 MeV, dont ~200 MeV récupérables : l'essentiel en
   énergie cinétique des fragments, 12 MeV perdus en antineutrinos.

@@ -19,11 +19,11 @@ renvoie à la leçon où la notion est introduite.
 
 ## Masses et énergie de liaison
 
-Énergie de liaison `B`
+Énergie de liaison $$B$$
 : Énergie qu'il faudrait fournir pour séparer un noyau en nucléons libres.
   Elle se calcule à partir des masses mesurées :
-  `B = [Z·m(¹H) + N·m(n) − M(A,Z)]·c²`. On la compare d'un noyau à l'autre
-  par nucléon, `B/A`, maximal pour Ni-62. ([leçon 1]({{ l1 }}))
+  $$B = \bigl[Z\,m({}^{1}\mathrm{H}) + N\,m_n - M(A,Z)\bigr]\,c^2$$. On la compare d'un noyau à l'autre
+  par nucléon, $$B/A$$, maximal pour Ni-62. ([leçon 1]({{ l1 }}))
 
 AME2020
 : *Atomic Mass Evaluation* 2020, la référence mondiale des masses atomiques :
@@ -35,9 +35,9 @@ Goutte liquide (formule semi-empirique de masse)
   termes : volume, surface, Coulomb, asymétrie et appariement. Excellent en
   moyenne, aveugle aux couches. ([leçon 1]({{ l1 }}), [leçon 3]({{ l3 }}))
 
-Énergie de séparation `S_n`, `S₂ₙ`
-: Énergie nécessaire pour arracher un neutron (ou deux) à un noyau. `S_n` du
-  noyau composé décide de la fissilité ; la chute de `S₂ₙ` le long d'une
+Énergie de séparation $$S_n$$, $$S_{2n}$$
+: Énergie nécessaire pour arracher un neutron (ou deux) à un noyau. $$S_n$$ du
+  noyau composé décide de la fissilité ; la chute de $$S_{2n}$$ le long d'une
   chaîne isotopique révèle les nombres magiques. ([leçon 1]({{ l1 }}))
 
 Nombres magiques
@@ -90,12 +90,12 @@ Scission
 
 Pénétrabilité (Hill-Wheeler)
 : Probabilité de traverser une barrière par effet tunnel :
-  `T = 1/(1 + exp(2π(B_f − E)/ħω))` pour une barrière parabolique.
+  $$T = 1/\bigl(1 + \exp[2\pi(B_f - E)/\hbar\omega]\bigr)$$ pour une barrière parabolique.
   ([leçon 6]({{ l6 }}))
 
-Paramètre de fissilité `x`
-: `x = E_c / 2E_s`, rapport entre énergie coulombienne et énergie de surface
-  d'une goutte sphérique. Pour `x ≥ 1`, la sphère est instable et la goutte
+Paramètre de fissilité $$x$$
+: $$x = E_c / 2E_s$$, rapport entre énergie coulombienne et énergie de surface
+  d'une goutte sphérique. Pour $$x \ge 1$$, la sphère est instable et la goutte
   fissionne spontanément. Pour U-236, x vaut 0,71 à 0,84 selon la goutte
   utilisée, et la barrière en dépend au cube. ([leçon 4]({{ l4 }}), [leçon 6]({{ l6 }}))
 
@@ -113,26 +113,26 @@ Fission asymétrique
 
 ## Couches et formes des noyaux
 
-Déformation `δ`, `β₂`
-: Mesures de l'écart à la sphère. `δ > 0` : noyau **allongé** (ballon de
-  rugby, *prolate*) ; `δ < 0` : **aplati** (galette, *oblate*). `β₂` est la
+Déformation $$\delta$$, $$\beta_2$$
+: Mesures de l'écart à la sphère. $$\delta > 0$$ : noyau **allongé** (ballon de
+  rugby, *prolate*) ; $$\delta < 0$$ : **aplati** (galette, *oblate*). $$\beta_2$$ est la
   convention expérimentale, déduite des transitions E2. ([leçon 4]({{ l4 }}))
 
 Modèle de Nilsson
 : Niveaux d'énergie d'un nucléon dans un oscillateur harmonique déformé, avec
-  un terme de spin-orbite et un terme en `l²`. Son diagramme montre comment
+  un terme de spin-orbite et un terme en $$\boldsymbol{l}^2$$. Son diagramme montre comment
   les couches se brisent quand le noyau se déforme. ([leçon 4]({{ l4 }}))
 
 Spin-orbite
-: Couplage entre le moment orbital `l` et le spin `s` d'un nucléon, de
+: Couplage entre le moment orbital $$\boldsymbol{l}$$ et le spin $$\boldsymbol{s}$$ d'un nucléon, de
   l'ordre du MeV dans le noyau. C'est lui qui produit les nombres magiques
   28, 50, 82, 126 (Goeppert Mayer, Haxel, Jensen, Suess, 1949).
   ([leçon 4]({{ l4 }}), [leçon 5]({{ l5 }}))
 
-`Ω`
+$$\Omega$$
 : Projection du moment angulaire d'un nucléon sur l'axe de symétrie d'un
   noyau déformé, le seul bon nombre quantique qui reste. Dans un noyau
-  allongé, les orbitales de petit `Ω` sont les plus basses. ([leçon 5]({{ l5 }}))
+  allongé, les orbitales de petit $$\Omega$$ sont les plus basses. ([leçon 5]({{ l5 }}))
 
 Correction de couches (Strutinsky)
 : Différence entre la somme des énergies des niveaux occupés et la même somme
@@ -141,7 +141,7 @@ Correction de couches (Strutinsky)
 
 BCS
 : Théorie de l'appariement (Bardeen, Cooper, Schrieffer), transposée des
-  supraconducteurs aux noyaux. Le **gap** `Δ` mesure l'appariement ; un
+  supraconducteurs aux noyaux. Le **gap** $$\Delta$$ mesure l'appariement ; un
   nucléon célibataire **bloque** son niveau. ([leçon 4]({{ l4 }}))
 
 Modèle macroscopique-microscopique, FRDM
@@ -150,7 +150,7 @@ Modèle macroscopique-microscopique, FRDM
   Alamos) en est la version de référence. ([leçon 4]({{ l4 }}))
 
 Orbitale nucléaire
-: Densité de probabilité `|ψ|²` d'un nucléon dans un état de Nilsson, tracée
+: Densité de probabilité $$\lvert\psi\rvert^2$$ d'un nucléon dans un état de Nilsson, tracée
   comme une orbitale électronique. La somme des orbitales occupées donne la
   forme du noyau. ([leçon 5]({{ l5 }}))
 
@@ -158,11 +158,11 @@ Orbitale nucléaire
 
 Modérateur, rapport de modération
 : Matériau qui ralentit les neutrons par chocs (eau, eau lourde, graphite).
-  Il doit ralentir vite (`ξΣs` grand) **et** peu absorber (`ξΣs/Σa` grand).
+  Il doit ralentir vite ($$\xi\Sigma_s$$ grand) **et** peu absorber ($$\xi\Sigma_s/\Sigma_a$$ grand).
   ([leçon 7]({{ l7 }}))
 
 Formule des quatre facteurs
-: `k_inf = η · ε · p · f` : facteur de reproduction, facteur de fission
+: $$k_\infty = \eta\, \varepsilon\, p\, f$$ : facteur de reproduction, facteur de fission
   rapide, probabilité d'échapper aux résonances, facteur d'utilisation
   thermique. ([leçon 7]({{ l7 }}))
 
@@ -171,12 +171,12 @@ Sous-modération
   volontairement sous-modéré pour que son coefficient de température
   modérateur soit négatif. ([leçon 7]({{ l7 }}))
 
-`k_eff`, pcm
+$$k_{\text{eff}}$$, pcm
 : Facteur de multiplication effectif, fuites comprises : le cœur est critique
-  pour `k_eff = 1`. La réactivité `ρ = (k − 1)/k` se compte en pcm
+  pour $$k_{\text{eff}} = 1$$. La réactivité $$\rho = (k-1)/k$$ se compte en pcm
   (pour cent mille). ([leçon 8]({{ l8 }}))
 
-Facteur de point chaud `F_xy`
+Facteur de point chaud $$F_{xy}$$
 : Rapport entre la puissance de l'assemblage le plus chargé et la puissance
   moyenne. Il fixe la marge thermique d'un cœur. ([leçon 8]({{ l8 }}))
 
@@ -186,6 +186,6 @@ Ombrage, anti-ombrage
   ([leçon 8]({{ l8 }}))
 
 Flux scalaire, théorie de la diffusion
-: Le flux `φ = n·v` est la longueur de trajectoire des neutrons par unité de
-  volume et de temps ; les taux de réaction valent `Σ·φ`. La diffusion
-  approche le transport par la loi de Fick `J = −D ∇φ`. ([annexe]({{ la }}))
+: Le flux $$\varphi = n v$$ est la longueur de trajectoire des neutrons par unité de
+  volume et de temps ; les taux de réaction valent $$\Sigma\varphi$$. La diffusion
+  approche le transport par la loi de Fick $$J = -D\, \nabla\varphi$$. ([annexe]({{ la }}))

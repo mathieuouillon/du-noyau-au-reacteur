@@ -10,7 +10,7 @@ image:
 lecon: 8
 partie: "III"
 objectifs:
-  - "Passer de k_inf à k_eff : le rôle des fuites et du réflecteur."
+  - 'Passer de \(k_\infty\) à \(k_{\text{eff}}\) : le rôle des fuites et du réflecteur.'
   - "Aplatir la puissance avec un plan de chargement, et en mesurer le prix en réactivité."
   - "Comparer le bore soluble et les grappes de commande ; comprendre ombrage et anti-ombrage."
   - "Savoir ce qu'un calcul de neutronique statique ne contient pas."
@@ -49,7 +49,7 @@ _Cartes de puissance : chargement uniforme ou zoné, grappes extraites ou insér
 ## 1. Le cycle de vie du neutron
 
 Tout part d'une question comptable : sur 100 neutrons d'une génération,
-combien en produit-on à la suivante ? Ce rapport, c'est `k`.
+combien en produit-on à la suivante ? Ce rapport, c'est $$k$$.
 
 Le parcours d'un neutron dans un REP :
 
@@ -63,31 +63,31 @@ Le parcours d'un neutron dans un REP :
    stérile (dans l'U238, le bore, les structures, une grappe).
 
 Le modèle à deux groupes comprime ce parcours en trois nombres par matériau :
-`Sigma_s(1→2)` (le ralentissement), `Sigma_a2` (l'absorption thermique),
-`nu_Sigma_f2` (la production thermique). D'où :
+$$\Sigma_{1\to2}$$ (le ralentissement), $$\Sigma_{a2}$$ (l'absorption thermique),
+$$\nu\Sigma_{f2}$$ (la production thermique). D'où :
 
-```
-k_inf = (nuSf1 + nuSf2 · Ss12/Sa2) / (Sa1 + Ss12)
-```
+$$
+k_\infty = \frac{\nu\Sigma_{f1} + \nu\Sigma_{f2}\, \Sigma_{1\to2}/\Sigma_{a2}}{\Sigma_{a1} + \Sigma_{1\to2}}
+$$
 
-Le terme `Ss12/Sa2` est la probabilité de survivre au ralentissement plutôt
+Le terme $$\Sigma_{1\to2}/\Sigma_{a2}$$ est la probabilité de survivre au ralentissement plutôt
 que d'être absorbé en route.
 
 **Valeurs du modèle :** zone1 = 1,21644 · zone2 = 1,25194 · zone3 = 1,29054.
 
-## 2. De `k_inf` à `k_eff` : le prix des fuites
+## 2. De $$k_\infty$$ à $$k_{\text{eff}}$$ : le prix des fuites
 
-`k_inf` suppose un milieu infini. Un cœur réel fuit :
+$$k_\infty$$ suppose un milieu infini. Un cœur réel fuit :
 
-```
-k_eff = k_inf × P_NL
-```
+$$
+k_{\text{eff}} = k_\infty \times P_{\text{NL}}
+$$
 
 Mesuré par le code, pour le chargement uniforme :
 
 | | k | P_NL |
 |---|---|---|
-| `k_inf` (zone3, milieu infini) | 1,29054 | — |
+| $$k_\infty$$ (zone3, milieu infini) | 1,29054 | — |
 | fuites radiales seules | 1,27841 | 0,99060 |
 | fuites radiales + axiales | 1,27317 | 0,98654 |
 
@@ -97,8 +97,7 @@ cœur renvoient l'essentiel des neutrons échappés. Un cœur nu perdrait
 plusieurs milliers de pcm.
 
 Noter le procédé pour la fuite axiale : le modèle est plan, il ne voit pas
-la troisième dimension. On la réintroduit par un **buckling** `B_z² =
-(π/H_ex)² ≈ 7,3·10⁻⁵ cm⁻²`, qui ajoute une pseudo-absorption `D·B_z²`. Si le
+la troisième dimension. On la réintroduit par un **buckling** $$B_z^2 = (\pi/H_{\text{ex}})^2 \approx 7{,}3\cdot10^{-5}~\text{cm}^{-2}$$, qui ajoute une pseudo-absorption $$D B_z^2$$. Si le
 flux axial est un cosinus — ce qui est le cas pour un cœur axialement nu —
 c'est exact, pas approché.
 
@@ -108,9 +107,9 @@ Le flux naturel d'un cœur homogène est en Bessel J₀ : très piqué au centre
 Or ce qui limite un réacteur n'est pas sa réactivité, c'est le **crayon le
 plus chaud**. Le facteur de point chaud radial
 
-```
-F_xy = puissance de l'assemblage max / puissance moyenne
-```
+$$
+F_{xy} = \frac{\text{puissance de l'assemblage le plus chargé}}{\text{puissance moyenne d'un assemblage}}
+$$
 
 fixe la marge avant crise d'ébullition (DNB). Un cœur au F_xy trop élevé
 doit être bridé en puissance, quelle que soit sa réactivité.
@@ -144,7 +143,7 @@ Dilué dans l'eau du primaire, donc **réparti uniformément** : il ne crée
 aucun point chaud. C'est sa qualité maîtresse. Absorbant en 1/v, il n'agit
 pratiquement que sur le groupe thermique.
 
-Poids différentiel calculé, `dρ/dppm` :
+Poids différentiel calculé, $$d\rho/d\text{ppm}$$ :
 
 | ppm | k_eff | ρ (pcm) | différentiel |
 |---|---|---|---|
@@ -179,7 +178,7 @@ cycle sans passer par le bore, et disparaissent en s'usant.
 ### Les grappes de commande — rapides, locales
 
 Elles tombent en secondes. Mais elles sont **locales**, donc elles
-déforment la puissance : `F_xy` passe de 1,485 à 1,592 à leur insertion.
+déforment la puissance : $$F_{xy}$$ passe de 1,485 à 1,592 à leur insertion.
 On paie l'efficacité en point chaud.
 
 Efficacité du groupe de 7 positions : **2 264 pcm**.
@@ -291,10 +290,10 @@ calibrés sur du transport.
 
 ## À retenir
 
-- `k_eff = k_inf × P_NL` : grâce au réflecteur, les fuites ne coûtent ici
+- $$k_{\text{eff}} = k_\infty \times P_{\text{NL}}$$ : grâce au réflecteur, les fuites ne coûtent ici
   qu'environ 1 000 pcm.
 - Ce qui limite un réacteur est le **crayon le plus chaud** : un chargement
-  « out-in » fait passer `F_xy` de 2,12 à 1,47, au prix de 3 020 pcm.
+  « out-in » fait passer $$F_{xy}$$ de 2,12 à 1,47, au prix de 3 020 pcm.
 - Le **bore** contrôle lentement et uniformément (bore critique : 1 301 ppm
   pour ce cœur neuf) ; sa concentration est bornée par le signe du
   coefficient modérateur.
@@ -309,7 +308,7 @@ calibrés sur du transport.
 
 Par ordre de rapport pédagogique/effort :
 
-1. **Contre-réactions Doppler et modérateur.** `Sigma_a(T)` et `D(rho)`,
+1. **Contre-réactions Doppler et modérateur.** $$\Sigma_a(T)$$ et $$D(\rho)$$,
    bouclés par itération de Picard avec un modèle thermohydraulique
    canal-par-canal simple. C'est le pas qui transforme un calcul de
    neutronique en modèle de réacteur.
