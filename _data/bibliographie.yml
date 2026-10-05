@@ -1,0 +1,631 @@
+# Bibliographie du cours : une entrée par référence, citée par sa clé dans
+# l'en-tête des leçons (champ `bibliographie`). Les DOI ont été vérifiés
+# auprès de doi.org et de Crossref.
+#
+# type : livre | article | revue (article de synthèse) | donnees | code
+
+# ---------------------------------------------------------------- manuels
+krane1988:
+  type: livre
+  auteurs: "K.S. Krane"
+  titre: "Introductory Nuclear Physics"
+  editeur: "Wiley"
+  annee: 1988
+basdevant2005:
+  type: livre
+  auteurs: "J.-L. Basdevant, J. Rich, M. Spiro"
+  titre: "Fundamentals in Nuclear Physics: From Nuclear Structure to Cosmology"
+  editeur: "Springer"
+  annee: 2005
+valentin1982:
+  type: livre
+  auteurs: "L. Valentin"
+  titre: "Physique subatomique : noyaux et particules"
+  editeur: "Hermann"
+  annee: 1982
+bohrmottelson1969:
+  type: livre
+  auteurs: "A. Bohr, B.R. Mottelson"
+  titre: "Nuclear Structure, vol. I : Single-Particle Motion"
+  editeur: "Benjamin"
+  annee: 1969
+bohrmottelson1975:
+  type: livre
+  auteurs: "A. Bohr, B.R. Mottelson"
+  titre: "Nuclear Structure, vol. II : Nuclear Deformations"
+  editeur: "Benjamin"
+  annee: 1975
+ringschuck1980:
+  type: livre
+  auteurs: "P. Ring, P. Schuck"
+  titre: "The Nuclear Many-Body Problem"
+  editeur: "Springer"
+  annee: 1980
+hasse1988:
+  type: livre
+  auteurs: "R.W. Hasse, W.D. Myers"
+  titre: "Geometrical Relationships of Macroscopic Nuclear Physics"
+  editeur: "Springer"
+  annee: 1988
+vandenbosch1973:
+  type: livre
+  auteurs: "R. Vandenbosch, J.R. Huizenga"
+  titre: "Nuclear Fission"
+  editeur: "Academic Press"
+  annee: 1973
+wagemans1991:
+  type: livre
+  auteurs: "C. Wagemans (dir.)"
+  titre: "The Nuclear Fission Process"
+  editeur: "CRC Press"
+  annee: 1991
+krappe2012:
+  type: livre
+  auteurs: "H.J. Krappe, K. Pomorski"
+  titre: "Theory of Nuclear Fission"
+  editeur: "Springer, Lecture Notes in Physics 838"
+  annee: 2012
+  doi: "10.1007/978-3-642-23515-3"
+hastie2009:
+  type: livre
+  auteurs: "T. Hastie, R. Tibshirani, J. Friedman"
+  titre: "The Elements of Statistical Learning (2e éd.)"
+  editeur: "Springer"
+  annee: 2009
+  doi: "10.1007/978-0-387-84858-7"
+rasmussen2006:
+  type: livre
+  auteurs: "C.E. Rasmussen, C.K.I. Williams"
+  titre: "Gaussian Processes for Machine Learning"
+  editeur: "MIT Press"
+  annee: 2006
+  url: "https://gaussianprocess.org/gpml/"
+reuss2003:
+  type: livre
+  auteurs: "P. Reuss"
+  titre: "Précis de neutronique"
+  editeur: "EDP Sciences"
+  annee: 2003
+bussac1985:
+  type: livre
+  auteurs: "J. Bussac, P. Reuss"
+  titre: "Traité de neutronique (2e éd.)"
+  editeur: "Hermann"
+  annee: 1985
+duderstadt1976:
+  type: livre
+  auteurs: "J.J. Duderstadt, L.J. Hamilton"
+  titre: "Nuclear Reactor Analysis"
+  editeur: "Wiley"
+  annee: 1976
+lamarsh1966:
+  type: livre
+  auteurs: "J.R. Lamarsh"
+  titre: "Introduction to Nuclear Reactor Theory"
+  editeur: "Addison-Wesley"
+  annee: 1966
+stacey2007:
+  type: livre
+  auteurs: "W.M. Stacey"
+  titre: "Nuclear Reactor Physics (2e éd.)"
+  editeur: "Wiley-VCH"
+  annee: 2007
+lewis1984:
+  type: livre
+  auteurs: "E.E. Lewis, W.F. Miller"
+  titre: "Computational Methods of Neutron Transport"
+  editeur: "Wiley"
+  annee: 1984
+
+# ------------------------------------------------- masses et goutte liquide
+weizsacker1935:
+  type: article
+  auteurs: "C.F. von Weizsäcker"
+  titre: "Zur Theorie der Kernmassen"
+  revue: "Z. Phys."
+  volume: "96"
+  pages: "431"
+  annee: 1935
+  doi: "10.1007/BF01337700"
+bethe1936:
+  type: article
+  auteurs: "H.A. Bethe, R.F. Bacher"
+  titre: "Nuclear Physics A. Stationary States of Nuclei"
+  revue: "Rev. Mod. Phys."
+  volume: "8"
+  pages: "82"
+  annee: 1936
+  doi: "10.1103/RevModPhys.8.82"
+wigner1937:
+  type: article
+  auteurs: "E. Wigner"
+  titre: "On the Consequences of the Symmetry of the Nuclear Hamiltonian on the Spectroscopy of Nuclei"
+  revue: "Phys. Rev."
+  volume: "51"
+  pages: "106"
+  annee: 1937
+  doi: "10.1103/PhysRev.51.106"
+myers1966:
+  type: article
+  auteurs: "W.D. Myers, W.J. Swiatecki"
+  titre: "Nuclear masses and deformations"
+  revue: "Nucl. Phys."
+  volume: "81"
+  pages: "1"
+  annee: 1966
+  doi: "10.1016/0029-5582(66)90639-0"
+myers1969:
+  type: article
+  auteurs: "W.D. Myers, W.J. Swiatecki"
+  titre: "Average nuclear properties"
+  revue: "Ann. Phys."
+  volume: "55"
+  pages: "395"
+  annee: 1969
+  doi: "10.1016/0003-4916(69)90202-4"
+duflo1995:
+  type: article
+  auteurs: "J. Duflo, A.P. Zuker"
+  titre: "Microscopic mass formulas"
+  revue: "Phys. Rev. C"
+  volume: "52"
+  pages: "R23"
+  annee: 1995
+  doi: "10.1103/PhysRevC.52.R23"
+dieperink2009:
+  type: article
+  auteurs: "A.E.L. Dieperink, P. Van Isacker"
+  titre: "Shell corrections to a liquid-drop description of nuclear masses and radii"
+  revue: "Eur. Phys. J. A"
+  volume: "42"
+  pages: "269"
+  annee: 2009
+  doi: "10.1140/epja/i2009-10869-3"
+wang2011:
+  type: article
+  auteurs: "N. Wang, M. Liu"
+  titre: "Nuclear mass predictions with a radial basis function approach"
+  revue: "Phys. Rev. C"
+  volume: "84"
+  pages: "051303"
+  annee: 2011
+  doi: "10.1103/PhysRevC.84.051303"
+wang2014:
+  type: article
+  auteurs: "N. Wang, M. Liu, X. Wu, J. Meng"
+  titre: "Surface diffuseness correction in global mass formula"
+  revue: "Phys. Lett. B"
+  volume: "734"
+  pages: "215"
+  annee: 2014
+  doi: "10.1016/j.physletb.2014.05.049"
+goriely2009:
+  type: article
+  auteurs: "S. Goriely, S. Hilaire, M. Girod, S. Péru"
+  titre: "First Gogny-Hartree-Fock-Bogoliubov Nuclear Mass Model"
+  revue: "Phys. Rev. Lett."
+  volume: "102"
+  pages: "242501"
+  annee: 2009
+  doi: "10.1103/PhysRevLett.102.242501"
+goriely2013:
+  type: article
+  auteurs: "S. Goriely, N. Chamel, J.M. Pearson"
+  titre: "Hartree-Fock-Bogoliubov nuclear mass model with 0.50 MeV accuracy based on standard forms of Skyrme and pairing functionals (HFB-27)"
+  revue: "Phys. Rev. C"
+  volume: "88"
+  pages: "061302"
+  annee: 2013
+  doi: "10.1103/PhysRevC.88.061302"
+adhikari2021:
+  type: article
+  auteurs: "D. Adhikari et al. (collaboration PREX)"
+  titre: "Accurate Determination of the Neutron Skin Thickness of 208Pb through Parity-Violation in Electron Scattering"
+  revue: "Phys. Rev. Lett."
+  volume: "126"
+  pages: "172502"
+  annee: 2021
+  doi: "10.1103/PhysRevLett.126.172502"
+
+# ------------------------------------------------------------- données
+wang2021:
+  type: donnees
+  auteurs: "M. Wang, W.J. Huang, F.G. Kondev, G. Audi, S. Naimi"
+  titre: "The AME 2020 atomic mass evaluation (II). Tables, graphs and references"
+  revue: "Chinese Phys. C"
+  volume: "45"
+  pages: "030003"
+  annee: 2021
+  doi: "10.1088/1674-1137/abddaf"
+huang2021:
+  type: donnees
+  auteurs: "W.J. Huang, M. Wang, F.G. Kondev, G. Audi, S. Naimi"
+  titre: "The AME 2020 atomic mass evaluation (I). Evaluation of input data, and adjustment procedures"
+  revue: "Chinese Phys. C"
+  volume: "45"
+  pages: "030002"
+  annee: 2021
+  doi: "10.1088/1674-1137/abddb0"
+kondev2021:
+  type: donnees
+  auteurs: "F.G. Kondev, M. Wang, W.J. Huang, S. Naimi, G. Audi"
+  titre: "The NUBASE2020 evaluation of nuclear physics properties"
+  revue: "Chinese Phys. C"
+  volume: "45"
+  pages: "030001"
+  annee: 2021
+  doi: "10.1088/1674-1137/abddae"
+tiesinga2021:
+  type: donnees
+  auteurs: "E. Tiesinga, P.J. Mohr, D.B. Newell, B.N. Taylor"
+  titre: "CODATA recommended values of the fundamental physical constants: 2018"
+  revue: "Rev. Mod. Phys."
+  volume: "93"
+  pages: "025010"
+  annee: 2021
+  doi: "10.1103/RevModPhys.93.025010"
+meija2016:
+  type: donnees
+  auteurs: "J. Meija et al."
+  titre: "Isotopic compositions of the elements 2013 (IUPAC Technical Report)"
+  revue: "Pure Appl. Chem."
+  volume: "88"
+  pages: "293"
+  annee: 2016
+  doi: "10.1515/pac-2015-0503"
+raman2001:
+  type: donnees
+  auteurs: "S. Raman, C.W. Nestor, P. Tikkanen"
+  titre: "Transition probability from the ground to the first-excited 2+ state of even-even nuclides"
+  revue: "At. Data Nucl. Data Tables"
+  volume: "78"
+  pages: "1"
+  annee: 2001
+  doi: "10.1006/adnd.2001.0858"
+angeli2013:
+  type: donnees
+  auteurs: "I. Angeli, K.P. Marinova"
+  titre: "Table of experimental nuclear ground state charge radii: An update"
+  revue: "At. Data Nucl. Data Tables"
+  volume: "99"
+  pages: "69"
+  annee: 2013
+  doi: "10.1016/j.adt.2011.12.006"
+capote2009:
+  type: donnees
+  auteurs: "R. Capote et al."
+  titre: "RIPL – Reference Input Parameter Library for Calculation of Nuclear Reactions and Nuclear Data Evaluations"
+  revue: "Nucl. Data Sheets"
+  volume: "110"
+  pages: "3107"
+  annee: 2009
+  doi: "10.1016/j.nds.2009.10.004"
+brown2018:
+  type: donnees
+  auteurs: "D.A. Brown et al."
+  titre: "ENDF/B-VIII.0: The 8th Major Release of the Nuclear Reaction Data Library with CIELO-project Cross Sections, New Standards and Thermal Scattering Data"
+  revue: "Nucl. Data Sheets"
+  volume: "148"
+  pages: "1"
+  annee: 2018
+  doi: "10.1016/j.nds.2018.02.001"
+plompen2020:
+  type: donnees
+  auteurs: "A.J.M. Plompen et al."
+  titre: "The joint evaluated fission and fusion nuclear data library, JEFF-3.3"
+  revue: "Eur. Phys. J. A"
+  volume: "56"
+  pages: "181"
+  annee: 2020
+  doi: "10.1140/epja/s10050-020-00141-9"
+nudat:
+  type: donnees
+  auteurs: "National Nuclear Data Center (Brookhaven)"
+  titre: "NuDat : base de données interactive des propriétés nucléaires"
+  url: "https://www.nndc.bnl.gov/nudat3/"
+periodictable:
+  type: code
+  auteurs: "P. Kienzle et al."
+  titre: "periodictable : propriétés des éléments et des isotopes pour Python"
+  url: "https://github.com/python-periodictable/periodictable"
+
+# ----------------------------------------------------------- fission
+hahn1939:
+  type: article
+  auteurs: "O. Hahn, F. Strassmann"
+  titre: "Über den Nachweis und das Verhalten der bei der Bestrahlung des Urans mittels Neutronen entstehenden Erdalkalimetalle"
+  revue: "Naturwissenschaften"
+  volume: "27"
+  pages: "11"
+  annee: 1939
+  doi: "10.1007/BF01488241"
+meitner1939:
+  type: article
+  auteurs: "L. Meitner, O.R. Frisch"
+  titre: "Disintegration of Uranium by Neutrons: a New Type of Nuclear Reaction"
+  revue: "Nature"
+  volume: "143"
+  pages: "239"
+  annee: 1939
+  doi: "10.1038/143239a0"
+bohr1939:
+  type: article
+  auteurs: "N. Bohr, J.A. Wheeler"
+  titre: "The Mechanism of Nuclear Fission"
+  revue: "Phys. Rev."
+  volume: "56"
+  pages: "426"
+  annee: 1939
+  doi: "10.1103/PhysRev.56.426"
+hill1953:
+  type: article
+  auteurs: "D.L. Hill, J.A. Wheeler"
+  titre: "Nuclear Constitution and the Interpretation of Fission Phenomena"
+  revue: "Phys. Rev."
+  volume: "89"
+  pages: "1102"
+  annee: 1953
+  doi: "10.1103/PhysRev.89.1102"
+cohen1963:
+  type: article
+  auteurs: "S. Cohen, W.J. Swiatecki"
+  titre: "The deformation energy of a charged drop. Part V : Results of electronic computer studies"
+  revue: "Ann. Phys."
+  volume: "22"
+  pages: "406"
+  annee: 1963
+  doi: "10.1016/0003-4916(63)90385-3"
+polikanov1962:
+  type: article
+  auteurs: "S.M. Polikanov et al."
+  titre: "Spontaneous fission with an anomalously short period"
+  revue: "Sov. Phys. JETP"
+  volume: "15"
+  pages: "1016"
+  annee: 1962
+bjornholm1980:
+  type: revue
+  auteurs: "S. Bjørnholm, J.E. Lynn"
+  titre: "The double-humped fission barrier"
+  revue: "Rev. Mod. Phys."
+  volume: "52"
+  pages: "725"
+  annee: 1980
+  doi: "10.1103/RevModPhys.52.725"
+pomorski2003:
+  type: article
+  auteurs: "K. Pomorski, J. Dudek"
+  titre: "Nuclear liquid-drop model and surface-curvature effects"
+  revue: "Phys. Rev. C"
+  volume: "67"
+  pages: "044316"
+  annee: 2003
+  doi: "10.1103/PhysRevC.67.044316"
+moller2001:
+  type: article
+  auteurs: "P. Möller, D.G. Madland, A.J. Sierk, A. Iwamoto"
+  titre: "Nuclear fission modes and fragment mass asymmetries in a five-dimensional deformation space"
+  revue: "Nature"
+  volume: "409"
+  pages: "785"
+  annee: 2001
+  doi: "10.1038/35057204"
+moller2009:
+  type: article
+  auteurs: "P. Möller et al."
+  titre: "Heavy-element fission barriers"
+  revue: "Phys. Rev. C"
+  volume: "79"
+  pages: "064304"
+  annee: 2009
+  doi: "10.1103/PhysRevC.79.064304"
+scamps2018:
+  type: article
+  auteurs: "G. Scamps, C. Simenel"
+  titre: "Impact of pear-shaped fission fragments on mass-asymmetric fission in actinides"
+  revue: "Nature"
+  volume: "564"
+  pages: "382"
+  annee: 2018
+  doi: "10.1038/s41586-018-0780-0"
+samyn2004:
+  type: article
+  auteurs: "M. Samyn, S. Goriely, M. Bender, J.M. Pearson"
+  titre: "Further explorations of Skyrme-Hartree-Fock-Bogoliubov mass formulas. III. Role of particle-number projection"
+  revue: "Phys. Rev. C"
+  volume: "70"
+  pages: "044309"
+  annee: 2004
+  doi: "10.1103/PhysRevC.70.044309"
+ryssens2023:
+  type: article
+  auteurs: "W. Ryssens, G. Scamps, S. Goriely, M. Bender"
+  titre: "Skyrme–Hartree–Fock–Bogoliubov mass models on a 3D mesh: IIb. Fission properties of BSkG2"
+  revue: "Eur. Phys. J. A"
+  volume: "59"
+  pages: "96"
+  annee: 2023
+  doi: "10.1140/epja/s10050-023-01002-x"
+schunck2016:
+  type: revue
+  auteurs: "N. Schunck, L.M. Robledo"
+  titre: "Microscopic theory of nuclear fission: a review"
+  revue: "Rep. Prog. Phys."
+  volume: "79"
+  pages: "116301"
+  annee: 2016
+  doi: "10.1088/0034-4885/79/11/116301"
+madland2006:
+  type: article
+  auteurs: "D.G. Madland"
+  titre: "Total prompt energy release in the neutron-induced fission of 235U, 238U, and 239Pu"
+  revue: "Nucl. Phys. A"
+  volume: "772"
+  pages: "113"
+  annee: 2006
+  doi: "10.1016/j.nuclphysa.2006.03.013"
+
+# ------------------------------------------- couches, déformation, appariement
+mayer1949:
+  type: article
+  auteurs: "M. Goeppert Mayer"
+  titre: "On Closed Shells in Nuclei. II"
+  revue: "Phys. Rev."
+  volume: "75"
+  pages: "1969"
+  annee: 1949
+  doi: "10.1103/PhysRev.75.1969"
+haxel1949:
+  type: article
+  auteurs: "O. Haxel, J.H.D. Jensen, H.E. Suess"
+  titre: "On the “Magic Numbers” in Nuclear Structure"
+  revue: "Phys. Rev."
+  volume: "75"
+  pages: "1766"
+  annee: 1949
+  doi: "10.1103/PhysRev.75.1766.2"
+nilsson1955:
+  type: article
+  auteurs: "S.G. Nilsson"
+  titre: "Binding states of individual nucleons in strongly deformed nuclei"
+  revue: "Mat. Fys. Medd. Dan. Vid. Selsk."
+  volume: "29"
+  pages: "n° 16"
+  annee: 1955
+nilsson1969:
+  type: article
+  auteurs: "S.G. Nilsson et al."
+  titre: "On the nuclear structure and stability of heavy and superheavy elements"
+  revue: "Nucl. Phys. A"
+  volume: "131"
+  pages: "1"
+  annee: 1969
+  doi: "10.1016/0375-9474(69)90809-4"
+bengtsson1985:
+  type: article
+  auteurs: "T. Bengtsson, I. Ragnarsson"
+  titre: "Rotational bands and particle-hole excitations at very high spin"
+  revue: "Nucl. Phys. A"
+  volume: "436"
+  pages: "14"
+  annee: 1985
+  doi: "10.1016/0375-9474(85)90541-x"
+strutinsky1967:
+  type: article
+  auteurs: "V.M. Strutinsky"
+  titre: "Shell effects in nuclear masses and deformation energies"
+  revue: "Nucl. Phys. A"
+  volume: "95"
+  pages: "420"
+  annee: 1967
+  doi: "10.1016/0375-9474(67)90510-6"
+strutinsky1968:
+  type: article
+  auteurs: "V.M. Strutinsky"
+  titre: "“Shells” in deformed nuclei"
+  revue: "Nucl. Phys. A"
+  volume: "122"
+  pages: "1"
+  annee: 1968
+  doi: "10.1016/0375-9474(68)90699-4"
+brack1972:
+  type: revue
+  auteurs: "M. Brack, J. Damgaard, A.S. Jensen, H.C. Pauli, V.M. Strutinsky, C.Y. Wong"
+  titre: "Funny Hills: The Shell-Correction Approach to Nuclear Shell Effects and Its Applications to the Fission Process"
+  revue: "Rev. Mod. Phys."
+  volume: "44"
+  pages: "320"
+  annee: 1972
+  doi: "10.1103/RevModPhys.44.320"
+bcs1957:
+  type: article
+  auteurs: "J. Bardeen, L.N. Cooper, J.R. Schrieffer"
+  titre: "Theory of Superconductivity"
+  revue: "Phys. Rev."
+  volume: "108"
+  pages: "1175"
+  annee: 1957
+  doi: "10.1103/PhysRev.108.1175"
+bohr1958:
+  type: article
+  auteurs: "A. Bohr, B.R. Mottelson, D. Pines"
+  titre: "Possible Analogy between the Excitation Spectra of Nuclei and Those of the Superconducting Metallic State"
+  revue: "Phys. Rev."
+  volume: "110"
+  pages: "936"
+  annee: 1958
+  doi: "10.1103/PhysRev.110.936"
+lipkin1960:
+  type: article
+  auteurs: "H.J. Lipkin"
+  titre: "Collective motion in many-particle systems. Part 1 : The violation of conservation laws"
+  revue: "Ann. Phys."
+  volume: "9"
+  pages: "272"
+  annee: 1960
+  doi: "10.1016/0003-4916(60)90032-4"
+nogami1964:
+  type: article
+  auteurs: "Y. Nogami"
+  titre: "Improved Superconductivity Approximation for the Pairing Interaction in Nuclei"
+  revue: "Phys. Rev."
+  volume: "134"
+  pages: "B313"
+  annee: 1964
+  doi: "10.1103/PhysRev.134.B313"
+moller1995:
+  type: donnees
+  auteurs: "P. Möller, J.R. Nix, W.D. Myers, W.J. Swiatecki"
+  titre: "Nuclear Ground-State Masses and Deformations"
+  revue: "At. Data Nucl. Data Tables"
+  volume: "59"
+  pages: "185"
+  annee: 1995
+  doi: "10.1006/adnd.1995.1002"
+moller2016:
+  type: donnees
+  auteurs: "P. Möller, A.J. Sierk, T. Ichikawa, H. Sagawa"
+  titre: "Nuclear ground-state masses and deformations: FRDM(2012)"
+  revue: "At. Data Nucl. Data Tables"
+  volume: "109-110"
+  pages: "1"
+  annee: 2016
+  doi: "10.1016/j.adt.2015.10.002"
+
+# ------------------------------------------------------------- réacteurs
+fermi1952:
+  type: article
+  auteurs: "E. Fermi"
+  titre: "Experimental Production of a Divergent Chain Reaction"
+  revue: "Am. J. Phys."
+  volume: "20"
+  pages: "536"
+  annee: 1952
+  doi: "10.1119/1.1933322"
+smith1986:
+  type: article
+  auteurs: "K.S. Smith"
+  titre: "Assembly homogenization techniques for light water reactor analysis"
+  revue: "Prog. Nucl. Energy"
+  volume: "17"
+  pages: "303"
+  annee: 1986
+  doi: "10.1016/0149-1970(86)90035-1"
+pusa2010:
+  type: article
+  auteurs: "M. Pusa, J. Leppänen"
+  titre: "Computing the Matrix Exponential in Burnup Calculations"
+  revue: "Nucl. Sci. Eng."
+  volume: "164"
+  pages: "140"
+  annee: 2010
+  doi: "10.13182/NSE09-14"
+romano2015:
+  type: code
+  auteurs: "P.K. Romano et al."
+  titre: "OpenMC: A state-of-the-art Monte Carlo code for research and development"
+  revue: "Ann. Nucl. Energy"
+  volume: "82"
+  pages: "90"
+  annee: 2015
+  doi: "10.1016/j.anucene.2014.07.048"

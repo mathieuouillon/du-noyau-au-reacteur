@@ -3,19 +3,55 @@ title: "Au-delà de la goutte liquide : modèles de masse"
 date: 2026-09-28 09:00:00 +0200
 categories: ["II · Couches et formes des noyaux", "Modèles de masse"]
 tags: [goutte liquide, couches, apprentissage automatique, extrapolation, peau de neutrons]
-description: "Cinq modèles de masse, de la goutte liquide aux couches, jugés sur ce qu'ils prédisent : la physique extrapole, la statistique non."
+description: "Cinq modèles de masse, de la goutte liquide aux couches : la physique de chaque terme, les mathématiques de l'ajustement, et un jugement sur ce qu'ils prédisent."
 image:
   path: /assets/img/nucleaire/modeles_masse.png
   alt: "Au-delà de la goutte liquide : modèles de masse"
 lecon: 3
 partie: "II"
 objectifs:
-  - "Construire une hiérarchie de modèles de masse, de la goutte liquide aux termes de couches."
+  - "Retrouver l'origine physique de chaque terme de la goutte liquide : saturation, tension de surface, sphère chargée, gaz de Fermi, appariement."
+  - "Construire une hiérarchie de modèles de masse, jusqu'à la symétrie de surface et aux termes de couches."
+  - "Écrire un ajustement par moindres carrés et lire, dans les corrélations, ce que les masses contraignent mal."
   - "Juger un modèle sur ce qu'il prédit : ajustement, interpolation, extrapolation."
-  - "Interpréter la symétrie de surface (peau de neutrons) et le terme de couches."
-  - "Comprendre pourquoi une correction statistique n'extrapole pas, et ce qui manque encore : la déformation."
+  - "Comprendre la régression à noyau, et pourquoi une correction statistique n'extrapole pas."
 prerequis: [1]
 code: [modeles_masse.py, etude_modeles.py]
+sources: >-
+  Masses : les 2367 masses mesurées d'AME2020 avec Z, N ≥ 8 (sans les valeurs estimées `#`). Calculs : `modeles_masse.py`, `etude_modeles.py`. Écarts RMS des modèles publiés : comparaisons sur AME2020 publiées pour WS4, HFB-27, D1M et DZ10 (A&A 2025 ; arXiv 2011.07904 ; arXiv 2609.19578) et pour les réseaux de neurones (« Machine learning the nuclear mass », 2021), telles que relevées par l'auteur.
+bibliographie:
+  - cle: weizsacker1935
+    note: "La formule à cinq termes."
+  - cle: bethe1936
+    note: "La goutte liquide et le terme d'asymétrie."
+  - cle: wigner1937
+    note: "La symétrie de spin-isospin, origine du terme de Wigner."
+  - cle: myers1966
+    note: "La goutte liquide de Myers et Swiatecki et ses corrections de couches."
+  - cle: myers1969
+    note: "Le modèle de la gouttelette : symétrie de surface et peau de neutrons."
+  - cle: dieperink2009
+    note: "Le terme de couches par comptage de valence utilisé ici (M3)."
+  - cle: duflo1995
+    note: "Une formule de masse à dix paramètres issue du modèle en couches."
+  - cle: wang2014
+    note: "WS4, modèle macroscopique-microscopique de référence."
+  - cle: wang2011
+    note: "La correction par fonctions de base radiales, modèle de M4."
+  - cle: goriely2013
+    note: "HFB-27 : une table de masses entièrement microscopique."
+  - cle: goriely2009
+    note: "Le premier modèle de masse Gogny-HFB (D1M)."
+  - cle: moller2016
+    note: "FRDM(2012), le modèle de la leçon suivante."
+  - cle: adhikari2021
+    note: "La mesure de la peau de neutrons du plomb 208."
+  - cle: wang2021
+    note: "Les masses utilisées."
+  - cle: hastie2009
+    note: "Moindres carrés, validation croisée, régression ridge et à noyau."
+  - cle: rasmussen2006
+    note: "La régression à noyau gaussien, vue comme un processus gaussien."
 ---
 
 {% include cours-entete.html %}
@@ -41,60 +77,269 @@ valeurs estimées `#`). Tous les chiffres sont produits par [`etude_modeles.py`]
 
 M0 à M3 sont **linéaires** dans leurs coefficients : l'ajustement est un
 moindres carrés exact, sans hasard ni réglage. M4 est un apprentissage
-automatique.
+automatique. Les sections 1 à 3 détaillent la physique de chaque terme, les
+sections 4 et 5 les mathématiques de l'ajustement.
 
-### M2 : trois termes de physique en plus
+En notant `I = (N − Z)/A`, et en comptant `B > 0` pour un noyau lié, M2 s'écrit :
 
-- **Symétrie de surface**, `+(N−Z)²/A^(4/3)`. L'excès de neutrons coûte
-  **moins cher en surface** qu'au cœur : il s'y loge en formant une peau de
-  neutrons. Le coefficient de symétrie effectif d'un noyau fini est donc
-  plus petit que celui de la matière nucléaire infinie.
-- **Échange coulombien**, `+Z^(4/3)/A^(1/3)`. Correction quantique : le
-  principe de Pauli tient les protons de même spin à distance, ce qui réduit
-  un peu leur répulsion.
-- **Terme de Wigner**, `−|N−Z|/A`. Surliaison des noyaux N ≈ Z, où protons et
-  neutrons occupent les mêmes orbitales et interagissent au maximum.
+```
+B(Z, N) = a_V A − a_S A^(2/3) − a_C Z(Z−1)/A^(1/3) − J (N−Z)²/A + δ_pair
+          + Q (N−Z)²/A^(4/3) + c_ex Z^(4/3)/A^(1/3) − W |N−Z|/A
+```
 
-### M3 : les couches, avec trois nombres
+---
 
-Pour chaque type de nucléon, situé dans une couche `[M_bas, M_haut[` de
-dégénérescence `D`, avec `ν` nucléons de valence :
+## 1. La goutte liquide, terme par terme
+
+**Volume : la saturation.** La force nucléaire est attractive mais de
+**courte portée** (~1 fm) et répulsive à très courte distance. Chaque nucléon
+n'interagit donc qu'avec un nombre fixe de voisins, et la densité au centre des
+noyaux est la même pour tous : `ρ₀ ≈ 0,16 nucléon/fm³`. L'énergie de liaison
+est alors proportionnelle au nombre de nucléons, `a_V A`, et le rayon croît
+comme `R = r₀ A^(1/3)`. Si la force agissait entre toutes les paires, comme la
+gravitation, l'énergie croîtrait comme `A²` et les noyaux s'effondreraient.
+
+**Surface : la tension superficielle.** Un nucléon de surface a moins de
+voisins : on retire une énergie proportionnelle à l'aire, `4πR² σ = a_S A^(2/3)`.
+Avec `a_S` = 17,36 MeV (M1) et le `r₀` déduit ci-dessous, la **tension de
+surface** nucléaire vaut `σ = a_S / 4πr₀²` = **0,92 MeV/fm²**. C'est la
+grandeur qui fixe le coût d'une déformation et la barrière de fission
+([leçon 6]({{ '/posts/barrieres-de-fission/' | relative_url }})).
+
+**Coulomb : la sphère chargée.** Construisons une sphère de charge `Q`
+uniforme couche par couche. Quand le rayon vaut `r`, la charge déjà en place
+est `q(r) = Q (r/R)³`, et apporter la couche suivante `dq = 3Q r² dr / R³`
+coûte `q(r) dq / r` :
+
+```
+E_C = ∫₀^R q(r) dq / r = (3Q²/R⁶) ∫₀^R r⁴ dr = (3/5) Q²/R
+```
+
+Avec `Q = Ze`, on remplace `Z²` par `Z(Z − 1)` : un proton ne se repousse
+pas lui-même. Donc `a_C = (3/5) e²/r₀`, avec `e² = 1,44 MeV·fm`. Le
+coefficient ajusté de M1, `a_C` = 0,705 MeV, donne `r₀` = **1,225 fm**. On
+peut le comparer au rayon de charge mesuré du plomb 208, 5,50 fm en moyenne
+quadratique (Angeli et Marinova) : la sphère uniforme équivalente a pour rayon
+`√(5/3) × 5,50 = 7,10 fm`, soit `r₀ = 7,10 / 208^(1/3)` = 1,20 fm. Un
+ajustement sur les seules masses retrouve donc la taille des noyaux à 2 % près.
+
+**Asymétrie : le principe de Pauli.** Les protons et les neutrons remplissent
+chacun leurs niveaux jusqu'à un niveau de Fermi. Dans le modèle du gaz de
+Fermi, `n` nucléons d'une espèce dans un volume `V` ont une énergie cinétique
+`(3/5) n ε_F(n)`, avec `ε_F ∝ (n/V)^(2/3)`. Écrivons `N = (A/2)(1 + I)` et
+`Z = (A/2)(1 − I)` :
+
+```
+E_cin = (3/5)(A/2) ε_F [ (1 + I)^(5/3) + (1 − I)^(5/3) ]
+      = (3/5) ε_F A  +  (ε_F / 3) A I²  +  O(I⁴)
+```
+
+Le second terme est le terme d'asymétrie, `(ε_F/3)(N − Z)²/A`. À la densité
+de saturation, `k_F = (3π² ρ₀/2)^(1/3)` = 1,333 fm⁻¹ et
+`ε_F = ħ²k_F²/2m` = 36,8 MeV : la seule énergie cinétique donne **12,3 MeV**.
+L'ajustement en demande 22,9 (M1), et même `J` = 28,9 MeV une fois la surface
+séparée (M3). Le reste vient de l'**interaction** : la force entre un proton
+et un neutron est plus attractive qu'entre deux nucléons identiques (le
+deutéron est lié, le dineutron ne l'est pas), et un noyau `N = Z` en profite
+au maximum.
+
+**Appariement.** Les nucléons identiques gagnent de l'énergie à se grouper
+par paires de moments opposés (leçon 4, BCS). D'où un terme
+`δ_pair = +a_P / A^(1/2)` pour les noyaux pair-pair, 0 pour `A` impair, et
+`−a_P / A^(1/2)` pour les noyaux impair-impair. La loi en `A^(−1/2)` est
+empirique : c'est celle du gap moyen `Δ ≈ 12/√A` MeV de Bohr et Mottelson,
+et l'ajustement redonne bien `a_P` ≈ 12 MeV.
+
+---
+
+## 2. La goutte étendue (M2)
+
+**Le développement leptoderme.** Un noyau lourd est une goutte « à peau
+fine » : l'épaisseur de surface (~2 fm) est petite devant le rayon. Toute
+grandeur extensive se développe alors en puissances de `A^(−1/3)`, un terme
+de volume (`∝ A`), puis un terme de surface (`∝ A^(2/3)`), puis de courbure
+(`∝ A^(1/3)`). La goutte à cinq termes applique ce développement à l'énergie
+de liaison, mais **pas** à l'énergie d'asymétrie, qui n'a qu'une partie de
+volume.
+
+**Symétrie de surface.** Appliquer le même développement à l'asymétrie
+donne :
+
+```
+E_sym = (J A − Q A^(2/3)) I²  =  J (N−Z)²/A − Q (N−Z)²/A^(4/3)
+      =  a_sym(A) (N−Z)²/A,     a_sym(A) = J − Q A^(−1/3)
+```
+
+`Q > 0` : l'asymétrie coûte **moins** cher en surface. L'excès de neutrons
+s'y loge et forme une **peau de neutrons**. Le coefficient effectif d'un
+noyau fini est donc plus petit que celui de la matière nucléaire infinie, `J`.
+
+**Échange coulombien.** Le principe de Pauli tient les protons de même spin
+à distance : ils se repoussent un peu moins que des charges classiques. Pour
+une sphère uniforme, l'approximation de Slater donne :
+
+```
+E_ex = −(3/4) (3/2π)^(2/3) e² Z^(4/3) / R   →   c_ex = (3/4)(3/2π)^(2/3) e²/r₀ = 0,54 MeV
+```
+
+L'ajustement donne 0,96 MeV (M2) et 1,16 MeV (M3), environ le double. Le
+terme en `Z^(4/3)/A^(1/3)` absorbe donc d'autres effets que la seule forme
+fonctionnelle ne permet pas de distinguer, comme la diffusivité de la surface
+de charge. C'est un premier exemple de ce que montre la section 4 : un bon
+ajustement ne garantit pas que chaque coefficient ait le sens physique qu'on
+lui prête.
+
+**Terme de Wigner.** Pour `N ≈ Z`, protons et neutrons occupent les mêmes
+orbitales et forment des paires proton-neutron. Wigner (1937) a montré qu'une
+interaction indépendante du spin et de l'isospin regroupe les états en
+« supermultiplets », avec une énergie qui varie en `|N − Z|` et non en
+`(N − Z)²`. D'où une **pointe** de liaison en `N = Z`, `−W |N − Z|/A`. Son
+coefficient change beaucoup d'un modèle à l'autre (39 MeV dans M2, 24 MeV
+dans M3) : il est porté par une poignée de noyaux légers, où il absorbe aussi
+des effets de couches.
+
+---
+
+## 3. Les couches, avec trois nombres (M3)
+
+**La variable de valence.** Pour chaque type de nucléon, situé dans une
+couche `[M_bas, M_haut[` de dégénérescence `D = M_haut − M_bas`, avec
+`ν = n − M_bas` nucléons de valence et `D − ν` trous :
 
 ```
 x = ν (D − ν) / D
 ```
 
-`x` vaut 0 sur une couche fermée et culmine à mi-couche. Il compte en fait le
-plus petit du nombre de particules ou de trous de valence (idée de Casten,
-forme de Dieperink et Van Isacker). Avec `S = x_p + x_n` :
+C'est le produit du nombre de particules par le nombre de trous, normalisé.
+`x` est **symétrique** particule-trou (ν ↔ D − ν), nul sur une couche fermée,
+et maximal à mi-couche, où il vaut `D/4`. Près d'une fermeture, `x ≈ ν` ou
+`x ≈ D − ν` : il compte le plus petit des deux nombres (idée de Casten, forme
+de Dieperink et Van Isacker). Exemple : l'U-238 a `N = 146` neutrons dans la
+couche `[126, 184[`, donc `D = 58`, `ν = 20` et `x_n = 20 × 38 / 58` = 13,10.
+
+**Trois termes.** Avec `S = x_p + x_n` :
 
 ```
-B_couches = a₁·S + a₂·S² + a₃·x_p·x_n
+B_couches = a₁ S + a₂ S² + a₃ x_p x_n
 ```
 
-Les nombres magiques utilisés sont 2, 8, 20, 28, 50, 82, 126 et 184 — ce
+- `a₁ S` (`a₁` = −1,34 MeV) : un noyau perd de la liaison en s'éloignant des
+  couches fermées, ce qui est la définition même d'une couche ;
+- `a₂ S²` (0,021 MeV) : une courbure, qui sature la pénalité en milieu de
+  couche ;
+- `a₃ x_p x_n` (0,061 MeV) : l'interaction entre **protons et neutrons de
+  valence**. C'est elle qui, en milieu de couche pour les deux types de
+  nucléons, rend la forme sphérique instable et **déforme** le noyau.
+
+Les nombres magiques utilisés sont 2, 8, 20, 28, 50, 82, 126 et 184. Le
 dernier est une fermeture **prédite**, jamais observée, nécessaire pour les
 neutrons au-delà de 126 (actinides).
 
-### M4 : apprendre ce que la physique a raté
+---
 
-Le résidu de M3 n'est pas du bruit : c'est une structure lisse sur la carte
-(Z, N) — déformations, couches secondaires (carte en bas à gauche de la
-figure). Une **régression à noyau gaussien** l'apprend : chaque prédiction
-est une moyenne pondérée des erreurs de M3 sur les noyaux voisins, avec un
-poids `exp(−d²/2l²)`. La longueur de corrélation `l` et la régularisation
-sont choisies par validation croisée **sur les seules données
-d'entraînement** ; on obtient `l = 3` nucléons.
+## 4. Ajuster : les moindres carrés
 
-C'est la méthode de correction par fonctions de base radiales utilisée dans
-la littérature pour améliorer FRDM, HFB et les modèles WS.
+**Le problème.** Chaque modèle M0 à M3 s'écrit `B ≈ X a`, où `X` est une
+matrice `n × p` (une ligne par noyau, une colonne par terme : `A`,
+`−A^(2/3)`, …) et `a` le vecteur des `p` coefficients. On minimise la somme
+des carrés des écarts :
+
+```
+a* = argmin ‖B − X a‖²
+
+⇔   (Xᵀ X) a* = Xᵀ B          (équations normales)
+```
+
+Le problème est **convexe** : la solution est unique, sans point de départ ni
+hasard. On ne forme pas `XᵀX`, ce qui élèverait au carré les erreurs
+d'arrondi : `np.linalg.lstsq` passe par la décomposition en valeurs
+singulières de `X`. La qualité se mesure par l'écart quadratique moyen,
+`RMS = √( Σᵢ (B_i − B_i^modèle)² / n )`.
+
+**Ce que les masses ne savent pas séparer.** Les erreurs formelles des
+coefficients s'obtiennent par `cov(a) = s² (XᵀX)⁻¹`, avec
+`s² = Σ résidus² / (n − p)`. Elles supposent des écarts indépendants. Ici,
+les écarts sont des erreurs de **modèle**, corrélées sur la carte : ces
+erreurs sont donc des bornes inférieures. Mais les **corrélations** entre
+coefficients sont instructives :
+
+| | M1 | M2 | M3 |
+|---|---|---|---|
+| conditionnement de X (colonnes normées) | 135 | 313 | 366 |
+| corrélation (surface, Coulomb) | +0,96 | +0,95 | +0,93 |
+| corrélation (volume, surface) | +0,99 | +0,26 | +0,26 |
+| corrélation (asymétrie, symétrie de surface) | — | +0,95 | +0,94 |
+| `a_S` (MeV) | 17,36 ± 0,08 | 18,23 ± 0,14 | 18,42 ± 0,07 |
+| `x` de l'U-236 | 0,721 ± 0,002 | 0,727 ± 0,012 | 0,717 ± 0,006 |
+
+Surface et Coulomb sont corrélés à 0,95 : si l'un augmente, l'autre suit, et
+les masses changent à peine. Les masses fixent leur **combinaison**, pas
+chacun séparément. Or la barrière de fission dépend de leur **rapport**, le
+paramètre de fissilité `x = E_C / 2E_S`. Nos trois modèles s'accordent sur
+`x ≈ 0,72` à 0,01 près, mais les gouttes publiées étudiées à la
+[leçon 6]({{ '/posts/barrieres-de-fission/' | relative_url }}), qui répartissent autrement l'énergie
+entre surface, courbure et Coulomb, vont de 0,76 à 0,84. Cet écart, bien
+au-delà des erreurs formelles, est une erreur de **modèle**, et il suffit à
+doubler la barrière de fission.
 
 ---
 
-## Trois épreuves
+## 5. M4 : la régression à noyau
 
-Écart RMS sur l'énergie de liaison **totale** B (la métrique standard du
-domaine), en MeV :
+Le résidu de M3, `r_i = B_i − B_i^M3`, n'est pas du bruit : c'est une
+structure lisse sur la carte (Z, N), faite de déformations et de couches
+secondaires (carte en bas à gauche de la figure). On l'apprend par
+**régression à noyau** (*kernel ridge regression*).
+
+**Le modèle.** Avec `zᵢ = (Zᵢ, Nᵢ)` et un noyau gaussien
+`k(z, z') = exp(−|z − z'|² / 2l²)`, la correction en un point `z` est :
+
+```
+δ(z) = Σᵢ αᵢ k(z, zᵢ),        (K + λ I) α = r,        K_ij = k(zᵢ, zⱼ)
+```
+
+C'est la fonction qui minimise `Σᵢ (rᵢ − δ(zᵢ))² + λ ‖δ‖²`, la norme étant
+celle de l'espace de fonctions engendré par le noyau (théorème du
+représentant). C'est aussi la moyenne a posteriori d'un **processus
+gaussien** de covariance `k`, avec un bruit de variance `λ`. La matrice
+`K + λI` est symétrique définie positive : on résout par une factorisation de
+Cholesky. Il y a **un poids `αᵢ` par noyau** d'entraînement : environ 2 400
+paramètres.
+
+**Les hyperparamètres** `l` (longueur de corrélation, en nucléons) et `λ`
+(régularisation) sont choisis par validation croisée à trois plis **sur les
+seules données d'entraînement**, parmi `l` ∈ {1,5 ; 2 ; 3 ; 4 ; 6} et
+`λ` ∈ {0,03 ; 0,3}. On obtient `l = 3` et `λ = 0,03`.
+
+**Pourquoi M4 n'extrapole pas.** Le poids d'un noyau connu à la distance `d`
+vaut `exp(−d²/2l²)` :
+
+| d (nucléons) | 1 | 2 | 4 | 6 | 8 |
+|---|---|---|---|---|---|
+| poids, `l = 3` | 0,95 | 0,80 | 0,41 | 0,14 | 0,03 |
+
+Loin des données, `δ(z) → 0` et M4 redevient M3 : la correction **s'efface**
+exactement là où l'on en aurait besoin. C'est ce que mesure l'épreuve de la
+distance, plus bas. C'est la méthode de correction par fonctions de base
+radiales utilisée dans la littérature pour améliorer FRDM, HFB et les modèles
+WS (Wang et Liu, 2011).
+
+---
+
+## 6. Valider : trois épreuves
+
+Un modèle se juge sur des noyaux qu'il n'a **pas** vus. Trois épreuves, de
+difficulté croissante, toutes mesurées par l'écart RMS sur l'énergie de
+liaison **totale** B (la métrique standard du domaine), en MeV :
+
+- **Ajustement** : on ajuste sur tous les noyaux et on mesure l'erreur sur
+  ces mêmes noyaux.
+- **Interpolation** (validation croisée à `K = 5` plis) : on partage les
+  noyaux au hasard en cinq groupes `G_k`, on ajuste sur quatre et on prédit le
+  cinquième, cinq fois. `RMS_CV = √( Σ_k Σ_{i ∈ G_k} (B_i − B_i^(−k))² / n )`,
+  où `B^(−k)` est le modèle ajusté sans le groupe `k`.
+- **Extrapolation** : on retire les 2 isotopes les plus riches et les 2 plus
+  pauvres en neutrons de chaque élément (372 noyaux), puis on les prédit.
 
 | modèle | paramètres | ajustement | interpolation | extrapolation | rapport |
 |---|---|---|---|---|---|
@@ -103,12 +348,6 @@ domaine), en MeV :
 | M2 | 8 | 2,47 | 2,48 | 2,82 | 1,14× |
 | M3 | 11 | 1,21 | 1,22 | 1,42 | 1,16× |
 | M4 | ~2400 | **0,23** | **0,28** | **0,49** | **1,71×** |
-
-- **Ajustement** — erreur sur les noyaux qui ont servi à ajuster.
-- **Interpolation** — validation croisée à 5 plis : on cache 20 % des noyaux
-  tirés au hasard, on les prédit, et on recommence.
-- **Extrapolation** — on retire les 2 isotopes les plus riches et les 2 plus
-  pauvres en neutrons de chaque élément (372 noyaux), puis on les prédit.
 
 **Trois leçons :**
 
@@ -124,7 +363,7 @@ domaine), en MeV :
 
 ---
 
-## Ce que disent les coefficients
+## 7. Ce que disent les coefficients
 
 ### La goutte liquide réajustée (M1)
 
@@ -193,7 +432,7 @@ liaison, et c'est elle qui pousse les noyaux de milieu de couche à se
 
 ---
 
-## L'erreur en fonction de la distance au connu
+## 8. L'erreur en fonction de la distance au connu
 
 L'épreuve qui compte vraiment. Pour chaque élément ayant au moins 14 isotopes
 mesurés, on retire les **8 plus riches en neutrons**, on ajuste sur le reste,
@@ -230,7 +469,7 @@ d'information en diagonale sur la carte.
 
 ---
 
-## Où se situent ces modèles
+## 9. Où se situent ces modèles
 
 Écart RMS sur les masses d'AME2020 de modèles publiés :
 
@@ -268,6 +507,10 @@ l'épreuve de la distance, pas sur le tableau ci-dessus.
 
 ## À retenir
 
+- Chaque terme a une origine physique qu'on peut chiffrer : saturation
+  (volume), tension de surface (σ = 0,92 MeV/fm²), sphère chargée
+  (r₀ = 1,225 fm), principe de Pauli (ε_F/3 = 12,3 MeV d'asymétrie
+  cinétique), appariement.
 - Chaque pièce de physique paie : de la goutte liquide de manuel (M0) au
   modèle avec couches (M3), l'erreur sur `B` passe de 3,8 à 1,2 MeV avec
   seulement 11 paramètres.
@@ -276,6 +519,9 @@ l'épreuve de la distance, pas sur le tableau ci-dessus.
 - Le terme de couches est nul pour les noyaux doublement magiques et coûte
   plus de 10 MeV en milieu de couche ; l'interaction proton-neutron de valence
   pousse ces noyaux à se **déformer**.
+- Les moindres carrés fixent bien les **combinaisons** de coefficients que
+  les masses voient, mal les autres : surface et Coulomb sont corrélés à
+  0,95, et leur rapport, le paramètre de fissilité, reste incertain.
 - Un modèle se juge sur l'**extrapolation**, pas sur l'ajustement : la
   correction statistique (M4) excelle près des données mais se dégrade vite en
   s'en éloignant. Seule la physique extrapole.
@@ -304,21 +550,8 @@ m4 = ModeleCorrige().ajuster(Z, N, B)   # ~15 s
 `python etude_modeles.py` refait toute l'étude et la figure (environ 2 min,
 l'essentiel pour la validation croisée de M4).
 
-## Références
+## Bibliographie
 
-- **AME2020** — M. Wang *et al.*, *Chinese Physics C* **45** (2021) 030003.
-- **Termes de couches** — A.E.L. Dieperink, P. Van Isacker, *Eur. Phys. J. A*
-  **42** (2009) 269 ; idée du comptage de valence : R.F. Casten.
-- **Correction RBF** — N. Wang, M. Liu, *Phys. Rev. C* **84** (2011) 051303.
-- **WS4** — N. Wang, M. Liu, X. Wu, J. Meng, *Phys. Lett. B* **734** (2014) 215.
-- **Duflo-Zuker** — J. Duflo, A.P. Zuker, *Phys. Rev. C* **52** (1995) R23.
-- **HFB-27** — S. Goriely, N. Chamel, J.M. Pearson, *Phys. Rev. C* **88**
-  (2013) 061302.
-- **FRDM2012** — P. Möller *et al.*, *At. Data Nucl. Data Tables* **109-110**
-  (2016) 1. Modèle macroscopique-microscopique de référence, qui ajoute la
-  déformation et la correction de Strutinsky.
-- **Valeurs RMS sur AME2020** citées ci-dessus : comparaisons publiées pour
-  WS4, HFB-27, D1M et DZ10 (A&A 2025 ; arXiv 2011.07904 ; arXiv 2609.19578),
-  réseaux de neurones (« Machine learning the nuclear mass », 2021).
+{% include bibliographie.html %}
 
 {% include cours-pied.html %}

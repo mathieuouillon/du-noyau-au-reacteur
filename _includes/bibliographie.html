@@ -1,0 +1,40 @@
+{%- comment -%}
+  Bibliographie d'une leçon : page.sources (texte, Markdown) puis les
+  références de page.bibliographie, liste de { cle, note } ou de clés,
+  regroupées par type. Les entrées sont dans _data/bibliographie.yml.
+{%- endcomment -%}
+{%- assign biblio = site.data.bibliographie -%}
+<div class="biblio-bloc">
+{%- if page.sources %}
+  <div class="biblio-sources">
+    <p class="biblio-groupe"><i class="fas fa-database fa-fw"></i> Sources des chiffres</p>
+    {{ page.sources | markdownify }}
+  </div>
+{%- endif %}
+{%- assign groupes = "livre|Manuels et ouvrages,revue|Articles de synthèse,article|Articles,donnees|Données évaluées,code|Codes et outils" | split: "," -%}
+{%- for g in groupes -%}
+  {%- assign gt = g | split: "|" -%}
+  {%- assign n = 0 -%}
+  {%- for item in page.bibliographie -%}
+    {%- assign cle = item.cle | default: item -%}
+    {%- if biblio[cle].type == gt[0] -%}{%- assign n = n | plus: 1 -%}{%- endif -%}
+  {%- endfor -%}
+  {%- if n > 0 %}
+  <p class="biblio-groupe">{{ gt[1] }}</p>
+  <ul class="biblio">
+    {%- for item in page.bibliographie -%}
+      {%- assign cle = item.cle | default: item -%}
+      {%- assign e = biblio[cle] -%}
+      {%- if e.type == gt[0] %}
+    <li id="ref-{{ cle }}">{% include biblio-entree.html e=e %}{% if item.note %}<br><span class="biblio-note">{{ item.note }}</span>{% endif %}</li>
+      {%- endif -%}
+    {%- endfor %}
+  </ul>
+  {%- endif -%}
+{%- endfor %}
+{%- for item in page.bibliographie -%}
+  {%- assign cle = item.cle | default: item -%}
+  {%- unless biblio[cle] %}<p class="biblio-erreur">Référence inconnue : {{ cle }}</p>{% endunless -%}
+{%- endfor %}
+  <p class="biblio-tout"><a href="{{ '/bibliographie/' | relative_url }}"><i class="fas fa-book-open fa-fw"></i> Bibliographie complète du cours</a></p>
+</div>

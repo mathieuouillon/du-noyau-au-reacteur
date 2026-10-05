@@ -30,8 +30,8 @@ produit ses chiffres, et se termine par une section **« À retenir »**. Le
 
 | parcours | leçons |
 |---|---|
-| Fission et formes des noyaux | 1 → 2 → 3 → 4 → 5 |
-| Physique des réacteurs | 1 → 2 → 6 → 7, puis l'annexe |
-| Cours complet | 1 à 7 dans l'ordre, puis l'annexe |
+| Fission et formes des noyaux | 1 → 2 → 3 → 4 → 5 → 6 |
+| Physique des réacteurs | 1 → 2 → 7 → 8, puis l'annexe |
+| Cours complet | 1 à 8 dans l'ordre, puis l'annexe |
 
 {% include plan-cours.html %}

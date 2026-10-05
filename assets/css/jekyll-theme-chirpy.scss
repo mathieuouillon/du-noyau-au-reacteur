@@ -244,3 +244,59 @@
 .content dl dd {
   margin-left: 1.2rem;
 }
+
+/* ----- Bibliographie ----- */
+
+.biblio-bloc {
+  font-size: 0.95rem;
+}
+
+.biblio-sources {
+  border-left: 4px solid var(--link-color);
+  background: var(--card-bg);
+  border-radius: 0.4rem;
+  padding: 0.7rem 1rem 0.2rem;
+  margin-bottom: 1.2rem;
+
+  i {
+    color: var(--link-color);
+  }
+}
+
+.biblio-groupe {
+  font-weight: 600;
+  margin: 1.2rem 0 0.4rem;
+}
+
+.content ul.biblio {
+  padding-left: 1.1rem;
+
+  li {
+    margin-bottom: 0.55rem;
+    line-height: 1.5;
+  }
+}
+
+.biblio-auteurs {
+  font-variant: small-caps;
+}
+
+.biblio-note {
+  color: var(--text-muted-color);
+  font-size: 0.9rem;
+}
+
+.biblio-lien {
+  font-size: 0.85rem;
+  word-break: break-all;
+}
+
+.biblio-erreur {
+  color: #c00;
+  font-weight: 700;
+}
+
+.biblio-tout {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}

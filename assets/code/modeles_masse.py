@@ -193,11 +193,15 @@ class ModeleCorrige:
         return np.exp(-d2 / (2 * l * l))
 
     def _apprendre(self, P, r, l, lam):
-        from scipy.linalg import cho_factor, cho_solve
+        """Resout (K + lam I) alpha = r par Cholesky, K = L L^T.
+        On utilise la factorisation de numpy : scipy.linalg.cho_factor
+        (lower=True) echoue a tort sur cette matrice avec SciPy 1.18."""
+        from scipy.linalg import solve_triangular
         K = self._noyau(P, P, l)
         K[np.diag_indices_from(K)] += lam
-        return cho_solve(cho_factor(K, lower=True, check_finite=False), r,
-                         check_finite=False)
+        L = np.linalg.cholesky(K)
+        y = solve_triangular(L, r, lower=True, check_finite=False)
+        return solve_triangular(L.T, y, lower=False, check_finite=False)
 
     def ajuster(self, Z, N, B, graine=0):
         self.base.ajuster(Z, N, B)

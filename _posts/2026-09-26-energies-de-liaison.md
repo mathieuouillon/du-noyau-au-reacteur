@@ -16,6 +16,37 @@ objectifs:
   - "Mettre en évidence les nombres magiques directement dans les masses, avec S₂ₙ."
 prerequis: []
 code: [donnees_liaison.py, analyse_liaison.py, trace_liaison.py, energies_liaison.csv]
+sources: >-
+  Masses : évaluation AME2020 (fichier `massround.mas20.txt`, lu par le paquet `periodictable` 2.1.0) ; constantes : CODATA 2018 ; abondances : CIAAW, via le même paquet (uranium : Meija et al. 2016). Calculs : `donnees_liaison.py`, `analyse_liaison.py`, `trace_liaison.py`.
+bibliographie:
+  - cle: wang2021
+    note: "La table de masses utilisée dans tout le cours."
+  - cle: huang2021
+    note: "Comment les mesures sont combinées en une évaluation."
+  - cle: kondev2021
+    note: "NUBASE2020 : demi-vies, spins, modes de désintégration."
+  - cle: tiesinga2021
+    note: "Les constantes (unité de masse atomique, masse du neutron)."
+  - cle: meija2016
+    note: "Compositions isotopiques recommandées."
+  - cle: periodictable
+    note: "Le paquet Python qui embarque AME2020."
+  - cle: weizsacker1935
+    note: "La formule semi-empirique de masse."
+  - cle: bethe1936
+    note: "La goutte liquide, présentée dans la « bible » de Bethe."
+  - cle: mayer1949
+    note: "Les nombres magiques expliqués par le spin-orbite."
+  - cle: haxel1949
+    note: "La même découverte, indépendante."
+  - cle: nudat
+    note: "Pour consulter un nucléide isolé."
+  - cle: krane1988
+    note: "Le manuel de référence : énergies de liaison, chapitre 3."
+  - cle: valentin1982
+    note: "Un manuel en français."
+  - cle: basdevant2005
+    note: "Un manuel moderne, de la structure du noyau à l'astrophysique."
 ---
 
 {% include cours-entete.html %}
@@ -460,5 +491,11 @@ travail publiable, citer AME2020 et prendre directement :
   demi-vies, spins, modes de désintégration.
 - **KAERI Table of Nuclides** ou **NNDC NuDat** — consultation en ligne d'un
   nuclide isolé.
+
+---
+
+## Bibliographie
+
+{% include bibliographie.html %}
 
 {% include cours-pied.html %}

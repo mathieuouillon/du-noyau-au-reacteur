@@ -7,7 +7,7 @@ description: "Pourquoi il faut ralentir les neutrons, comment choisir un modéra
 image:
   path: /assets/img/nucleaire/fission_bilan.png
   alt: "Ralentir les neutrons"
-lecon: 6
+lecon: 7
 partie: "III"
 objectifs:
   - "Comparer les modérateurs : vitesse de ralentissement et rapport de modération."
@@ -16,6 +16,25 @@ objectifs:
   - "Expliquer la sous-modération des REP et pourquoi l'uranium naturel ne diverge pas dans l'eau légère."
 prerequis: [2]
 code: [fission.py, etude_fission.py]
+sources: >-
+  Sections efficaces à 2200 m/s, ν, ξ et intégrales de résonance : valeurs classiques saisies dans `fission.py`, sans référence précise dans le code ; pour des valeurs évaluées, voir ENDF/B-VIII.0 ou JEFF-3.3. Calculs : `fission.py`, `etude_fission.py`.
+bibliographie:
+  - cle: reuss2003
+    note: "La meilleure entrée en matière en français ; couvre exactement cette leçon."
+  - cle: bussac1985
+    note: "La référence complète."
+  - cle: duderstadt1976
+    note: "Chapitres 2-3 et 10 : quatre facteurs et autoprotection."
+  - cle: lamarsh1966
+    note: "Un classique, très pédagogique sur le ralentissement."
+  - cle: fermi1952
+    note: "La pile de Chicago, racontée par Fermi."
+  - cle: brown2018
+    note: "Données nucléaires évaluées américaines."
+  - cle: plompen2020
+    note: "Données nucléaires évaluées européennes."
+  - cle: nudat
+    note: "Pour vérifier une section efficace ou une énergie."
 ---
 
 {% include cours-entete.html %}
@@ -25,7 +44,7 @@ d'énergie sort. Reste à **entretenir** la réaction en chaîne : chaque fissio
 doit en provoquer au moins une autre. Cette leçon reprend la suite de
 [`fission.py`]({{ '/assets/code/fission.py' | relative_url }}) et [`etude_fission.py`]({{ '/assets/code/etude_fission.py' | relative_url }}) ; tous les chiffres sont produits par le code.
 [`diffusion.py`]({{ '/assets/code/diffusion.py' | relative_url }}) résout ensuite le transport des neutrons
-([annexe]({{ '/posts/solveur-de-diffusion/' | relative_url }})) et [`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }}) conçoit le cœur ([leçon 7]({{ '/posts/neutronique-du-coeur/' | relative_url }})).
+([annexe]({{ '/posts/solveur-de-diffusion/' | relative_url }})) et [`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }}) conçoit le cœur ([leçon 8]({{ '/posts/neutronique-du-coeur/' | relative_url }})).
 
 ![Courbe de liaison, ralentissement, courbe de modération et quatre facteurs]({{ '/assets/img/nucleaire/fission_bilan.png' | relative_url }})
 _Figure produite par `etude_fission.py` : efficacité de ralentissement (en haut à droite), courbe de modération (en bas à gauche) et quatre facteurs (en bas à droite)._
@@ -224,14 +243,8 @@ Chaque flèche est un domaine de recherche.
 
 ---
 
-## Références
+## Bibliographie
 
-- **P. Reuss, _Précis de neutronique_** (EDP Sciences) — la meilleure entrée
-  en matière en français ; couvre exactement ce document.
-- **J. Bussac & P. Reuss, _Traité de neutronique_** — la référence complète.
-- **Duderstadt & Hamilton, _Nuclear Reactor Analysis_**, ch. 2-3 et 10 — pour
-  les quatre facteurs et l'auto-protection.
-- **Table of Nuclides** (KAERI, NNDC) — pour vérifier les énergies de liaison
-  et sections efficaces citées ici.
+{% include bibliographie.html %}
 
 {% include cours-pied.html %}

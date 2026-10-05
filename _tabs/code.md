@@ -27,7 +27,7 @@ pip install numpy scipy matplotlib sympy periodictable
   et l'analyse des masses (leçon 1).
 - `python trace_liaison.py` : `energie_liaison_modeles.png` (leçon 1).
 - `python etude_fission.py` : `fission_bilan.png` et les tableaux des leçons 2
-  et 6.
+  et 7.
 - `python etude_modeles.py` : `modeles_masse.png` et les trois épreuves
   (leçon 3) ; environ 2 min.
 - `python precalcul_micro.py` : `micro.npz`, la partie microscopique du modèle
@@ -36,8 +36,10 @@ pip install numpy scipy matplotlib sympy periodictable
   environ 2 min.
 - `python galerie_orbitales.py` : `orbitales_nucleaires.png` et
   `orbitales_3d.json` (leçon 5).
+- `python etude_barrieres.py` : `barrieres_fission.png`, les barrières de la
+  goutte et la double bosse (leçon 6) ; environ 1 min.
 - `python etude_coeur.py` : `cartes_puissance.png` et l'étude du cœur
-  (leçon 7).
+  (leçon 8).
 - `python run_tests.py` : la vérification de `diffusion.py` et `flux_maps.png`
   (annexe).
 

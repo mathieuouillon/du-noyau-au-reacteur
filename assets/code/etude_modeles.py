@@ -172,6 +172,70 @@ def coefficients(t, Z, N, B):
 
 
 # ==========================================================================
+def incertitudes(Z, N, B):
+    titre("2 bis. CE QUE LES MASSES CONTRAIGNENT MAL")
+    print("""
+  Moindres carres B = X a + residu. Erreurs FORMELLES des coefficients :
+      cov(a) = s^2 (X^T X)^-1,   s^2 = somme(residus^2) / (n - p)
+  Elles supposent des residus independants ; ici les residus sont des
+  erreurs de MODELE, correlees sur la carte : ces erreurs sont donc des
+  bornes inferieures. Les correlations, elles, disent quelles combinaisons
+  de termes les masses ne savent pas separer.
+""")
+    paires = (("volume", "surface"), ("surface", "Coulomb"), ("volume", "Coulomb"),
+              ("asymetrie", "sym. surface"), ("Coulomb", "echange coul."))
+    for nom, fab in (("M1", colonnes_M1), ("M2", colonnes_M2), ("M3", colonnes_M3)):
+        m = ModeleLineaire(nom, fab).ajuster(Z, N, B)
+        X = m._X(Z, N)
+        n, p = X.shape
+        r = B - X @ m.coefs
+        s2 = r @ r / (n - p)
+        cov = s2 * np.linalg.inv(X.T @ X)
+        err = np.sqrt(np.diag(cov))
+        corr = cov / np.outer(err, err)
+        cond = np.linalg.cond(X / np.linalg.norm(X, axis=0))
+        T = m.termes
+        print(f"  {nom} : s = {np.sqrt(s2):.3f} MeV, conditionnement de X (colonnes normees) = {cond:.0f}")
+        for k, c, e in zip(T, m.coefs, err):
+            print(f"      {k:<14} {c:9.4f} +- {e:.4f}")
+        for a, b in paires:
+            if a in T and b in T:
+                print(f"      correlation({a}, {b}) = {corr[T.index(a), T.index(b)]:+.3f}")
+        # fissilite de l'U-236 et son erreur formelle (propagation lineaire)
+        c = dict(zip(T, m.coefs))
+        z, nn = 92, 144
+        A, I = z + nn, nn - z
+        Es = c["surface"] * A ** (2 / 3) - c.get("sym. surface", 0) * I ** 2 / A ** (4 / 3)
+        Ec = c["Coulomb"] * z * (z - 1) / A ** (1 / 3) - c.get("echange coul.", 0) * z ** (4 / 3) / A ** (1 / 3)
+        x = Ec / (2 * Es)
+        g = np.zeros(p)
+        g[T.index("Coulomb")] = z * (z - 1) / A ** (1 / 3) / (2 * Es)
+        g[T.index("surface")] = -x / Es * A ** (2 / 3)
+        if "echange coul." in T:
+            g[T.index("echange coul.")] = -z ** (4 / 3) / A ** (1 / 3) / (2 * Es)
+        if "sym. surface" in T:
+            g[T.index("sym. surface")] = x / Es * I ** 2 / A ** (4 / 3)
+        print(f"      fissilite de l'U-236 : x = {x:.3f} +- {np.sqrt(g @ cov @ g):.3f} (formelle)\n")
+        if nom == "M1":
+            r0 = 0.6 * 1.44 / c["Coulomb"]
+            sig = c["surface"] / (4 * np.pi * r0 ** 2)
+            hb2m, rho0 = 20.736, 0.16
+            kF = (1.5 * np.pi ** 2 * rho0) ** (1 / 3)
+            eF = hb2m * kF ** 2
+            print(f"      a_C = (3/5) e^2 / r0       ->  r0 = {r0:.3f} fm")
+            print(f"      a_S = 4 pi r0^2 sigma      ->  tension de surface sigma = {sig:.2f} MeV/fm^2")
+            print(f"      gaz de Fermi, rho0 = {rho0} fm^-3 : k_F = {kF:.3f} fm^-1, e_F = {eF:.1f} MeV,")
+            print(f"      part cinetique de l'asymetrie e_F/3 = {eF / 3:.1f} MeV (ajuste : {c['asymetrie']:.1f})")
+            ex = 0.75 * (3 / (2 * np.pi)) ** (2 / 3) * 1.44 / r0
+            print(f"      echange coulombien de Slater (3/4)(3/2pi)^(2/3) e^2/r0 = {ex:.2f} MeV\n")
+    print("""  Surface et Coulomb sont correles a ~0,95 : les masses fixent leur
+  COMBINAISON, pas chacun separement. Or la barriere de fission depend de
+  leur RAPPORT, x = E_c / 2 E_s (lecon 6). D'un modele a l'autre, x(U-236)
+  bouge bien plus que son erreur formelle : c'est une erreur de modele.
+""")
+
+
+# ==========================================================================
 def distance(t, Z, N, B, K=8):
     titre("3. COMMENT L'ERREUR CROIT AVEC LA DISTANCE AU CONNU")
     print(f"""
@@ -358,6 +422,7 @@ def main():
     t, Z, N, B = charger()
     resultats = epreuves(t, Z, N, B)
     coefficients(t, Z, N, B)
+    incertitudes(Z, N, B)
     courbes = distance(t, Z, N, B)
     litterature(resultats)
     graphiques(t, Z, N, B, resultats, courbes)

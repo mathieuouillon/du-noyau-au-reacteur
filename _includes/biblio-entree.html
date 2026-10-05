@@ -1,0 +1,9 @@
+{%- comment -%} Une référence formatée. Paramètre : include.e (entrée de _data/bibliographie.yml). {%- endcomment -%}
+{%- assign e = include.e -%}
+<span class="biblio-auteurs">{{ e.auteurs }}</span>,
+{%- if e.type == "livre" %} <em>{{ e.titre }}</em>, {{ e.editeur }}{% if e.annee %}, {{ e.annee }}{% endif %}.
+{%- elsif e.revue %} « {{ e.titre }} », <em>{{ e.revue }}</em>{% if e.volume %} <strong>{{ e.volume }}</strong>{% endif %}{% if e.pages %}, {{ e.pages }}{% endif %}{% if e.annee %} ({{ e.annee }}){% endif %}.
+{%- else %} <em>{{ e.titre }}</em>{% if e.annee %}, {{ e.annee }}{% endif %}.
+{%- endif -%}
+{%- if e.doi %} <a class="biblio-lien" href="https://doi.org/{{ e.doi }}">doi:{{ e.doi }}</a>{% endif -%}
+{%- if e.url %} <a class="biblio-lien" href="{{ e.url }}">{{ e.url | remove: "https://" | remove: "http://" }}</a>{% endif -%}

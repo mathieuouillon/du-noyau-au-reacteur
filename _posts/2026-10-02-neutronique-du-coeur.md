@@ -7,15 +7,32 @@ description: "Plan de chargement, bore critique, efficacité des grappes et anti
 image:
   path: /assets/img/nucleaire/cartes_puissance.png
   alt: "Neutronique du cœur : comprendre et concevoir"
-lecon: 7
+lecon: 8
 partie: "III"
 objectifs:
   - "Passer de k_inf à k_eff : le rôle des fuites et du réflecteur."
   - "Aplatir la puissance avec un plan de chargement, et en mesurer le prix en réactivité."
   - "Comparer le bore soluble et les grappes de commande ; comprendre ombrage et anti-ombrage."
   - "Savoir ce qu'un calcul de neutronique statique ne contient pas."
-prerequis: [6]
+prerequis: [7]
 code: [coeur.py, etude_coeur.py, diffusion.py]
+sources: >-
+  Tous les chiffres (k, pcm, F_xy, ppm) : `coeur.py` et `etude_coeur.py`, avec les constantes à deux groupes de `coeur.py`, dont l'origine est discutée à la leçon 7. Ordres de grandeur d'exploitation (xénon, β_eff) : valeurs usuelles des manuels cités.
+bibliographie:
+  - cle: bussac1985
+    note: "La référence francophone."
+  - cle: reuss2003
+    note: "Plus accessible, excellent sur les deux groupes et le contrôle de réactivité."
+  - cle: duderstadt1976
+    note: "Le standard anglo-saxon."
+  - cle: stacey2007
+    note: "Méthodes nodales et facteurs de discontinuité."
+  - cle: smith1986
+    note: "L'homogénéisation et les facteurs de discontinuité."
+  - cle: pusa2010
+    note: "La méthode CRAM pour l'épuisement."
+  - cle: romano2015
+    note: "OpenMC, pour confronter ces résultats à un Monte-Carlo."
 ---
 
 {% include cours-entete.html %}
@@ -309,14 +326,8 @@ Par ordre de rapport pédagogique/effort :
 
 ---
 
-## Références
+## Bibliographie
 
-- **J. Bussac & P. Reuss, _Traité de neutronique_** — la référence
-  francophone.
-- **P. Reuss, _Précis de neutronique_** (EDP Sciences) — plus accessible,
-  excellent sur les deux groupes et le contrôle de réactivité.
-- **Duderstadt & Hamilton, _Nuclear Reactor Analysis_** — le standard
-  anglo-saxon.
-- **Documentation OpenMC** — pour confronter ces résultats à un Monte-Carlo.
+{% include bibliographie.html %}
 
 {% include cours-pied.html %}

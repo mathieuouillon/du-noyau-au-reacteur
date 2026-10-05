@@ -7,20 +7,33 @@ description: "Physique, discrétisation et itération d'un solveur de diffusion 
 image:
   path: /assets/img/nucleaire/flux_maps.png
   alt: "Le solveur de diffusion multigroupe"
-lecon: 8
+lecon: 9
 annexe: true
 partie: "III"
 objectifs:
   - "Établir l'équation de diffusion multigroupe et voir pourquoi le calcul de k est un problème aux valeurs propres."
   - "Discrétiser en volumes finis et résoudre par itération de la puissance, accélérée par décalage de Wielandt."
   - "Vérifier un code de calcul contre une solution analytique et par une étude de convergence."
-prerequis: [6]
+prerequis: [7]
 code: [diffusion.py, run_tests.py]
+sources: >-
+  Tous les chiffres : `diffusion.py` et `run_tests.py`, vérifiés contre la solution analytique du réacteur nu homogène.
+bibliographie:
+  - cle: duderstadt1976
+    note: "Chapitres 4-5 : la diffusion, bien plus soigneusement."
+  - cle: lewis1984
+    note: "Quand la diffusion ne suffit plus : SN et MOC."
+  - cle: stacey2007
+    note: "Méthodes nodales et facteurs de discontinuité."
+  - cle: smith1986
+    note: "Les facteurs de discontinuité."
+  - cle: romano2015
+    note: "Un code Monte-Carlo moderne et lisible."
 ---
 
 {% include cours-entete.html %}
 
-> Cette annexe a été écrite en anglais, au tout début du projet. Elle détaille le solveur sur lequel repose la [leçon 7]({{ '/posts/neutronique-du-coeur/' | relative_url }}). Elle est utile pour qui veut lire ou modifier le code, mais n'est pas nécessaire pour suivre le cours.
+> Cette annexe a été écrite en anglais, au tout début du projet. Elle détaille le solveur sur lequel repose la [leçon 8]({{ '/posts/neutronique-du-coeur/' | relative_url }}). Elle est utile pour qui veut lire ou modifier le code, mais n'est pas nécessaire pour suivre le cours.
 {: .prompt-info }
 
 A walkthrough of [`diffusion.py`]({{ '/assets/code/diffusion.py' | relative_url }}), from the neutron balance to the last line of
@@ -697,5 +710,11 @@ multigroup constants:
 
 Budget real time for the data pipeline. On most projects like this it is
 larger than the solver.
+
+---
+
+## Bibliographie
+
+{% include bibliographie.html %}
 
 {% include cours-pied.html %}

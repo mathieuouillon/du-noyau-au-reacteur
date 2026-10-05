@@ -18,6 +18,35 @@ objectifs:
   - "Comprendre pourquoi la fission réelle est asymétrique alors que le bilan d'énergie favorise la symétrie."
 prerequis: [1]
 code: [fission.py, etude_fission.py]
+sources: >-
+  Énergies de liaison et `S_n` : formule semi-empirique de `fission.py` (coefficients de manuel), comparée aux masses mesurées d'AME2020. Les barrières (6,2 et 6,6 MeV) et le bilan des ~200 MeV sont des valeurs classiques, saisies dans `fission.py` et `etude_fission.py` sans référence précise : pour des valeurs évaluées, voir RIPL-3 (barrières, et la leçon 6) et Madland (2006) pour le bilan.
+bibliographie:
+  - cle: hahn1939
+    note: "La découverte : du baryum dans l'uranium irradié."
+  - cle: meitner1939
+    note: "L'interprétation : le noyau se casse en deux."
+  - cle: bohr1939
+    note: "La théorie de la fission par la goutte liquide."
+  - cle: wang2021
+    note: "Les masses mesurées, pour les énergies de séparation et les Q."
+  - cle: madland2006
+    note: "Le bilan détaillé de l'énergie libérée, mesuré et évalué."
+  - cle: capote2009
+    note: "Barrières de fission recommandées."
+  - cle: moller2001
+    note: "Pourquoi la fission de l'uranium est asymétrique."
+  - cle: scamps2018
+    note: "Le rôle des fragments déformés en poire."
+  - cle: vandenbosch1973
+    note: "Le manuel classique sur la fission."
+  - cle: wagemans1991
+    note: "Un ouvrage collectif plus récent, très complet."
+  - cle: krappe2012
+    note: "La théorie moderne de la fission."
+  - cle: reuss2003
+    note: "La fission vue du neutronicien, en français."
+  - cle: nudat
+    note: "Pour vérifier énergies de liaison et sections efficaces."
 ---
 
 {% include cours-entete.html %}
@@ -25,10 +54,10 @@ code: [fission.py, etude_fission.py]
 Les sections 1 à 3 de [`fission.py`]({{ '/assets/code/fission.py' | relative_url }}) et de
 [`etude_fission.py`]({{ '/assets/code/etude_fission.py' | relative_url }}). Tous les chiffres sont produits par le code.
 La suite de ces deux scripts, qui ralentit les neutrons et assemble un réseau de
-réacteur, fait l'objet de la [leçon 6]({{ '/posts/ralentir-les-neutrons/' | relative_url }}).
+réacteur, fait l'objet de la [leçon 7]({{ '/posts/ralentir-les-neutrons/' | relative_url }}).
 
 ![Courbe de liaison, ralentissement, courbe de modération et quatre facteurs]({{ '/assets/img/nucleaire/fission_bilan.png' | relative_url }})
-_Figure produite par `etude_fission.py`. Le panneau en haut à gauche (courbe de liaison) concerne cette leçon ; les trois autres, la [leçon 6]({{ '/posts/ralentir-les-neutrons/' | relative_url }})._
+_Figure produite par `etude_fission.py`. Le panneau en haut à gauche (courbe de liaison) concerne cette leçon ; les trois autres, la [leçon 7]({{ '/posts/ralentir-les-neutrons/' | relative_url }})._
 
 ---
 
@@ -71,6 +100,12 @@ modèle de la goutte liquide la reproduit :
 
 (mesures : 6,545 et 4,806 MeV — l'accord est excellent)
 
+> Les barrières de ce tableau sont des valeurs typiques. La
+> [leçon 6]({{ '/posts/barrieres-de-fission/' | relative_url }}) les calcule, et donne les valeurs recommandées par
+> RIPL-3 pour U-236 : 5,67 MeV pour la bosse la plus haute, 5,00 MeV pour
+> l'autre. La conclusion ne change pas : `S_n` = 6,55 MeV passe au-dessus.
+{: .prompt-info }
+
 Le mécanisme en une phrase : **l'U-235 a un nombre impair de neutrons (143)**.
 Le neutron incident vient compléter une paire, et l'énergie d'appariement
 ainsi libérée suffit à franchir la barrière. L'U-238 a un nombre pair (146) ;
@@ -83,7 +118,7 @@ S_n.** La fissilité ne dépend donc pas de la vitesse du neutron mais de la
 sans exception.
 
 L'U-238 fissionne quand même si on lui apporte la différence en énergie
-cinétique — seuil ~1 MeV. C'est le facteur `ε ≈ 1,03` de la [leçon 6]({{ '/posts/ralentir-les-neutrons/' | relative_url }}) : 3 % des fissions
+cinétique — seuil ~1 MeV. C'est le facteur `ε ≈ 1,03` de la [leçon 7]({{ '/posts/ralentir-les-neutrons/' | relative_url }}) : 3 % des fissions
 d'un REP ont lieu sur l'U-238, par des neutrons encore rapides.
 
 ## 3. Combien d'énergie
@@ -143,19 +178,14 @@ nucléaires (MeV) et chimiques (eV).
   énergie cinétique des fragments, 12 MeV perdus en antineutrinos.
 - Le partage **symétrique** libère le plus d'énergie, mais la fission de
   l'uranium est **asymétrique** : elle suit la surface d'énergie potentielle,
-  façonnée par les couches Z = 50 et N = 82 des fragments. Comprendre ces
-  effets de couches et de forme est l'objet de la partie II.
+  façonnée par les couches des fragments. Comprendre ces effets de couches
+  et de forme, jusqu'à la barrière de fission elle-même
+  ([leçon 6]({{ '/posts/barrieres-de-fission/' | relative_url }})), est l'objet de la partie II.
 
 ---
 
-## Références
+## Bibliographie
 
-- **N. Bohr, J.A. Wheeler**, *The mechanism of nuclear fission*,
-  **Phys. Rev. 56 (1939) 426** — l'article fondateur de la théorie de la
-  fission par la goutte liquide.
-- **P. Reuss, _Précis de neutronique_** (EDP Sciences), chapitres
-  d'introduction — la fission vue du neutronicien.
-- **Table of Nuclides** (KAERI, NNDC) — pour vérifier les énergies de liaison
-  citées ici.
+{% include bibliographie.html %}
 
 {% include cours-pied.html %}

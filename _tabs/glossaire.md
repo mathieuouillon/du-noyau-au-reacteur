@@ -9,8 +9,9 @@ order: 1
 {% assign l3 = '/posts/au-dela-de-la-goutte-liquide/' | relative_url %}
 {% assign l4 = '/posts/vers-frdm/' | relative_url %}
 {% assign l5 = '/posts/orbitales-nucleaires/' | relative_url %}
-{% assign l6 = '/posts/ralentir-les-neutrons/' | relative_url %}
-{% assign l7 = '/posts/neutronique-du-coeur/' | relative_url %}
+{% assign l6 = '/posts/barrieres-de-fission/' | relative_url %}
+{% assign l7 = '/posts/ralentir-les-neutrons/' | relative_url %}
+{% assign l8 = '/posts/neutronique-du-coeur/' | relative_url %}
 {% assign la = '/posts/solveur-de-diffusion/' | relative_url %}
 
 Les notions clés du cours, regroupées par thème. Le lien en fin de définition
@@ -67,15 +68,36 @@ Fissile, fissionnable
   neutron rapide, au-dessus d'environ 1 MeV. ([leçon 2]({{ l2 }}))
 
 Barrière de fission
-: Énergie qu'un noyau doit franchir pour se déformer jusqu'à la scission,
-  quelques MeV pour les actinides (environ 6 MeV pour U-236). Pour les
-  actinides, elle présente en réalité deux bosses, effet des couches.
-  ([leçon 2]({{ l2 }}), [leçon 4]({{ l4 }}))
+: Hauteur du point selle au-dessus de l'état fondamental : l'énergie qu'un
+  noyau doit acquérir pour se déformer jusqu'à la scission. Quelques MeV pour
+  les actinides (5 à 6 MeV pour U-236). Pour eux, elle a deux bosses, effet
+  des couches. ([leçon 2]({{ l2 }}), [leçon 6]({{ l6 }}))
+
+Point selle
+: Col du paysage d'énergie potentielle : minimum dans toutes les directions
+  sauf celle du chemin de fission, où il est maximum. ([leçon 6]({{ l6 }}))
+
+Double bosse, isomère de fission
+: La correction de couches, qui oscille avec la déformation, découpe la
+  barrière des actinides en deux bosses séparées par un second puits
+  superdéformé. Un noyau piégé dans ce puits est un **isomère de fission** :
+  il fissionne bien plus vite que l'état fondamental (Am-242, 14 ms,
+  Polikanov 1962). ([leçon 6]({{ l6 }}))
+
+Scission
+: Rupture du col qui relie les deux fragments naissants : la fin du chemin de
+  fission. ([leçon 6]({{ l6 }}))
+
+Pénétrabilité (Hill-Wheeler)
+: Probabilité de traverser une barrière par effet tunnel :
+  `T = 1/(1 + exp(2π(B_f − E)/ħω))` pour une barrière parabolique.
+  ([leçon 6]({{ l6 }}))
 
 Paramètre de fissilité `x`
 : `x = E_c / 2E_s`, rapport entre énergie coulombienne et énergie de surface
   d'une goutte sphérique. Pour `x ≥ 1`, la sphère est instable et la goutte
-  fissionne spontanément ; U-236 est à 0,71. ([leçon 4]({{ l4 }}))
+  fissionne spontanément. Pour U-236, x vaut 0,71 à 0,84 selon la goutte
+  utilisée, et la barrière en dépend au cube. ([leçon 4]({{ l4 }}), [leçon 6]({{ l6 }}))
 
 Q de fission
 : Énergie libérée par une fission, différence entre les énergies de liaison
@@ -85,8 +107,9 @@ Q de fission
 Fission asymétrique
 : L'uranium se casse le plus souvent en deux fragments inégaux (A ≈ 95 et
   A ≈ 139), alors que le partage symétrique libérerait plus d'énergie.
-  L'asymétrie vient des couches Z = 50 et N = 82 des fragments, qui façonnent
-  le chemin vers la scission. ([leçon 2]({{ l2 }}))
+  La goutte liquide prédit une fission symétrique : l'asymétrie vient des
+  couches des fragments, qui façonnent le chemin vers la scission.
+  ([leçon 2]({{ l2 }}), [leçon 6]({{ l6 }}))
 
 ## Couches et formes des noyaux
 
@@ -136,31 +159,31 @@ Orbitale nucléaire
 Modérateur, rapport de modération
 : Matériau qui ralentit les neutrons par chocs (eau, eau lourde, graphite).
   Il doit ralentir vite (`ξΣs` grand) **et** peu absorber (`ξΣs/Σa` grand).
-  ([leçon 6]({{ l6 }}))
+  ([leçon 7]({{ l7 }}))
 
 Formule des quatre facteurs
 : `k_inf = η · ε · p · f` : facteur de reproduction, facteur de fission
   rapide, probabilité d'échapper aux résonances, facteur d'utilisation
-  thermique. ([leçon 6]({{ l6 }}))
+  thermique. ([leçon 7]({{ l7 }}))
 
 Sous-modération
 : Réseau qui contient moins d'eau que l'optimum de réactivité. Un REP est
   volontairement sous-modéré pour que son coefficient de température
-  modérateur soit négatif. ([leçon 6]({{ l6 }}))
+  modérateur soit négatif. ([leçon 7]({{ l7 }}))
 
 `k_eff`, pcm
 : Facteur de multiplication effectif, fuites comprises : le cœur est critique
   pour `k_eff = 1`. La réactivité `ρ = (k − 1)/k` se compte en pcm
-  (pour cent mille). ([leçon 7]({{ l7 }}))
+  (pour cent mille). ([leçon 8]({{ l8 }}))
 
 Facteur de point chaud `F_xy`
 : Rapport entre la puissance de l'assemblage le plus chargé et la puissance
-  moyenne. Il fixe la marge thermique d'un cœur. ([leçon 7]({{ l7 }}))
+  moyenne. Il fixe la marge thermique d'un cœur. ([leçon 8]({{ l8 }}))
 
 Ombrage, anti-ombrage
 : Deux grappes accolées se gênent et absorbent moins que la somme de leurs
   efficacités (ombrage) ; éloignées, elles peuvent absorber plus (anti-ombrage).
-  ([leçon 7]({{ l7 }}))
+  ([leçon 8]({{ l8 }}))
 
 Flux scalaire, théorie de la diffusion
 : Le flux `φ = n·v` est la longueur de trajectoire des neutrons par unité de

@@ -16,6 +16,24 @@ objectifs:
   - "Construire la forme d'un noyau entier et connaître les limites du modèle."
 prerequis: [4]
 code: [orbitales.py, galerie_orbitales.py]
+sources: >-
+  Niveaux et fonctions d'onde : le modèle de Nilsson de la leçon 4 (`orbitales.py`) ; déformations : celles trouvées à la leçon 4 ; rayon de charge mesuré du plomb 208 : Angeli et Marinova (2013) ; peau de neutrons : PREX. Calculs : `orbitales.py`, `galerie_orbitales.py`.
+bibliographie:
+  - cle: nilsson1955
+    note: "Les orbitales des noyaux déformés."
+  - cle: mayer1949
+    note: "Le couplage spin-orbite."
+  - cle: haxel1949
+  - cle: bohrmottelson1975
+    note: "Le chapitre sur les noyaux déformés, et les diagrammes de Nilsson."
+  - cle: ringschuck1980
+    note: "Chapitre 2."
+  - cle: angeli2013
+    note: "Les rayons de charge mesurés."
+  - cle: adhikari2021
+    note: "La peau de neutrons du plomb 208."
+  - cle: basdevant2005
+    note: "Le modèle en couches, côté manuel."
 ---
 
 {% include cours-entete.html %}
@@ -134,13 +152,8 @@ Les déformations δ sont celles trouvées par le modèle de la [leçon 4]({{ '/
 - Le modèle donne de bons rayons (Pb-208 : 5,56 fm contre 5,50 mesuré), mais
   une densité centrale trop forte et pas de peau de neutrons.
 
-## Pour aller plus loin
+## Bibliographie
 
-- A. Bohr, B.R. Mottelson, *Nuclear Structure*, vol. II (Benjamin, 1975) :
-  le chapitre sur les noyaux déformés, et les célèbres diagrammes de Nilsson.
-- P. Ring, P. Schuck, *The Nuclear Many-Body Problem* (Springer, 1980),
-  chap. 2.
-- Rayons de charge : I. Angeli, K.P. Marinova, *At. Data Nucl. Data Tables*
-  99 (2013) 69.
+{% include bibliographie.html %}
 
 {% include cours-pied.html %}
