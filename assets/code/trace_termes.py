@@ -138,15 +138,22 @@ def ecarter(ys, ecart):
 
 def etiquettes(ax, xfin, yfin, noms, couleurs, ecart):
     """Etiquette directe en bout de courbe : trait de rappel fin, segment de
-    couleur (l'identite), texte en encre (jamais dans la couleur de la serie)."""
-    yl = ecarter(yfin, ecart)
-    x0 = xfin
-    dx = 0.04 * (ax.get_xlim()[1] - ax.get_xlim()[0])
-    for y0, y1, nom, col in zip(yfin, yl, noms, couleurs):
-        ax.plot([x0, x0 + dx], [y0, y1], color=DISCRET, lw=0.6, clip_on=False)
-        ax.plot([x0 + dx, x0 + 2.2 * dx], [y1, y1], color=col, lw=2.4,
-                solid_capstyle="round", clip_on=False)
-        ax.text(x0 + 2.6 * dx, y1, nom, va="center", fontsize=10.5, color=ENCRE)
+    couleur (l'identite), texte en encre (jamais dans la couleur de la serie).
+    Les etiquettes partent du bord droit du cadre (coordonnees d'axe en x,
+    donc valable en echelle lineaire comme logarithmique). `ecart` est
+    l'espacement minimal en unites de donnees, ou en decades si l'axe y est
+    logarithmique. `xfin` est garde pour compatibilite."""
+    log = ax.get_yscale() == "log"
+    y = np.log10(yfin) if log else np.asarray(yfin, float)
+    yl = ecarter(y, ecart)
+    if log:
+        y, yl = 10 ** y, 10 ** yl
+    tr = ax.get_yaxis_transform()          # x : fraction d'axe, y : donnees
+    for y0, y1, nom, col in zip(y, yl, noms, couleurs):
+        ax.plot([1.0, 1.04], [y0, y1], color=DISCRET, lw=0.6, clip_on=False, transform=tr)
+        ax.plot([1.04, 1.088], [y1, y1], color=col, lw=2.4, solid_capstyle="round",
+                clip_on=False, transform=tr)
+        ax.text(1.104, y1, nom, va="center", fontsize=10.5, color=ENCRE, transform=tr)
 
 
 # ==========================================================================

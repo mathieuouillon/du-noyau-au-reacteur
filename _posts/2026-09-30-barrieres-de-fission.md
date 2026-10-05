@@ -322,7 +322,8 @@ goutte liquide prédit donc une fission **symétrique**, alors que l'uranium se
 casse en fragments inégaux ($$A \approx 95$$ et $$A \approx 139$$, [leçon 2]({{ '/posts/la-fission-de-l-uranium/' | relative_url }})).
 
 Le désaccord n'est pas une affaire de bilan d'énergie : la leçon 2 a montré que
-le partage symétrique libère **plus** d'énergie. Il vient de la forme du
+l'énergie disponible culmine pour un fragment lourd ¹³²Sn, près du partage
+symétrique, et que le partage observé (A ≈ 139) libère moins. Il vient de la forme du
 chemin. Au-delà de la barrière interne, les **couches des fragments naissants**
 abaissent les formes asymétriques. Les calculs dans des espaces de formes à
 cinq dimensions (Möller *et al.*, 2001) reproduisent ainsi l'asymétrie des

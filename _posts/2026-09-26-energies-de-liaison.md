@@ -353,6 +353,12 @@ attribuant l'écart aux couches nucléaires.
 Les masses mesurées montrent que la partition symétrique libère **effectivement
 plus d'énergie** (193 MeV contre 167). Sur ce point le modèle avait raison.
 
+> **Précision.** En balayant tous les partages, l'énergie disponible culmine
+> à 199 MeV quand le fragment lourd est ¹³²Sn, doublement magique, près du
+> partage symétrique mais pas exactement ([leçon 2]({{ '/posts/la-fission-de-l-uranium/' | relative_url }})). Le partage observé
+> (fragment lourd vers A ≈ 139) libère moins que les deux.
+{: .prompt-info }
+
 L'asymétrie n'est donc **pas** un effet de bilan énergétique. Elle vient de la
 **dynamique** du noyau au point de scission : la surface d'énergie potentielle
 au point selle favorise des fragments proches des couches fermées Z=50 et

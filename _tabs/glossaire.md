@@ -106,10 +106,38 @@ Q de fission
 
 Fission asymétrique
 : L'uranium se casse le plus souvent en deux fragments inégaux (A ≈ 95 et
-  A ≈ 139), alors que le partage symétrique libérerait plus d'énergie.
+  A ≈ 139), alors que l'énergie disponible culmine plus près du partage
+  symétrique, pour un fragment lourd ¹³²Sn.
   La goutte liquide prédit une fission symétrique : l'asymétrie vient des
   couches des fragments, qui façonnent le chemin vers la scission.
   ([leçon 2]({{ l2 }}), [leçon 6]({{ l6 }}))
+
+Section efficace
+: Aire apparente qu'un noyau présente à un neutron pour une réaction donnée :
+  le taux de réaction vaut $$R = N\sigma\varphi$$. Unité : le barn,
+  $$10^{-24}~\text{cm}^2$$. ([leçon 2]({{ l2 }}))
+
+Noyau composé
+: Noyau formé par l'absorption d'un neutron, excité de
+  $$E^* = S_n + E_n A/(A+1)$$, qui « oublie » comment il a été formé avant de
+  fissionner, d'émettre un gamma ou de réémettre un neutron (Bohr, 1936).
+  ([leçon 2]({{ l2 }}))
+
+Résonance, formule de Breit-Wigner
+: Pic de section efficace quand l'énergie du neutron tombe sur un état du noyau
+  composé ; sa forme est donnée par la formule de Breit et Wigner (1936), avec
+  des largeurs partielles $$\Gamma_n$$, $$\Gamma_\gamma$$, $$\Gamma_f$$.
+  ([leçon 2]({{ l2 }}))
+
+Loi en 1/v
+: Loin sous les résonances, la section efficace d'absorption décroît comme
+  l'inverse de la vitesse du neutron : les neutrons lents sont absorbés bien
+  plus souvent que les rapides. ([leçon 2]({{ l2 }}))
+
+Facteur de reproduction $$\eta$$
+: Nombre moyen de neutrons émis par neutron absorbé dans un noyau fissile,
+  $$\eta = \nu\,\sigma_f/(\sigma_f + \sigma_\gamma)$$ : 2,08 pour l'U-235
+  thermique, plus de 2,8 pour le Pu-239 rapide. ([leçon 2]({{ l2 }}), [leçon 7]({{ l7 }}))
 
 ## Couches et formes des noyaux
 

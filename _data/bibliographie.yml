@@ -318,6 +318,26 @@ plompen2020:
   pages: "181"
   annee: 2020
   doi: "10.1140/epja/s10050-020-00141-9"
+shibata2011:
+  type: donnees
+  auteurs: "K. Shibata et al."
+  titre: "JENDL-4.0: A New Library for Nuclear Science and Engineering"
+  revue: "J. Nucl. Sci. Technol."
+  volume: "48"
+  pages: "1"
+  annee: 2011
+  doi: "10.1080/18811248.2011.9711675"
+jendl_tables:
+  type: donnees
+  auteurs: "JAEA, Nuclear Data Center"
+  titre: "JENDL-4.0 : tables des sections efficaces à 0,0253 eV, moyennes maxwelliennes, intégrales de résonance et moyennes sur le spectre de fission"
+  url: "https://wwwndc.jaea.go.jp/cgi-bin/Tab80WWW.cgi?lib=J40&iso=U235"
+mughabghab2018:
+  type: livre
+  auteurs: "S.F. Mughabghab"
+  titre: "Atlas of Neutron Resonances: Resonance Properties and Thermal Cross Sections Z = 1-102 (6e éd.)"
+  editeur: "Elsevier"
+  annee: 2018
 nudat:
   type: donnees
   auteurs: "National Nuclear Data Center (Brookhaven)"
@@ -330,6 +350,33 @@ periodictable:
   url: "https://github.com/python-periodictable/periodictable"
 
 # ----------------------------------------------------------- fission
+fermi1935:
+  type: article
+  auteurs: "E. Amaldi, O. D'Agostino, E. Fermi, B. Pontecorvo, F. Rasetti, E. Segrè"
+  titre: "Artificial radioactivity produced by neutron bombardment. II"
+  revue: "Proc. R. Soc. Lond. A"
+  volume: "149"
+  pages: "522"
+  annee: 1935
+  doi: "10.1098/rspa.1935.0080"
+bohr1936:
+  type: article
+  auteurs: "N. Bohr"
+  titre: "Neutron Capture and Nuclear Constitution"
+  revue: "Nature"
+  volume: "137"
+  pages: "344"
+  annee: 1936
+  doi: "10.1038/137344a0"
+breit1936:
+  type: article
+  auteurs: "G. Breit, E. Wigner"
+  titre: "Capture of Slow Neutrons"
+  revue: "Phys. Rev."
+  volume: "49"
+  pages: "519"
+  annee: 1936
+  doi: "10.1103/PhysRev.49.519"
 hahn1939:
   type: article
   auteurs: "O. Hahn, F. Strassmann"

@@ -28,6 +28,10 @@ pip install numpy scipy matplotlib sympy periodictable
 - `python trace_liaison.py` : `energie_liaison_modeles.png` (leçon 1).
 - `python etude_fission.py` : `fission_bilan.png` et les tableaux des leçons 2
   et 7.
+- `python sections_efficaces.py` : noyau composé, taille quantique du neutron,
+  résonances, loi en 1/v, passage de la barrière et partage des fragments
+  (leçon 2), avec `sections_taille.png`, `sections_resonance.png`,
+  `fission_seuil.png` et `fission_partage.png`.
 - `python etude_modeles.py` : `modeles_masse.png` et les trois épreuves
   (leçon 3) ; environ 2 min.
 - `python trace_termes.py` : `termes_goutte.png`, `termes_m2.png`,
