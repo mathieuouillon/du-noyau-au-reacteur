@@ -16,9 +16,9 @@ objectifs:
   - "Juger un modèle sur ce qu'il prédit : ajustement, interpolation, extrapolation."
   - "Comprendre la régression à noyau, et pourquoi une correction statistique n'extrapole pas."
 prerequis: [1]
-code: [modeles_masse.py, etude_modeles.py]
+code: [modeles_masse.py, etude_modeles.py, trace_termes.py]
 sources: >-
-  Masses : les 2367 masses mesurées d'AME2020 avec Z, N ≥ 8 (sans les valeurs estimées `#`). Calculs : `modeles_masse.py`, `etude_modeles.py`. Écarts RMS des modèles publiés : comparaisons sur AME2020 publiées pour WS4, HFB-27, D1M et DZ10 (A&A 2025 ; arXiv 2011.07904 ; arXiv 2609.19578) et pour les réseaux de neurones (« Machine learning the nuclear mass », 2021), telles que relevées par l'auteur.
+  Masses : les 2367 masses mesurées d'AME2020 avec Z, N ≥ 8 (sans les valeurs estimées `#`). Calculs : `modeles_masse.py`, `etude_modeles.py`, et `trace_termes.py` pour les figures terme par terme. Écarts RMS des modèles publiés : comparaisons sur AME2020 publiées pour WS4, HFB-27, D1M et DZ10 (A&A 2025 ; arXiv 2011.07904 ; arXiv 2609.19578) et pour les réseaux de neurones (« Machine learning the nuclear mass », 2021), telles que relevées par l'auteur.
 bibliographie:
   - cle: weizsacker1935
     note: "La formule à cinq termes."
@@ -77,8 +77,9 @@ valeurs estimées `#`). Tous les chiffres sont produits par [`etude_modeles.py`]
 
 M0 à M3 sont **linéaires** dans leurs coefficients : l'ajustement est un
 moindres carrés exact, sans hasard ni réglage. M4 est un apprentissage
-automatique. Les sections 1 à 3 détaillent la physique de chaque terme, les
-sections 4 et 5 les mathématiques de l'ajustement.
+automatique. Les sections 1 à 3 détaillent la physique de chaque terme, la
+section 4 les montre en images, les sections 5 et 6 donnent les mathématiques
+de l'ajustement.
 
 En notant $$I = (N-Z)/A$$, et en comptant $$B > 0$$ pour un noyau lié, M2 s'écrit :
 
@@ -194,7 +195,7 @@ $$
 L'ajustement donne 0,96 MeV (M2) et 1,16 MeV (M3), environ le double. Le
 terme en $$Z^{4/3}/A^{1/3}$$ absorbe donc d'autres effets que la seule forme
 fonctionnelle ne permet pas de distinguer, comme la diffusivité de la surface
-de charge. C'est un premier exemple de ce que montre la section 4 : un bon
+de charge. C'est un premier exemple de ce que montre la section 5 : un bon
 ajustement ne garantit pas que chaque coefficient ait le sens physique qu'on
 lui prête.
 
@@ -246,7 +247,113 @@ neutrons au-delà de 126 (actinides).
 
 ---
 
-## 4. Ajuster : les moindres carrés
+## 4. Chaque terme, en images
+
+On prend les 11 coefficients de M3, ajustés sur les 2367 masses mesurées, et on
+trace séparément la contribution de chaque terme à l'énergie de liaison. Pour
+suivre les termes en fonction de $$A$$ sans mélanger les noyaux d'une même
+masse, on se place sur la **vallée de stabilité** : pour chaque $$A$$, l'isobare
+le plus lié parmi les noyaux mesurés. Une contribution positive lie le noyau
+davantage, une contribution négative lui coûte de la liaison.
+
+Toutes les figures de cette section sont produites par
+[`trace_termes.py`]({{ '/assets/code/trace_termes.py' | relative_url }}).
+
+![Les quatre termes de la goutte le long de la vallée de stabilité, en MeV par nucléon]({{ '/assets/img/nucleaire/termes_goutte.png' | relative_url }})
+
+**(a) La goutte.** Le volume apporte une liaison constante, 15,5 MeV par
+nucléon. Les trois autres termes en retirent, chacun à sa façon : la
+**surface** coûte le plus aux noyaux légers (−7 MeV par nucléon à $$A = 16$$,
+puis décroît en $$A^{-1/3}$$), le **Coulomb** coûte de plus en plus aux noyaux
+lourds (plus de −4 MeV par nucléon pour les actinides) et l'**asymétrie** grandit
+avec l'excès de neutrons de la vallée. Les courbes de surface et de Coulomb se
+croisent vers $$A \approx 150$$ : c'est leur duel qui donne au total $$B/A$$ son
+maximum, vers $$A \approx 60$$.
+
+![Corrections de M2 et appariement le long de la vallée de stabilité, en MeV]({{ '/assets/img/nucleaire/termes_m2.png' | relative_url }})
+
+**(b) Les corrections de M2.** Échange coulombien et symétrie de surface
+**rendent** chacun jusqu'à 80 MeV aux noyaux les plus lourds. C'est beaucoup
+en valeur absolue, mais c'est une correction de quelques pour cent sur les
+termes qu'ils corrigent (Coulomb et asymétrie, plusieurs centaines de MeV). La
+symétrie de surface zigzague parce que l'excès de neutrons $$N - Z$$ de la
+vallée varie d'un $$A$$ à l'autre. Le terme de Wigner reste autour de −5 MeV,
+l'appariement entre 0 et 3 MeV, en alternance pair/impair.
+
+![Les trois termes de couches de M3 et leur somme le long de la vallée de stabilité]({{ '/assets/img/nucleaire/termes_couches.png' | relative_url }})
+
+**(c) Les couches.** Le terme $$a_1 S$$ pénalise l'éloignement des couches
+fermées, jusqu'à −34 MeV pour les actinides en milieu de couche ; les termes
+$$a_2 S^2$$ et $$a_3\, x_p x_n$$ en rendent une partie. Leur somme vaut
+environ −12 MeV en milieu de couche et remonte exactement à zéro au plomb 208,
+doublement magique.
+
+![Écart RMS sur les masses mesurées quand on ajoute les termes un à un]({{ '/assets/img/nucleaire/termes_gain.png' | relative_url }})
+
+**(d) Ce que rapporte chaque terme.** On ajuste des modèles de plus en plus
+complets, en ajoutant les termes un à un dans l'ordre du tableau de M3 :
+
+| modèle | volume | + surface | + Coulomb | + asymétrie | + appariement | + sym. surface | + échange | + Wigner | + $$a_1 S$$ | + $$a_2 S^2$$ | + $$a_3 x_p x_n$$ |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| RMS (MeV) | 47,35 | 25,95 | 24,13 | 3,20 | 3,08 | 2,76 | 2,52 | 2,47 | 1,57 | 1,24 | 1,21 |
+
+Le résultat le plus frappant : ajouter le Coulomb seul ne gagne presque rien
+(25,95 → 24,13 MeV), puis l'asymétrie divise l'erreur par 7,5. Les deux termes
+ne vont pas l'un sans l'autre : le Coulomb pousse les noyaux vers l'excès de
+neutrons, l'asymétrie les ramène vers $$N = Z$$, et c'est leur **équilibre** qui
+dessine la vallée de stabilité. Sans l'asymétrie, le modèle ne peut pas
+décrire les noyaux situés de part et d'autre de la vallée. Le gain attribué à
+chaque terme dépend donc de l'ordre dans lequel on les ajoute : ce graphique
+dit ce que chaque terme apporte **en plus des précédents**.
+
+![Contribution de six termes de M3 sur la carte (N, Z) des noyaux mesurés]({{ '/assets/img/nucleaire/termes_carte.png' | relative_url }})
+_Six termes sur la carte des noyaux, chacun avec sa propre échelle._
+
+La carte montre **où** chaque terme agit :
+
+- le **Coulomb** ne dépend presque que de $$Z$$ : il fonce de bas en haut ;
+- l'**asymétrie** est nulle sur la droite $$N = Z$$ et grandit à mesure qu'on
+  s'en écarte, vers les noyaux riches en neutrons ;
+- la **symétrie de surface** a la même géométrie, de signe opposé et environ
+  quatre fois plus faible pour les noyaux lourds : elle corrige l'asymétrie ;
+- le terme de **Wigner** est nul en $$N = Z$$ et coûte ailleurs, mais
+  linéairement en $$\lvert N - Z \rvert$$ et non quadratiquement : il crée une
+  **pointe** de liaison sur la droite $$N = Z$$, là où protons et neutrons
+  occupent les mêmes orbitales ;
+- l'**appariement** forme un damier : rouge (lié) pour les noyaux pair-pair,
+  bleu pour les impair-impair, neutre pour $$A$$ impair ; son amplitude décroît
+  en $$A^{-1/2}$$ ;
+- les **couches** s'effacent le long des lignes des nombres magiques et
+  s'annulent à leurs croisements, les noyaux doublement magiques ; elles sont
+  les plus fortes entre les lignes, en milieu de couche.
+
+**Les mêmes chiffres, terme par terme** (contribution à $$B$$, en MeV) :
+
+| terme | O-16 | Ca-48 | Sn-120 | Pb-208 | U-238 |
+|---|---|---|---|---|---|
+| volume | 248,7 | 746,1 | 1865,3 | 3233,2 | 3699,6 |
+| surface | −116,9 | −243,2 | −448,0 | −646,5 | −707,2 |
+| Coulomb | −16,1 | −75,6 | −358,9 | −810,1 | −976,2 |
+| asymétrie | 0 | −38,5 | −96,3 | −268,8 | −353,8 |
+| appariement | 2,8 | 1,6 | 1,0 | 0,8 | 0,7 |
+| symétrie de surface | 0 | 14,7 | 27,2 | 63,1 | 79,4 |
+| échange coulombien | 7,4 | 17,3 | 43,3 | 69,7 | 77,7 |
+| Wigner | 0 | −4,1 | −4,1 | −5,2 | −5,5 |
+| couches $$a_1 S$$ | 0 | 0 | −10,0 | 0 | −27,9 |
+| couches $$a_2 S^2$$ | 0 | 0 | 1,2 | 0 | 9,2 |
+| couches $$a_3 x_p x_n$$ | 0 | 0 | 0 | 0 | 6,1 |
+| **total M3** | **125,9** | **418,5** | **1020,7** | **1636,4** | **1802,1** |
+| mesure AME2020 | 127,6 | 416,0 | 1020,5 | 1636,4 | 1801,7 |
+
+Les noyaux doublement magiques (O-16, Ca-48, Pb-208) n'ont aucun terme de
+couches ; l'étain 120, magique en protons seulement, garde la pénalité de ses
+neutrons de valence. On lit aussi l'ordre de grandeur de chaque correction : la
+goutte fait l'essentiel, à quelques MeV près sur des milliers ; les termes
+suivants se disputent ces derniers MeV.
+
+---
+
+## 5. Ajuster : les moindres carrés
 
 **Le problème.** Chaque modèle M0 à M3 s'écrit $$B \approx X a$$, où $$X$$ est une
 matrice $$n \times p$$ (une ligne par noyau, une colonne par terme : $$A$$,
@@ -294,7 +401,7 @@ doubler la barrière de fission.
 
 ---
 
-## 5. M4 : la régression à noyau
+## 6. M4 : la régression à noyau
 
 Le résidu de M3, $$r_i = B_i - B_i^{\text{M3}}$$, n'est pas du bruit : c'est une
 structure lisse sur la carte (Z, N), faite de déformations et de couches
@@ -336,7 +443,7 @@ WS (Wang et Liu, 2011).
 
 ---
 
-## 6. Valider : trois épreuves
+## 7. Valider : trois épreuves
 
 Un modèle se juge sur des noyaux qu'il n'a **pas** vus. Trois épreuves, de
 difficulté croissante, toutes mesurées par l'écart RMS sur l'énergie de
@@ -373,7 +480,7 @@ liaison **totale** B (la métrique standard du domaine), en MeV :
 
 ---
 
-## 7. Ce que disent les coefficients
+## 8. Ce que disent les coefficients
 
 ### La goutte liquide réajustée (M1)
 
@@ -442,7 +549,7 @@ liaison, et c'est elle qui pousse les noyaux de milieu de couche à se
 
 ---
 
-## 8. L'erreur en fonction de la distance au connu
+## 9. L'erreur en fonction de la distance au connu
 
 L'épreuve qui compte vraiment. Pour chaque élément ayant au moins 14 isotopes
 mesurés, on retire les **8 plus riches en neutrons**, on ajuste sur le reste,
@@ -479,7 +586,7 @@ d'information en diagonale sur la carte.
 
 ---
 
-## 9. Où se situent ces modèles
+## 10. Où se situent ces modèles
 
 Écart RMS sur les masses d'AME2020 de modèles publiés :
 
@@ -521,6 +628,9 @@ l'épreuve de la distance, pas sur le tableau ci-dessus.
   (volume), tension de surface (σ = 0,92 MeV/fm²), sphère chargée
   (r₀ = 1,225 fm), principe de Pauli (ε_F/3 = 12,3 MeV d'asymétrie
   cinétique), appariement.
+- Montrés un par un, les termes se compensent : surface contre Coulomb pour
+  le maximum de $$B/A$$, Coulomb contre asymétrie pour la vallée de stabilité.
+  Ajouter le Coulomb sans l'asymétrie ne gagne presque rien.
 - Chaque pièce de physique paie : de la goutte liquide de manuel (M0) au
   modèle avec couches (M3), l'erreur sur $$B$$ passe de 3,8 à 1,2 MeV avec
   seulement 11 paramètres.
@@ -559,6 +669,8 @@ m4 = ModeleCorrige().ajuster(Z, N, B)   # ~15 s
 
 `python etude_modeles.py` refait toute l'étude et la figure (environ 2 min,
 l'essentiel pour la validation croisée de M4).
+`python trace_termes.py` trace les deux figures terme par terme de la section 4
+(quelques secondes).
 
 ## Bibliographie
 

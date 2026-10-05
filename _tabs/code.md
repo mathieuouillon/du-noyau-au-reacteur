@@ -30,6 +30,9 @@ pip install numpy scipy matplotlib sympy periodictable
   et 7.
 - `python etude_modeles.py` : `modeles_masse.png` et les trois épreuves
   (leçon 3) ; environ 2 min.
+- `python trace_termes.py` : `termes_goutte.png`, `termes_m2.png`,
+  `termes_couches.png`, `termes_gain.png` et `termes_carte.png`, la
+  contribution de chaque terme des modèles de masse (leçon 3).
 - `python precalcul_micro.py` : `micro.npz`, la partie microscopique du modèle
   (leçon 4) ; environ 10 min, une seule fois.
 - `python etude_frdm.py` : `modele_frdm.png` et l'étude complète (leçon 4) ;
