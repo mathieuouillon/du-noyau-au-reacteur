@@ -1,15 +1,27 @@
 ---
 title: "Au-delà de la goutte liquide : modèles de masse"
-date: 2026-09-29 09:00:00 +0200
-categories: [Physique nucléaire, Masses nucléaires]
-tags: [goutte liquide, couches, apprentissage automatique, extrapolation]
-description: "Cinq modèles de masse jugés sur ce qu'ils prédisent : la physique extrapole, la statistique non."
+date: 2026-09-28 09:00:00 +0200
+categories: ["II · Couches et formes des noyaux", "Modèles de masse"]
+tags: [goutte liquide, couches, apprentissage automatique, extrapolation, peau de neutrons]
+description: "Cinq modèles de masse, de la goutte liquide aux couches, jugés sur ce qu'ils prédisent : la physique extrapole, la statistique non."
 image:
   path: /assets/img/nucleaire/modeles_masse.png
   alt: "Au-delà de la goutte liquide : modèles de masse"
+lecon: 3
+partie: "II"
+objectifs:
+  - "Construire une hiérarchie de modèles de masse, de la goutte liquide aux termes de couches."
+  - "Juger un modèle sur ce qu'il prédit : ajustement, interpolation, extrapolation."
+  - "Interpréter la symétrie de surface (peau de neutrons) et le terme de couches."
+  - "Comprendre pourquoi une correction statistique n'extrapole pas, et ce qui manque encore : la déformation."
+prerequis: [1]
+code: [modeles_masse.py, etude_modeles.py]
 ---
 
-Suite de [Énergies de liaison : les données mesurées]({{ '/posts/energies-de-liaison/' | relative_url }}). Cinq modèles de complexité croissante, tous
+{% include cours-entete.html %}
+
+La [leçon 1]({{ '/posts/energies-de-liaison/' | relative_url }}) a montré ce que la goutte liquide ignore : les couches.
+Cette leçon ouvre la partie II en la complétant. Cinq modèles de complexité croissante, tous
 ajustés sur les **2367 masses mesurées** d'AME2020 (Z ≥ 8, N ≥ 8, sans les
 valeurs estimées `#`). Tous les chiffres sont produits par [`etude_modeles.py`]({{ '/assets/code/etude_modeles.py' | relative_url }}).
 
@@ -244,13 +256,31 @@ de la physique, il manque deux choses :
 - un vrai calcul des **niveaux individuels** (méthode de Strutinsky, ou
   Hartree-Fock-Bogoliubov) au lieu d'un simple comptage de valence.
 
-> **Suite** : [Vers FRDM : le modèle macroscopique-microscopique]({{ '/posts/vers-frdm/' | relative_url }}) construit ce modèle macroscopique-microscopique
+> **Suite** : la [leçon 4]({{ '/posts/vers-frdm/' | relative_url }}) construit ce modèle macroscopique-microscopique
 > (goutte déformable, niveaux de Nilsson, correction de Strutinsky, BCS).
 
 M4 rivalise avec WS4 en interpolation, **mais la comparaison n'est pas
 équitable** : WS4 est un modèle physique à une dizaine de paramètres, qui
 extrapole bien mieux qu'une correction statistique. Sa valeur se juge sur
 l'épreuve de la distance, pas sur le tableau ci-dessus.
+
+---
+
+## À retenir
+
+- Chaque pièce de physique paie : de la goutte liquide de manuel (M0) au
+  modèle avec couches (M3), l'erreur sur `B` passe de 3,8 à 1,2 MeV avec
+  seulement 11 paramètres.
+- La **symétrie de surface** traduit la **peau de neutrons** : l'excès de
+  neutrons coûte moins cher en surface qu'au cœur.
+- Le terme de couches est nul pour les noyaux doublement magiques et coûte
+  plus de 10 MeV en milieu de couche ; l'interaction proton-neutron de valence
+  pousse ces noyaux à se **déformer**.
+- Un modèle se juge sur l'**extrapolation**, pas sur l'ajustement : la
+  correction statistique (M4) excelle près des données mais se dégrade vite en
+  s'en éloignant. Seule la physique extrapole.
+- Pour aller plus loin, il faut calculer la **déformation** et les **niveaux
+  individuels** : c'est l'objet de la leçon suivante.
 
 ---
 
@@ -290,3 +320,5 @@ l'essentiel pour la validation croisée de M4).
 - **Valeurs RMS sur AME2020** citées ci-dessus : comparaisons publiées pour
   WS4, HFB-27, D1M et DZ10 (A&A 2025 ; arXiv 2011.07904 ; arXiv 2609.19578),
   réseaux de neurones (« Machine learning the nuclear mass », 2021).
+
+{% include cours-pied.html %}

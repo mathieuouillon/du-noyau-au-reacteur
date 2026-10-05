@@ -16,12 +16,12 @@ timezone: Europe/Paris
 
 title: Du noyau au réacteur
 
-tagline: Physique nucléaire et neutronique, calculées pas à pas
+tagline: Fission et formes des noyaux, un cours calculé pas à pas
 
 description: >- # used by seo meta and the atom feed
-  Une série pour comprendre la neutronique et la physique nucléaire
-  en construisant le code soi-même : fission, masses nucléaires, modèle
-  de type FRDM, orbitales, solveur de diffusion et conception de cœur.
+  Un cours de physique nucléaire construit en Python, des masses mesurées à la
+  fission et à la forme des noyaux : goutte liquide, couches, modèle de type
+  FRDM, orbitales de Nilsson, puis neutronique d'un cœur de réacteur.
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -159,7 +159,6 @@ pwa:
     deny_paths:
       # - "/example"  # URLs match `<SITE_URL>/example/*` will not be cached by the PWA
 
-paginate: 10
 
 # The base URL of your site
 baseurl: ""
@@ -225,8 +224,14 @@ exclude:
   - README.md
   - LICENSE
   - purgecss.js
+  - vendor
+  - Gemfile.lock
+  - publier.sh
   - "*.config.js"
   - "package*.json"
+
+plugins:
+  - jekyll-redirect-from
 
 jekyll-archives:
   enabled: [categories, tags]

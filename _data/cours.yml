@@ -1,0 +1,19 @@
+# Organisation du cours. Chaque leçon (un article de _posts/) déclare dans son
+# en-tête son numéro (`lecon`), sa partie (`partie`), ses objectifs, ses
+# prérequis et son code ; ce fichier ne décrit que les parties.
+parties:
+  - id: "I"
+    titre: "Énergie du noyau et fission"
+    resume: >-
+      Ce que disent les masses mesurées, et pourquoi un noyau lourd libère de
+      l'énergie en se cassant : bilan, fissilité, fragments.
+  - id: "II"
+    titre: "Couches et formes des noyaux"
+    resume: >-
+      Pourquoi la goutte liquide ne suffit pas : couches nucléaires,
+      déformation, orbitales des nucléons et forme du noyau entier.
+  - id: "III"
+    titre: "Du noyau au réacteur"
+    resume: >-
+      Application : ralentir les neutrons, entretenir la réaction en chaîne
+      et concevoir un cœur de réacteur à eau pressurisée.

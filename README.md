@@ -25,11 +25,24 @@ bundle install
 bundle exec jekyll serve      # http://127.0.0.1:4000
 ```
 
+## Ajouter une leçon
+
+Créer un article dans `_posts/` avec, dans son en-tête, `lecon` (numéro),
+`partie` (`I`, `II` ou `III`), `objectifs`, `prerequis` (numéros de leçons) et
+`code` (fichiers de `assets/code/`). Placer `{% include cours-entete.html %}`
+au début du texte et `{% include cours-pied.html %}` à la fin. La date de
+l'article doit suivre l'ordre des leçons. Le plan du cours, la navigation et
+la page Code se mettent à jour d'eux-mêmes.
+
 ## Organisation
 
 | chemin | contenu |
 |---|---|
-| `_posts/` | les articles |
+| `_posts/` | les leçons ; leur en-tête porte `lecon`, `partie`, `objectifs`, `prerequis` et `code` |
+| `_data/cours.yml` | les parties du cours |
+| `index.md`, `_layouts/home.html` | la page d'accueil « Plan du cours » |
+| `_includes/cours-*.html`, `_includes/plan-cours.html` | en-tête et navigation des leçons, plan du cours |
+| `_tabs/glossaire.md`, `_tabs/code.md` | le glossaire et la page du code |
 | `_tabs/about.md` | la page « À propos » |
 | `assets/img/nucleaire/` | les figures |
 | `assets/code/` | le code Python téléchargeable |

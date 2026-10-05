@@ -1,13 +1,28 @@
 ---
 title: "Énergies de liaison : les données mesurées"
-date: 2026-09-28 09:00:00 +0200
-categories: [Physique nucléaire, Masses nucléaires]
-tags: [AME2020, énergie de liaison, nombres magiques]
-description: "2825 nucléides de l'évaluation AME2020, leur provenance, et ce qu'ils révèlent : le maximum en Ni-62 et les couches nucléaires."
+date: 2026-09-26 09:00:00 +0200
+categories: ["I · Énergie du noyau et fission", "Énergie de liaison"]
+tags: [AME2020, énergie de liaison, nombres magiques, goutte liquide]
+description: "2825 nucléides de l'évaluation AME2020, leur provenance, et ce qu'ils révèlent : le maximum en Ni-62, la goutte liquide et les couches nucléaires."
 image:
   path: /assets/img/nucleaire/energie_liaison_modeles.png
   alt: "Énergies de liaison : les données mesurées"
+lecon: 1
+partie: "I"
+objectifs:
+  - "Calculer une énergie de liaison à partir des masses atomiques mesurées (AME2020)."
+  - "Lire la courbe B/A : son maximum en Ni-62, et pourquoi fission et fusion libèrent de l'énergie."
+  - "Interpréter les termes de la goutte liquide et repérer ce qu'elle ignore."
+  - "Mettre en évidence les nombres magiques directement dans les masses, avec S₂ₙ."
+prerequis: []
+code: [donnees_liaison.py, analyse_liaison.py, trace_liaison.py, energies_liaison.csv]
 ---
+
+{% include cours-entete.html %}
+
+Tout le cours repose sur une seule grandeur : l'**énergie de liaison** `B`
+d'un noyau, l'énergie qu'il faudrait fournir pour le séparer en nucléons
+libres. Cette première leçon part des **masses mesurées**, avant tout modèle.
 
 Jeu de données complet : **[`energies_liaison.csv`]({{ '/assets/code/energies_liaison.csv' | relative_url }})**, 2825 nuclides, Z de 1 à 100,
 issus de l'évaluation **AME2020** — dont **2450 masses mesurées** et **375 masses
@@ -158,8 +173,7 @@ quatre décimales des valeurs de référence.
 
 ![Énergie de liaison par nucléon : mesures brutes et modèle de la goutte liquide]({{ '/assets/img/nucleaire/energie_liaison_modeles.png' | relative_url }})
 
-*Généré par [`trace_liaison.py`]({{ '/assets/code/trace_liaison.py' | relative_url }}). L'image doit se trouver dans le même dossier
-que ce fichier pour s'afficher.*
+*Généré par [`trace_liaison.py`]({{ '/assets/code/trace_liaison.py' | relative_url }}).*
 
 ### En haut : données brutes et modèle
 
@@ -298,10 +312,10 @@ d'appariement en capturant un neutron pour franchir leur barrière.
 
 ---
 
-## Ce que les données corrigent dans les documents précédents
+## Fission symétrique ou asymétrique : ce que disent les masses
 
-**L'asymétrie de la fission n'est pas une erreur du modèle.** J'avais écrit
-dans [De l'uranium au réacteur]({{ '/posts/de-l-uranium-au-reacteur/' | relative_url }}) que la goutte liquide « prédit un maximum pour la
+**L'asymétrie de la fission n'est pas une erreur du modèle.** J'avais d'abord
+écrit dans la leçon sur la [fission de l'uranium]({{ '/posts/la-fission-de-l-uranium/' | relative_url }}) que la goutte liquide « prédit un maximum pour la
 fission symétrique, alors que la fission réelle est asymétrique », en
 attribuant l'écart aux couches nucléaires.
 
@@ -312,7 +326,7 @@ L'asymétrie n'est donc **pas** un effet de bilan énergétique. Elle vient de l
 **dynamique** du noyau au point de scission : la surface d'énergie potentielle
 au point selle favorise des fragments proches des couches fermées Z=50 et
 N=82. Le noyau ne choisit pas le partage le plus exothermique, il suit le
-chemin le plus facile. Les deux documents sont corrigés.
+chemin le plus facile. Les deux leçons sont corrigées.
 
 ## Qualité réelle de la formule semi-empirique
 
@@ -345,7 +359,7 @@ modèle ignore par construction. **Sans conséquence pour le réacteur** :
 l'uranium et ses produits de fission sont lourds et proches de la stabilité,
 où le modèle vaut 0,03 MeV/nucléon.
 
-> **Pour aller plus loin** : [Au-delà de la goutte liquide : modèles de masse]({{ '/posts/au-dela-de-la-goutte-liquide/' | relative_url }}) construit des modèles qui
+> **Pour aller plus loin** : la [leçon 3]({{ '/posts/au-dela-de-la-goutte-liquide/' | relative_url }}) construit des modèles qui
 > corrigent ces défauts — goutte liquide étendue, termes de couches,
 > correction statistique — et les juge sur leur capacité à prédire.
 
@@ -390,6 +404,23 @@ mesurées.**
 
 ---
 
+## À retenir
+
+- `B(A,Z) = [Z·m(¹H) + N·m(n) − M(A,Z)]·c²` : l'énergie de liaison se calcule
+  directement à partir des masses atomiques mesurées (AME2020, 2450 masses
+  mesurées sur 2825 nucléides retenus).
+- `B/A` culmine à **Ni-62** (8,7946 MeV), pas à Fe-56 : couper un noyau lourd
+  (fission) ou réunir des noyaux légers (fusion) libère de l'énergie.
+- La **goutte liquide** (volume, surface, Coulomb, asymétrie, appariement)
+  reproduit `B/A` à ~0,03 MeV par nucléon au voisinage de la vallée de
+  stabilité ; le maximum
+  naît du duel surface contre Coulomb.
+- Ce qu'elle ignore se lit dans les données : des bosses en N = 50, 82, 126
+  et des chutes de `S₂ₙ` juste après les **nombres magiques**. Le noyau a une
+  structure en couches.
+
+---
+
 ## Utilisation
 
 ```python
@@ -429,3 +460,5 @@ travail publiable, citer AME2020 et prendre directement :
   demi-vies, spins, modes de désintégration.
 - **KAERI Table of Nuclides** ou **NNDC NuDat** — consultation en ligne d'un
   nuclide isolé.
+
+{% include cours-pied.html %}

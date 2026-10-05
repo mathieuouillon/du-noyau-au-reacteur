@@ -1,0 +1,33 @@
+{%- include cours-lecons.html -%}
+{%- assign cours_partie = site.data.cours.parties | where: "id", page.partie | first -%}
+<div class="cours-entete">
+  <div class="cours-fil">
+    <a href="{{ '/' | relative_url }}">Plan du cours</a>
+    <span class="cours-sep">›</span>
+    <a href="{{ '/' | relative_url }}#partie-{{ cours_partie.id | downcase }}">Partie {{ cours_partie.id }} · {{ cours_partie.titre }}</a>
+    <span class="cours-sep">›</span>
+    <strong>{% if page.annexe %}Annexe{% else %}Leçon {{ page.lecon }} sur {{ cours_nb }}{% endif %}</strong>
+  </div>
+  <div class="cours-objectifs">
+    <p class="cours-bloc-titre"><i class="fas fa-bullseye fa-fw"></i> Objectifs</p>
+    <ul>
+      {%- for o in page.objectifs %}
+      <li>{{ o }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="cours-meta"><i class="fas fa-route fa-fw"></i> <strong>Prérequis :</strong>
+      {%- if page.prerequis.size > 0 -%}
+        {%- for n in page.prerequis -%}
+          {%- assign l = cours_lecons | where: "lecon", n | first %}
+      <a href="{{ l.url | relative_url }}" title="{{ l.title | escape }}">leçon {{ n }}</a>{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      {%- else %} aucun, c'est le point de départ.
+      {%- endif -%}
+    </p>
+    <p class="cours-meta"><i class="fas fa-code fa-fw"></i> <strong>Code :</strong>
+      {%- for f in page.code %}
+      <a href="{{ '/assets/code/' | append: f | relative_url }}"><code>{{ f }}</code></a>{% unless forloop.last %} ·{% endunless %}
+      {%- endfor -%}
+    </p>
+  </div>
+</div>

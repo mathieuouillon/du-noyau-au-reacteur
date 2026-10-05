@@ -1,0 +1,3 @@
+{%- comment -%} Les leçons du cours, triées par numéro, et leur nombre (hors annexe). {%- endcomment -%}
+{%- assign cours_lecons = site.posts | where_exp: "p", "p.lecon" | sort: "lecon" -%}
+{%- assign cours_nb = cours_lecons | where_exp: "p", "p.annexe != true" | size -%}

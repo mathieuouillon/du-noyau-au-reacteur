@@ -1,12 +1,14 @@
 ---
 # the default layout is 'page'
 icon: fas fa-info-circle
-order: 4
+order: 6
 ---
 
-Ce site rassemble une série d'articles pour **comprendre la neutronique et la
-physique nucléaire en construisant le code soi-même**, en Python : de la
-structure du noyau jusqu'au calcul d'un cœur de réacteur à eau pressurisée.
+Ce site est un **cours de physique nucléaire construit en Python** : on y
+calcule soi-même l'énergie de liaison des noyaux, la fission de l'uranium, la
+forme des noyaux déformés et leurs orbitales, puis la neutronique d'un cœur
+de réacteur à eau pressurisée. Le [plan du cours]({{ '/' | relative_url }}) donne
+l'ordre de lecture.
 
 Trois principes guident la série :
 

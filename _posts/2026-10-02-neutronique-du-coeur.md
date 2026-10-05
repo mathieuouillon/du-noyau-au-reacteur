@@ -1,13 +1,24 @@
 ---
 title: "Neutronique du cœur : comprendre et concevoir"
-date: 2026-10-03 09:00:00 +0200
-categories: [Neutronique, Conception de cœur]
+date: 2026-10-02 09:00:00 +0200
+categories: ["III · Du noyau au réacteur", "Conception de cœur"]
 tags: [REP, bore, grappes, facteur de point chaud]
 description: "Plan de chargement, bore critique, efficacité des grappes et anti-ombrage, sur un cœur REP modélisé."
 image:
   path: /assets/img/nucleaire/cartes_puissance.png
   alt: "Neutronique du cœur : comprendre et concevoir"
+lecon: 7
+partie: "III"
+objectifs:
+  - "Passer de k_inf à k_eff : le rôle des fuites et du réflecteur."
+  - "Aplatir la puissance avec un plan de chargement, et en mesurer le prix en réactivité."
+  - "Comparer le bore soluble et les grappes de commande ; comprendre ombrage et anti-ombrage."
+  - "Savoir ce qu'un calcul de neutronique statique ne contient pas."
+prerequis: [6]
+code: [coeur.py, etude_coeur.py, diffusion.py]
 ---
+
+{% include cours-entete.html %}
 
 Document de synthèse accompagnant [`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }}) et [`etude_coeur.py`]({{ '/assets/code/etude_coeur.py' | relative_url }}).
 Tous les chiffres cités sont produits par le code, pas estimés.
@@ -253,11 +264,27 @@ n'est rechargé qu'au tiers ou au quart.
 
 ### Les limites de la diffusion elle-même
 
-Voir [Le solveur de diffusion multigroupe (en anglais)]({{ '/posts/solveur-de-diffusion/' | relative_url }}) §1.2. La théorie de la diffusion est mauvaise près des
+Voir l'[annexe sur le solveur de diffusion]({{ '/posts/solveur-de-diffusion/' | relative_url }}), §1.2. La théorie de la diffusion est mauvaise près des
 absorbants forts — c'est-à-dire précisément près des **grappes**. Les
 efficacités calculées ici sont qualitativement justes et quantitativement
 approximatives. Un calcul industriel utilise des facteurs de discontinuité
 calibrés sur du transport.
+
+---
+
+## À retenir
+
+- `k_eff = k_inf × P_NL` : grâce au réflecteur, les fuites ne coûtent ici
+  qu'environ 1 000 pcm.
+- Ce qui limite un réacteur est le **crayon le plus chaud** : un chargement
+  « out-in » fait passer `F_xy` de 2,12 à 1,47, au prix de 3 020 pcm.
+- Le **bore** contrôle lentement et uniformément (bore critique : 1 301 ppm
+  pour ce cœur neuf) ; sa concentration est bornée par le signe du
+  coefficient modérateur.
+- Les **grappes** agissent vite mais localement ; leurs efficacités ne
+  s'additionnent pas (ombrage si accolées, anti-ombrage si éloignées).
+- Sans contre-réactions, xénon ni épuisement, ce modèle statique ne simule ni
+  transitoire ni cycle.
 
 ---
 
@@ -291,3 +318,5 @@ Par ordre de rapport pédagogique/effort :
 - **Duderstadt & Hamilton, _Nuclear Reactor Analysis_** — le standard
   anglo-saxon.
 - **Documentation OpenMC** — pour confronter ces résultats à un Monte-Carlo.
+
+{% include cours-pied.html %}

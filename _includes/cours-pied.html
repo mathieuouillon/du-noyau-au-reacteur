@@ -1,0 +1,24 @@
+{%- include cours-lecons.html -%}
+{%- assign n_prec = page.lecon | minus: 1 -%}
+{%- assign n_suiv = page.lecon | plus: 1 -%}
+{%- assign l_prec = cours_lecons | where: "lecon", n_prec | first -%}
+{%- assign l_suiv = cours_lecons | where: "lecon", n_suiv | first -%}
+<nav class="cours-pied" aria-label="Navigation entre les leçons">
+  {%- if l_prec %}
+  <a class="cours-pied-lien" href="{{ l_prec.url | relative_url }}">
+    <span class="cours-pied-label"><i class="fas fa-arrow-left fa-fw"></i> {% if l_prec.annexe %}Annexe{% else %}Leçon {{ l_prec.lecon }}{% endif %}</span>
+    <span class="cours-pied-titre">{{ l_prec.title }}</span>
+  </a>
+  {%- else %}
+  <span class="cours-pied-lien cours-pied-vide"></span>
+  {%- endif %}
+  <a class="cours-pied-plan" href="{{ '/' | relative_url }}"><i class="fas fa-list-ol fa-fw"></i> Plan du cours</a>
+  {%- if l_suiv %}
+  <a class="cours-pied-lien cours-pied-suiv" href="{{ l_suiv.url | relative_url }}">
+    <span class="cours-pied-label">{% if l_suiv.annexe %}Annexe{% else %}Leçon {{ l_suiv.lecon }}{% endif %} <i class="fas fa-arrow-right fa-fw"></i></span>
+    <span class="cours-pied-titre">{{ l_suiv.title }}</span>
+  </a>
+  {%- else %}
+  <span class="cours-pied-lien cours-pied-vide"></span>
+  {%- endif %}
+</nav>

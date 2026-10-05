@@ -1,15 +1,26 @@
 ---
-title: "Les orbitales nucléaires, en 2D et en 3D"
-date: 2026-10-01 09:00:00 +0200
-categories: [Physique nucléaire, Structure du noyau]
+title: "Les orbitales nucléaires et la forme du noyau"
+date: 2026-09-30 09:00:00 +0200
+categories: ["II · Couches et formes des noyaux", "Structure du noyau"]
 tags: [Nilsson, orbitales, visualisation, déformation]
-description: "Tracer les orbitales des nucléons comme celles de l'électron, puis la forme du noyau entier."
+description: "Tracer les orbitales des nucléons comme celles de l'électron, en 2D et en 3D, puis la forme du noyau entier."
 image:
   path: /assets/img/nucleaire/orbitales_nucleaires.png
   alt: "Les orbitales nucléaires, en 2D et en 3D"
+lecon: 5
+partie: "II"
+objectifs:
+  - "Passer des niveaux de Nilsson aux fonctions d'onde des nucléons."
+  - "Comparer orbitales nucléaires et atomiques : puits, spin-orbite, déformation."
+  - "Voir pourquoi, dans un noyau allongé, les orbitales de petit Ω sont les plus basses."
+  - "Construire la forme d'un noyau entier et connaître les limites du modèle."
+prerequis: [4]
+code: [orbitales.py, galerie_orbitales.py]
 ---
 
-Suite de [Vers FRDM : le modèle macroscopique-microscopique]({{ '/posts/vers-frdm/' | relative_url }}). Le modèle de Nilsson ne donne pas seulement des
+{% include cours-entete.html %}
+
+Suite de la [leçon 4]({{ '/posts/vers-frdm/' | relative_url }}). Le modèle de Nilsson ne donne pas seulement des
 **énergies** : chaque niveau a une **fonction d'onde**, qu'on peut tracer
 comme une orbitale électronique. En sommant les orbitales occupées, on
 obtient la **forme du noyau**.
@@ -90,7 +101,7 @@ valence peuvent descendre sur les orbitales de Ω petit en allongeant le noyau.
 | Er-166 | 0,24 | 1,32 | 5,27 fm |
 | U-238 | 0,19 | 1,24 | 5,87 fm |
 
-Les déformations δ sont celles trouvées par le modèle de [Vers FRDM : le modèle macroscopique-microscopique]({{ '/posts/vers-frdm/' | relative_url }}).
+Les déformations δ sont celles trouvées par le modèle de la [leçon 4]({{ '/posts/vers-frdm/' | relative_url }}).
 
 ## Limites, à garder en tête
 
@@ -107,7 +118,21 @@ Les déformations δ sont celles trouvées par le modèle de [Vers FRDM : le mod
   neutrons du plomb est mesurée positive (expérience PREX). Il faudrait un
   calcul auto-cohérent, de type Hartree-Fock, pour la prédire.
 - **Déformation de l'uranium sous-estimée** par le modèle, voir
-  [Vers FRDM : le modèle macroscopique-microscopique]({{ '/posts/vers-frdm/' | relative_url }}).
+  la [leçon 4]({{ '/posts/vers-frdm/' | relative_url }}).
+
+## À retenir
+
+- Chaque niveau de Nilsson a une fonction d'onde : on trace `|ψ|²` comme une
+  orbitale électronique, et la somme des orbitales occupées donne la forme du
+  noyau.
+- Trois différences avec l'atome : un puits à fond plat (niveaux de type
+  oscillateur), un **spin-orbite** de l'ordre du MeV, et un puits qui peut se
+  **déformer**, ne laissant que Ω comme bon nombre quantique.
+- Dans un noyau allongé, les orbitales de **petit Ω** passent par les pôles,
+  là où se trouve la matière : leur énergie baisse. C'est le mécanisme de la
+  déformation, rendu visible.
+- Le modèle donne de bons rayons (Pb-208 : 5,56 fm contre 5,50 mesuré), mais
+  une densité centrale trop forte et pas de peau de neutrons.
 
 ## Pour aller plus loin
 
@@ -117,3 +142,5 @@ Les déformations δ sont celles trouvées par le modèle de [Vers FRDM : le mod
   chap. 2.
 - Rayons de charge : I. Angeli, K.P. Marinova, *At. Data Nucl. Data Tables*
   99 (2013) 69.
+
+{% include cours-pied.html %}

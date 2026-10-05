@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+{% comment %}
+  Remplace la page d'accueil de Chirpy (liste chronologique des articles) par
+  le plan du cours : le contenu de index.md, qui inclut plan-cours.html.
+{% endcomment %}
+
+<article class="px-1 cours-accueil">
+  <h1 class="dynamic-title">{{ page.title | default: site.title }}</h1>
+  <div class="content">
+    {{ content }}
+  </div>
+</article>

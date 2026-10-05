@@ -1,126 +1,38 @@
 ---
-title: "De l'uranium au réacteur"
-date: 2026-09-27 09:00:00 +0200
-categories: [Physique nucléaire, Fission]
-tags: [fission, uranium, modération, quatre facteurs]
-description: "Pourquoi l'uranium 235 fissionne, combien d'énergie sort, et pourquoi un REP ne peut pas fonctionner à l'uranium naturel."
+title: "Ralentir les neutrons : modération et quatre facteurs"
+date: 2026-10-01 09:00:00 +0200
+categories: ["III · Du noyau au réacteur", "Neutronique"]
+tags: [modération, quatre facteurs, uranium, sous-modération]
+description: "Pourquoi il faut ralentir les neutrons, comment choisir un modérateur, et pourquoi un REP ne peut pas fonctionner à l'uranium naturel."
 image:
   path: /assets/img/nucleaire/fission_bilan.png
-  alt: "De l'uranium au réacteur"
+  alt: "Ralentir les neutrons"
+lecon: 6
+partie: "III"
+objectifs:
+  - "Comparer les modérateurs : vitesse de ralentissement et rapport de modération."
+  - "Écrire le facteur de multiplication infini avec la formule des quatre facteurs."
+  - "Comprendre pourquoi le combustible est en crayons (autoprotection des résonances)."
+  - "Expliquer la sous-modération des REP et pourquoi l'uranium naturel ne diverge pas dans l'eau légère."
+prerequis: [2]
+code: [fission.py, etude_fission.py]
 ---
 
-Document accompagnant [`fission.py`]({{ '/assets/code/fission.py' | relative_url }}) et [`etude_fission.py`]({{ '/assets/code/etude_fission.py' | relative_url }}).
-Tous les chiffres sont produits par le code.
+{% include cours-entete.html %}
 
-C'est le point de départ logique de la série : [`fission.py`]({{ '/assets/code/fission.py' | relative_url }}) explique d'où
-viennent les sections efficaces, [`diffusion.py`]({{ '/assets/code/diffusion.py' | relative_url }}) résout le transport,
-[`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }}) conçoit le cœur.
-
+La [leçon 2]({{ '/posts/la-fission-de-l-uranium/' | relative_url }}) a montré pourquoi l'U-235 fissionne et combien
+d'énergie sort. Reste à **entretenir** la réaction en chaîne : chaque fission
+doit en provoquer au moins une autre. Cette leçon reprend la suite de
+[`fission.py`]({{ '/assets/code/fission.py' | relative_url }}) et [`etude_fission.py`]({{ '/assets/code/etude_fission.py' | relative_url }}) ; tous les chiffres sont produits par le code.
+[`diffusion.py`]({{ '/assets/code/diffusion.py' | relative_url }}) résout ensuite le transport des neutrons
+([annexe]({{ '/posts/solveur-de-diffusion/' | relative_url }})) et [`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }}) conçoit le cœur ([leçon 7]({{ '/posts/neutronique-du-coeur/' | relative_url }})).
 
 ![Courbe de liaison, ralentissement, courbe de modération et quatre facteurs]({{ '/assets/img/nucleaire/fission_bilan.png' | relative_url }})
-_Courbe de liaison, ralentissement, courbe de modération et quatre facteurs._
+_Figure produite par `etude_fission.py` : efficacité de ralentissement (en haut à droite), courbe de modération (en bas à gauche) et quatre facteurs (en bas à droite)._
 
 ---
 
-## 1. Pourquoi un noyau lourd libère de l'énergie en se cassant
-
-Une seule courbe explique la fission **et** la fusion : l'énergie de liaison
-par nucléon `B/A`. Elle monte de l'hydrogène jusqu'à un maximum vers A ≈ 60
-(**Ni-62, 8,7946 MeV** — pas Fe-56, voir [Énergies de liaison : les données mesurées]({{ '/posts/energies-de-liaison/' | relative_url }})), puis
-redescend. Un noyau lourd qui se casse en deux morceaux plus proches du fer
-devient plus lié ; la différence est libérée.
-
-On la calcule par la formule semi-empirique de masse, qui traite le noyau
-comme une goutte de liquide chargée.
-
-| noyau | B/A calculé | B/A mesuré |
-|---|---|---|
-| He-4 | 5,486 | 7,074 |
-| Fe-56 | 8,760 | 8,790 |
-| U-235 | **7,600** | **7,591** |
-
-Excellent sur les noyaux lourds, mauvais sur l'hélium 4 : le modèle ignore
-les couches nucléaires, et He-4 est doublement magique donc anormalement
-lié. Retenir cette limite, elle resservira.
-
-**Le terme coupable** est le terme coulombien, en `Z²/A^(1/3)`. Les protons
-se repoussent **tous** mutuellement (en `Z²`), alors que la force nucléaire
-ne lie qu'aux voisins immédiats (en `A`). Passé le fer, la répulsion
-l'emporte. L'uranium est déjà presque instable ; il suffit de le déformer.
-
-## 2. Pourquoi l'U-235 et pas l'U-238
-
-Les deux sont *fissionnables*. Un seul est **fissile**, c'est-à-dire cassable
-par un neutron lent. La différence tient à l'appariement des nucléons, et le
-modèle de la goutte liquide la reproduit :
-
-| réaction | noyau composé | S_n calculé | barrière | fissile ? |
-|---|---|---|---|---|
-| U-235 + n → U-236* | U-236 | **6,70 MeV** | 6,2 MeV | **OUI** |
-| U-238 + n → U-239* | U-239 | **4,87 MeV** | 6,6 MeV | non |
-
-(mesures : 6,545 et 4,806 MeV — l'accord est excellent)
-
-Le mécanisme en une phrase : **l'U-235 a un nombre impair de neutrons (143)**.
-Le neutron incident vient compléter une paire, et l'énergie d'appariement
-ainsi libérée suffit à franchir la barrière. L'U-238 a un nombre pair (146) ;
-le neutron incident reste célibataire, ne reçoit pas ce bonus, et
-l'excitation est insuffisante.
-
-Un neutron thermique apporte 0,025 eV, soit rien du tout. **Tout vient de
-S_n.** La fissilité ne dépend donc pas de la vitesse du neutron mais de la
-**parité du noyau cible**. Même règle pour Pu-239 (N=145) et U-233 (N=141),
-sans exception.
-
-L'U-238 fissionne quand même si on lui apporte la différence en énergie
-cinétique — seuil ~1 MeV. C'est le facteur `ε ≈ 1,03` : 3 % des fissions
-d'un REP ont lieu sur l'U-238, par des neutrons encore rapides.
-
-## 3. Combien d'énergie
-
-`Q = B(fragment 1) + B(fragment 2) − B(U-236)`. Les neutrons libres ont une
-énergie de liaison nulle et ne comptent pas.
-
-| partition de U-236 | Q (goutte liquide) |
-|---|---|
-| 118/46 + 118/46 (symétrique) | **185,0 MeV** |
-| 133/52 + 100/40 + 3n | 164,6 |
-| 141/56 + 92/36 + 3n | 156,4 |
-
-**Pourquoi la fission réelle est-elle asymétrique ?** Le calcul donne un
-maximum pour la partition **symétrique**, alors que la fission réelle fait
-deux bosses vers A=95 et A=139.
-
-Ce n'est **pas** une erreur du modèle — les masses mesurées donnent elles
-aussi plus d'énergie au partage symétrique (193 MeV contre 167). L'asymétrie
-n'est donc pas un effet de bilan énergétique : elle vient de la **dynamique**
-au point de scission, où la surface d'énergie potentielle favorise des
-fragments proches des couches fermées Z=50 et N=82. Le noyau ne choisit pas le
-partage le plus exothermique, il suit le chemin le plus facile.
-
-Pour Ba-141 + Kr-92 + 3n : 156 MeV calculés contre 167 mesurés. 6 % d'erreur
-pour un modèle à cinq paramètres.
-
-**Les ~200 MeV, en détail :**
-
-| forme | MeV | récupérable |
-|---|---|---|
-| énergie cinétique des fragments | 168 | oui |
-| neutrons de fission | 5 | oui |
-| gammas prompts | 7 | oui |
-| bêta des produits de fission | 8 | oui |
-| gammas des produits de fission | 7 | oui |
-| **antineutrinos** | **12** | **NON** |
-| captures (n,γ) hors fission | 10 | oui |
-
-207 MeV libérés par fission, dont 12 partent en antineutrinos qui traversent
-la Terre sans interagir. D'où les ~200 MeV récupérables conventionnels.
-
-Ordre de grandeur : **1 g d'U-235 fissionné ≈ 1 MW·jour ≈ 2 à 3 tonnes de
-charbon.** Le facteur million est simplement le rapport entre énergies
-nucléaires (MeV) et chimiques (eV).
-
-## 4. Ralentir les neutrons : le choix qui décide de tout
+## 1. Ralentir les neutrons : le choix qui décide de tout
 
 Un neutron naît à ~2 MeV. La section de fission de l'U-235 vaut 583 barns à
 0,025 eV contre ~1 barn à 2 MeV : **500 fois plus grande une fois
@@ -162,7 +74,7 @@ Toute l'architecture des filières sort de ce tableau :
 Ce n'est pas un détail technique : c'est ce qui décide si un pays a besoin ou
 non d'une usine d'enrichissement.
 
-## 5. Les quatre facteurs
+## 2. Les quatre facteurs
 
 ```
 k_inf = η · ε · p · f
@@ -205,7 +117,7 @@ cumulent :
 La pile de Fermi, en 1942, était un empilement hétérogène de blocs d'uranium
 dans du graphite. Homogénéisée, elle n'aurait jamais divergé.
 
-## 6. La sous-modération : le choix de sûreté fondamental
+## 3. La sous-modération : le choix de sûreté fondamental
 
 Ajouter de l'eau fait monter `p` (on ralentit mieux) et baisser `f` (l'eau
 absorbe). Il existe donc un optimum.
@@ -234,7 +146,7 @@ C'est aussi la vraie raison de la limite en bore vue dans
 [Neutronique du cœur : comprendre et concevoir]({{ '/posts/neutronique-du-coeur/' | relative_url }}) : le bore étant dans l'eau, trop de bore rend ce
 coefficient positif.
 
-## 7. Pourquoi un REP ne peut pas marcher à l'uranium naturel
+## 4. Pourquoi un REP ne peut pas marcher à l'uranium naturel
 
 | cas | Vm/Vf | p | f | k_inf | |
 |---|---|---|---|---|---|
@@ -254,7 +166,7 @@ donne 0,318. On ne change pas de modérateur sans redessiner tout le réseau —
 c'est l'erreur que j'ai faite au premier essai en imposant Vm/Vf = 2 à l'eau
 lourde.
 
-## 8. Bouclage : d'où viennent vraiment les constantes de [`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }})
+## 5. Bouclage : d'où viennent vraiment les constantes de [`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }})
 
 [`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }}) utilisait `Σa2 = 0,082` et `νΣf2 = 0,1375` sans les justifier.
 Tentative naïve, `Σ = N·σ` avec σ à 2200 m/s :
@@ -293,6 +205,23 @@ données nucléaires évaluées (JEFF, ENDF/B)
 
 Chaque flèche est un domaine de recherche.
 
+## À retenir
+
+- Un neutron naît à ~2 MeV, mais la fission de l'U-235 est **500 fois** plus
+  probable une fois le neutron thermalisé : il faut le ralentir sans le perdre
+  dans les résonances de capture de l'U-238.
+- L'hydrogène ralentit le mieux (18 chocs), mais absorbe : l'**eau légère**
+  impose d'enrichir, l'**eau lourde** permet l'uranium naturel au prix d'un
+  cœur bien plus grand.
+- `k_inf = η · ε · p · f` ; `η` ne dépend que de l'enrichissement et fixe le
+  plafond.
+- Le réseau **hétérogène** (crayons dans l'eau) gagne sur le mélange homogène
+  grâce à l'autoprotection énergétique et spatiale des résonances.
+- Un REP est volontairement **sous-modéré** (Vm/Vf ≈ 2 contre un optimum à
+  4,4) : son coefficient de température modérateur est négatif.
+- Uranium naturel + eau légère donne `k_inf < 1` quelle que soit la quantité
+  d'eau : il faut enrichir ou changer de modérateur.
+
 ---
 
 ## Références
@@ -304,3 +233,5 @@ Chaque flèche est un domaine de recherche.
   les quatre facteurs et l'auto-protection.
 - **Table of Nuclides** (KAERI, NNDC) — pour vérifier les énergies de liaison
   et sections efficaces citées ici.
+
+{% include cours-pied.html %}

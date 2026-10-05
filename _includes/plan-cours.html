@@ -1,0 +1,24 @@
+{%- include cours-lecons.html -%}
+{%- for partie in site.data.cours.parties %}
+<section class="cours-partie">
+  <h2 id="partie-{{ partie.id | downcase }}"><span class="cours-partie-num">Partie {{ partie.id }}</span> {{ partie.titre }}</h2>
+  <p class="cours-partie-resume">{{ partie.resume }}</p>
+  <ol class="cours-cartes">
+    {%- assign lecons = cours_lecons | where: "partie", partie.id -%}
+    {%- for l in lecons %}
+    <li>
+      <a class="cours-carte" href="{{ l.url | relative_url }}">
+        <span class="cours-num">{% if l.annexe %}A{% else %}{{ l.lecon }}{% endif %}</span>
+        <span class="cours-carte-texte">
+          <span class="cours-carte-titre">{{ l.title }}</span>
+          <span class="cours-carte-desc">{{ l.description }}</span>
+        </span>
+        {%- if l.image.path %}
+        <span class="cours-vignette" style="background-image: url('{{ l.image.path | relative_url }}')" role="img" aria-label="{{ l.image.alt | escape }}"></span>
+        {%- endif %}
+      </a>
+    </li>
+    {%- endfor %}
+  </ol>
+</section>
+{%- endfor %}

@@ -4,6 +4,9 @@ source "https://rubygems.org"
 
 gem "jekyll-theme-chirpy", "~> 7.6"
 
+# Redirige les anciennes adresses des articles réorganisés
+gem "jekyll-redirect-from", "~> 0.16", group: :jekyll_plugins
+
 gem "html-proofer", "~> 5.0", group: :test
 
 platforms :windows, :jruby do
