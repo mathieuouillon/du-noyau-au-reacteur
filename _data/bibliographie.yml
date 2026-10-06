@@ -338,6 +338,12 @@ mughabghab2018:
   titre: "Atlas of Neutron Resonances: Resonance Properties and Thermal Cross Sections Z = 1-102 (6e éd.)"
   editeur: "Elsevier"
   annee: 2018
+endf102:
+  type: donnees
+  auteurs: "A. Trkov, M. Herman, D.A. Brown (dir.)"
+  titre: "ENDF-6 Formats Manual (ENDF-102, BNL-203218-2018-INRE)"
+  annee: 2018
+  url: "https://www.nndc.bnl.gov/endfdocs/ENDF-102-2018.pdf"
 nudat:
   type: donnees
   auteurs: "National Nuclear Data Center (Brookhaven)"
@@ -404,6 +410,24 @@ bohr1939:
   pages: "426"
   annee: 1939
   doi: "10.1103/PhysRev.56.426"
+reich1958:
+  type: article
+  auteurs: "C.W. Reich, M.S. Moore"
+  titre: "Multilevel Formula for the Fission Process"
+  revue: "Phys. Rev."
+  volume: "111"
+  pages: "929"
+  annee: 1958
+  doi: "10.1103/PhysRev.111.929"
+cullen1976:
+  type: article
+  auteurs: "D.E. Cullen, C.R. Weisbin"
+  titre: "Exact Doppler Broadening of Tabulated Cross Sections"
+  revue: "Nucl. Sci. Eng."
+  volume: "60"
+  pages: "199"
+  annee: 1976
+  doi: "10.13182/NSE76-1"
 hill1953:
   type: article
   auteurs: "D.L. Hill, J.A. Wheeler"

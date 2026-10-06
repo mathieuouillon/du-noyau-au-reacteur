@@ -10,7 +10,7 @@ par un. Placez-les dans un même dossier : ils s'importent les uns les autres.
 **Dépendances :** `numpy`, `scipy`, `matplotlib`, `sympy` et `periodictable`.
 
 ```bash
-pip install numpy scipy matplotlib sympy periodictable
+pip install numpy scipy matplotlib sympy periodictable endf remotezip
 ```
 
 {% include cours-lecons.html %}
@@ -30,8 +30,14 @@ pip install numpy scipy matplotlib sympy periodictable
   et 7.
 - `python sections_efficaces.py` : noyau composé, taille quantique du neutron,
   résonances, loi en 1/v, passage de la barrière et partage des fragments
-  (leçon 2), avec `sections_taille.png`, `sections_resonance.png`,
-  `fission_seuil.png` et `fission_partage.png`.
+  (leçon 2), avec `sections_taille.png`, `fission_seuil.png` et
+  `fission_partage.png`.
+- `python sections_endf.py` : télécharge les fichiers U-235 et U-238 de
+  ENDF/B-VIII.0 (~16 Mo, une seule fois, dans `donnees_endf/`), reconstruit
+  les résonances avec `reconstruction.py`, valide la reconstruction et trace
+  `endf_vue_ensemble.png`, `endf_resonances.png` et `endf_doppler.png`
+  (leçon 2) ; environ 40 s. Demande en plus les paquets `endf` et
+  `remotezip`.
 - `python etude_modeles.py` : `modeles_masse.png` et les trois épreuves
   (leçon 3) ; environ 2 min.
 - `python trace_termes.py` : `termes_goutte.png`, `termes_m2.png`,

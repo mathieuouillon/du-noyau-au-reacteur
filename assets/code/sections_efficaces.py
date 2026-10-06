@@ -14,8 +14,8 @@ Donnees :
     Ryssens et al., Eur. Phys. J. A 59 (2023) 96.
 
 Lancer :  python sections_efficaces.py
-    ->  sections_taille.png, sections_resonance.png, fission_seuil.png,
-        fission_partage.png
+    ->  sections_taille.png, fission_seuil.png, fission_partage.png
+    (les vraies courbes, reconstruites depuis ENDF/B-VIII.0 : sections_endf.py)
 """
 
 import numpy as np
@@ -351,46 +351,6 @@ def figures(lignes, res):
     fig.savefig("sections_taille.png", dpi=120, facecolor=SURFACE)
     plt.close(fig)
 
-    # --- 2. resonance et 1/v
-    fig, ax = figure(droite=0.95)
-    style(ax)
-    E = np.logspace(-3, 2, 3000)
-    cap = breit_wigner_capture(E, **U238_RES)
-    ax.axvspan(0.005, 0.2, color=GRILLE, alpha=0.45, lw=0)
-    ax.text(0.032, 2.2e5, "neutrons\nthermiques", ha="center", fontsize=10, color=ENCRE_2)
-    ax.plot(E, cap, color=SERIES[1], lw=2)
-    E1 = np.logspace(-3, 0, 100)
-    ax.plot(E1, sf["sf"] * np.sqrt(E_TH / E1), color=SERIES[0], lw=2)
-    ax.plot([E_TH], [sf["sf"]], "s", ms=8, color=SERIES[0], mec=SURFACE, mew=2, zorder=6)
-    ax.plot([E_TH], [JENDL[("U", 238)]["sg"]], "s", ms=8, color=SERIES[1], mec=SURFACE, mew=2, zorder=6)
-    ax.annotate("JENDL-4.0 : 585,1 b", (E_TH, sf["sf"]), xytext=(10, 8), textcoords="offset points",
-                fontsize=9.5, color=ENCRE_2)
-    ax.annotate("JENDL-4.0 : 2,683 b", (E_TH, JENDL[("U", 238)]["sg"]), xytext=(10, 6),
-                textcoords="offset points", fontsize=9.5, color=ENCRE_2)
-    ax.text(0.0013, 9000, "fission de l'U-235 : loi en 1/v", fontsize=10.5, color=ENCRE)
-    ax.text(0.0013, 0.13, "capture de l'U-238 : une seule résonance (Breit-Wigner)",
-            fontsize=10.5, color=ENCRE)
-    pic = breit_wigner_capture(U238_RES["E0"], **U238_RES)
-    ax.annotate(f"résonance à 6,67 eV : {pic:,.0f} b".replace(",", " ").replace("6 67", "6,67"),
-                (U238_RES["E0"], pic), xytext=(-14, -2), textcoords="offset points",
-                fontsize=10, color=ENCRE, va="top", ha="right")
-    ax.set_xscale("log")
-    ax.set_yscale("log")
-    ax.set_xlim(1e-3, 100)
-    ax.set_ylim(0.1, 1e6)
-    ax.xaxis.set_major_formatter(FuncFormatter(fmt_e))
-    ax.yaxis.set_major_locator(FixedLocator([0.1, 1, 10, 100, 1e3, 1e4, 1e5, 1e6]))
-    ax.yaxis.set_major_formatter(FuncFormatter(puissance))
-    ax.yaxis.set_minor_formatter(NullFormatter())
-    ax.set_xlabel("énergie du neutron")
-    ax.set_ylabel("section efficace (barns)")
-    titre(ax, "Résonances et loi en 1/v",
-          "Loin sous une résonance, σ décroît comme 1/v : plus le neutron est lent, plus il est absorbé.")
-    note(fig, "Résonance : Mughabghab (2018). Carrés : JENDL-4.0 à 0,0253 eV. "
-              "Loi en 1/v ancrée sur JENDL-4.0 et tracée jusqu'à 1 eV seulement.")
-    fig.savefig("sections_resonance.png", dpi=120, facecolor=SURFACE)
-    plt.close(fig)
-
     # --- 3. seuil de fissilite
     fig, ax = figure(gauche=0.13, droite=0.95)
     style(ax)
@@ -460,4 +420,4 @@ if __name__ == "__main__":
     franchissement(t)
     res = partage(t)
     figures(lignes, res)
-    print("\n  --> sections_taille.png, sections_resonance.png, fission_seuil.png, fission_partage.png")
+    print("\n  --> sections_taille.png, fission_seuil.png, fission_partage.png")

@@ -243,7 +243,8 @@ d'ici. Il ne faut pas lui faire dire ce qu'il ne sait pas.
 Aucune. Les sections efficaces sont figées, alors qu'elles dépendent de la
 température et de la densité de l'eau.
 
-- **Effet Doppler** (coefficient combustible). La température du combustible
+- **Effet Doppler** (coefficient combustible ; voir les résonances élargies de
+  la [leçon 2]({{ '/posts/la-fission-de-l-uranium/' | relative_url }})). La température du combustible
   monte, les résonances de l'U238 s'élargissent, les captures stériles
   augmentent, la réactivité baisse. Toujours négatif, **instantané**.
   C'est la première barrière de sûreté d'un REP : c'est lui qui arrête une

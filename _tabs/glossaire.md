@@ -134,6 +134,18 @@ Loi en 1/v
   l'inverse de la vitesse du neutron : les neutrons lents sont absorbés bien
   plus souvent que les rapides. ([leçon 2]({{ l2 }}))
 
+Évaluation (ENDF)
+: Fichier qui rassemble, pour un noyau, toutes les sections efficaces
+  recommandées, issues des mesures et des modèles (ENDF/B-VIII.0, JENDL,
+  JEFF). Dans la région des résonances, il donne leurs paramètres, et la
+  courbe se reconstruit (formalisme de Reich-Moore). ([leçon 2]({{ l2 }}))
+
+Effet Doppler
+: Élargissement des résonances par l'agitation thermique des noyaux : le pic
+  s'abaisse, s'élargit, l'aire est conservée. Dans le combustible, il augmente
+  la capture de l'U-238 quand la température monte : coefficient de
+  température négatif. ([leçon 2]({{ l2 }}), [leçon 8]({{ l8 }}))
+
 Facteur de reproduction $$\eta$$
 : Nombre moyen de neutrons émis par neutron absorbé dans un noyau fissile,
   $$\eta = \nu\,\sigma_f/(\sigma_f + \sigma_\gamma)$$ : 2,08 pour l'U-235

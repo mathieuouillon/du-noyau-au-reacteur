@@ -33,3 +33,6 @@ Thumbs.db
 
 # Claude Code
 .claude
+
+# Donnees ENDF telechargees par sections_endf.py
+assets/code/donnees_endf/

@@ -16,15 +16,18 @@ objectifs:
   - 'Distinguer noyau fissile et fissionnable : noyau composé, appariement, \(S_n\) face à la barrière.'
   - "Comprendre pourquoi les neutrons lents sont si efficaces : taille quantique, résonances de Breit-Wigner, loi en 1/v."
   - "Comparer neutrons thermiques et rapides : sections efficaces et nombre de neutrons η par neutron absorbé."
+  - "Lire une évaluation (ENDF/B-VIII.0) : reconstruire les résonances par le formalisme de Reich-Moore, puis l'effet Doppler."
   - "Relier la fission sous la barrière à l'effet tunnel, et le seuil de l'U-238 à la hauteur de la barrière."
   - "Calculer le Q d'une fission selon le partage, et l'origine coulombienne des 168 MeV des fragments."
 prerequis: [1]
-code: [fission.py, etude_fission.py, sections_efficaces.py]
+code: [fission.py, etude_fission.py, sections_efficaces.py, reconstruction.py, sections_endf.py]
 sources: >-
   Énergies de liaison et Q : formule semi-empirique de `fission.py` (coefficients de manuel) et masses
   mesurées d'AME2020. Sections efficaces évaluées (fission, capture, ν, facteurs de Westcott) : JENDL-4.0
   à 300 K, lues dans les tables publiées par la JAEA. Résonance de l'U-238 à 6,67 eV : Mughabghab (2018).
-  Barrières : RIPL-3, via Ryssens et al. (2023). Calculs : `sections_efficaces.py`. Les barrières typiques
+  Courbes complètes : évaluation ENDF/B-VIII.0 (fichiers n-092_U_235 et n-092_U_238 du NNDC), résonances
+  reconstruites par `reconstruction.py` et validées sur les valeurs annoncées par l'évaluation.
+  Barrières : RIPL-3, via Ryssens et al. (2023). Calculs : `sections_efficaces.py`, `sections_endf.py`. Les barrières typiques
   (6,2 et 6,6 MeV) et le bilan des ~200 MeV sont des valeurs classiques saisies dans `fission.py` et
   `etude_fission.py` sans référence précise.
 bibliographie:
@@ -40,6 +43,14 @@ bibliographie:
     note: "Les tables de valeurs thermiques et moyennes de la JAEA."
   - cle: mughabghab2018
     note: "Les paramètres de la résonance de l'U-238 à 6,67 eV."
+  - cle: brown2018
+    note: "ENDF/B-VIII.0 : l'évaluation dont on trace les vraies courbes."
+  - cle: endf102
+    note: "Le format ENDF-6 et les formules de reconstruction (annexe D)."
+  - cle: reich1958
+    note: "Le formalisme de Reich-Moore."
+  - cle: cullen1976
+    note: "L'élargissement Doppler exact (noyau SIGMA1)."
   - cle: hill1953
     note: "La pénétrabilité d'une barrière parabolique."
   - cle: ryssens2023
@@ -281,7 +292,14 @@ pendant leur ralentissement sans être capturés
 donne une capture de 1,230 b à 0,0253 eV, soit **46 %** de la valeur évaluée
 (2,683 b) : le reste vient des autres résonances.
 
-![Résonance de l'U-238 et loi en 1/v de la fission de l'U-235]({{ '/assets/img/nucleaire/sections_resonance.png' | relative_url }})
+![Fission de l'U-235 et capture de l'U-238 entre 0,01 et 100 eV, évaluation ENDF/B-VIII.0 et modèle à une résonance]({{ '/assets/img/nucleaire/endf_resonances.png' | relative_url }})
+_Figure produite par [`sections_endf.py`]({{ '/assets/code/sections_endf.py' | relative_url }}) : l'évaluation ENDF/B-VIII.0 reconstruite (voir plus bas), et le modèle à une seule résonance._
+
+La comparaison avec l'évaluation complète montre ce que le modèle saisit et ce
+qu'il rate : il reproduit la position et la forme de la résonance de 6,67 eV,
+mais pas la centaine d'autres qui suivent, ni la remontée de la capture vers
+les basses énergies. Le pic de l'évaluation est aussi plus bas, parce qu'elle
+est tracée à 293,6 K : c'est l'effet Doppler, expliqué plus bas.
 
 ### La loi en 1/v
 
@@ -339,6 +357,109 @@ Trois conséquences :
   a un $$\eta$$ thermique médiocre (2,11), parce qu'il capture beaucoup. En
   neutrons rapides, sa capture s'effondre et son $$\eta$$ dépasse 2,8, loin
   devant l'U-235 : c'est le principe des surgénérateurs à neutrons rapides.
+
+### Les vraies courbes : l'évaluation ENDF/B-VIII.0
+
+Les sections efficaces utilisées par les codes de réacteur ne sont pas des
+mesures brutes : ce sont des **évaluations**, qui combinent toutes les mesures
+et des modèles en un fichier unique au format ENDF-6. On utilise ici
+ENDF/B-VIII.0, l'évaluation américaine de référence (Brown *et al.*, 2018),
+téléchargée au NNDC de Brookhaven : seuls les deux fichiers de l'U-235 et de
+l'U-238 sont lus dans l'archive, soit 16 Mo transférés au lieu de 296.
+
+**Une évaluation ne contient pas la courbe.** Dans la région des résonances
+résolues (jusqu'à 2,25 keV pour l'U-235, 20 keV pour l'U-238), le fichier ne
+donne que les **paramètres** de 3 171 et 3 312 résonances : énergie, spin,
+largeurs. Il faut reconstruire la courbe, ce que fait d'ordinaire le code
+NJOY. On le refait ici dans
+[`reconstruction.py`]({{ '/assets/code/reconstruction.py' | relative_url }}), avec le formalisme qu'utilise
+l'évaluation, celui de **Reich et Moore** (1958) : une matrice R à une voie
+neutron et deux voies de fission, où les milliers de voies de capture gamma
+sont « éliminées » dans une simple largeur. Pour chaque onde et chaque spin $$J$$ :
+
+$$
+\begin{gathered}
+K_{cc'}(E) = \sum_r \frac{\beta_{rc}\,\beta_{rc'}}{E_r - E - i\,\Gamma_{\gamma,r}/2} \\[4pt]
+U_{nn} = e^{-2i\varphi}\Bigl[\,2\,\bigl((I - iK)^{-1}\bigr)_{nn} - 1\Bigr]
+\end{gathered}
+$$
+
+d'où $$\sigma_t = \tfrac{2\pi}{k^2}\,g_J\,(1 - \operatorname{Re} U_{nn})$$, la diffusion
+$$\tfrac{\pi}{k^2}\,g_J\,\lvert 1 - U_{nn}\rvert^2$$, la fission à partir des
+éléments $$\bigl((I - iK)^{-1}\bigr)_{nf}$$, et la capture par différence.
+Au-delà des résonances résolues, le fichier donne directement des sections
+efficaces moyennes, utilisées telles quelles.
+
+**Validation.** L'en-tête du fichier de l'U-235 annonce ses valeurs à
+0,0253 eV et 0 K : la reconstruction les retrouve au millionième.
+
+| grandeur | reconstruction | référence |
+|---|---|---|
+| fission U-235, 0,0253 eV, 0 K | 586,7835 b | 586,7870 b (en-tête du fichier) |
+| capture U-235, 0,0253 eV, 0 K | 99,3903 b | 99,3909 b (en-tête du fichier) |
+| fission U-235, 0,0253 eV, 293,6 K | 586,60 b | 585,1 b (JENDL-4.0, 300 K) |
+| capture U-238, 0,0253 eV, 293,6 K | 2,683 b | 2,683 b (JENDL-4.0, 300 K) |
+| élastique U-238, 0,0253 eV, 293,6 K | 9,24 b | 9,30 b (JENDL-4.0, 300 K) |
+| facteur de Westcott, fission U-235 | 0,979 | 0,977 (JENDL-4.0) |
+| intégrale de résonance, capture U-238 | 275,2 b | 275,6 b (JENDL-4.0) |
+| intégrale de résonance, fission U-235 | 279,9 b | 274,4 b (JENDL-4.0) |
+
+(Intégrales de résonance : $$\int \sigma(E)\,dE/E$$ de 0,5 eV à 20 MeV, à 0 K.
+Les écarts de quelques pour cent avec JENDL-4.0 sont des écarts entre deux
+évaluations, pas des erreurs de reconstruction.)
+
+![Fission de l'U-235, capture et fission de l'U-238 de 10⁻⁵ eV à 20 MeV, ENDF/B-VIII.0 à 293,6 K]({{ '/assets/img/nucleaire/endf_vue_ensemble.png' | relative_url }})
+_Figure produite par [`sections_endf.py`]({{ '/assets/code/sections_endf.py' | relative_url }})._
+
+La vue d'ensemble résume toute la section :
+
+- **En thermique**, la fission de l'U-235 suit la pente 1/v, à 586,6 b à
+  0,0253 eV, avec une première résonance vers 0,3 eV.
+- **Entre 1 eV et quelques keV**, une forêt de résonances : celles de la
+  capture de l'U-238 montent à plus de 7 000 b, et c'est là que les neutrons en
+  cours de ralentissement risquent d'être capturés.
+- **En rapide**, la fission de l'U-235 ne vaut plus que 1,20 b à 1 MeV et
+  1,29 b à 2 MeV : **455 fois moins** qu'en thermique.
+- **La fission de l'U-238** reste au niveau du microbarn sous 100 keV (de
+  petites résonances, par effet tunnel), puis s'allume entre 1 et 2 MeV :
+  0,015 b à 1 MeV, 0,36 b à 1,5 MeV, 0,54 b à 2 MeV. Elle atteint la moitié de
+  son plateau vers 1,8 MeV. C'est le seuil de la section 4, vu dans les
+  données.
+
+### L'effet Doppler
+
+Les noyaux d'une cible ne sont pas immobiles : ils s'agitent à la température
+$$T$$. Ce que « voit » le neutron, c'est la section efficace moyennée sur les
+vitesses relatives. Pour un gaz libre, avec $$x = \sqrt{AE'/kT}$$ et
+$$y = \sqrt{AE/kT}$$, la moyenne est exacte (Cullen et Weisbin, 1976) :
+
+$$
+\sigma(E, T) = \frac{1}{\sqrt{\pi}\,y^2} \int_0^\infty x^2\,\sigma(x, 0)\,
+\Bigl[e^{-(x-y)^2} - e^{-(x+y)^2}\Bigr]\,dx
+$$
+
+Une résonance de largeur naturelle $$\Gamma$$ est étalée sur la largeur
+Doppler $$\Delta = \sqrt{4EkT/A}$$, soit 0,054 eV à 6,67 eV et 293,6 K, deux
+fois sa largeur naturelle (0,024 eV).
+
+![La résonance de l'U-238 à 6,67 eV à 0, 293,6, 900 et 1 800 K]({{ '/assets/img/nucleaire/endf_doppler.png' | relative_url }})
+
+| température | pic de capture | largeur à mi-hauteur | aire entre 6,0 et 7,4 eV |
+|---|---|---|---|
+| 0 K | 22 702 b | 0,024 eV | 856,7 b·eV |
+| 293,6 K | 7 198 b | 0,102 eV | 856,7 b·eV |
+| 900 K | 4 535 b | 0,169 eV | 856,7 b·eV |
+| 1 800 K | 3 338 b | 0,234 eV | 856,6 b·eV |
+
+Le pic s'abaisse et s'élargit, mais l'**aire** est conservée : une cible mince
+absorbe autant à toute température. Dans un crayon de combustible, en
+revanche, le flux est **creusé** au centre de la résonance (c'est
+l'autoprotection de la [leçon 7]({{ '/posts/ralentir-les-neutrons/' | relative_url }})). Les ailes, où le flux n'est
+pas creusé, comptent davantage : une résonance plus large et moins haute
+capture donc **plus** de neutrons. Quand le combustible chauffe, l'U-238
+capture plus, et la réactivité baisse. C'est le **coefficient Doppler**,
+négatif et instantané, la première barrière de sûreté d'un réacteur à eau
+pressurisée ([leçon 8]({{ '/posts/neutronique-du-coeur/' | relative_url }})).
 
 ---
 
@@ -470,6 +591,13 @@ nucléaires (MeV) et chimiques (eV).
   millions de fois celle du noyau. Sous les **résonances** (Breit-Wigner), sa
   section efficace suit la **loi en 1/v** : ralentir multiplie la fission de
   l'U-235 par 480.
+- Les **vraies courbes** (ENDF/B-VIII.0) se reconstruisent à partir de
+  milliers de paramètres de résonances (Reich-Moore) : la fission de l'U-235
+  passe de 586,6 b en thermique à 1,29 b à 2 MeV, et celle de l'U-238 s'allume
+  entre 1 et 2 MeV.
+- L'**effet Doppler** abaisse et élargit les résonances en conservant leur
+  aire ; dans le combustible, il augmente la capture de l'U-238 quand la
+  température monte : c'est le coefficient Doppler, négatif.
 - En neutrons rapides, la capture s'effondre : le $$\eta$$ du Pu-239 passe de
   2,11 à plus de 2,8, d'où les surgénérateurs. En thermique, l'U-233 est le
   meilleur ($$\eta$$ = 2,29).
