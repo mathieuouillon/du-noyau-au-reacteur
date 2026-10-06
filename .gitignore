@@ -36,3 +36,4 @@ Thumbs.db
 
 # Donnees ENDF telechargees par sections_endf.py
 assets/code/donnees_endf/
+__pycache__/
