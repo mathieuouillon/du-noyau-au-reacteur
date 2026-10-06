@@ -116,7 +116,8 @@ def _bcs(eps, n_paires, G):
     sur l'equation du nombre (monotone) ; puis Delta par dichotomie sur
     l'equation du gap. Si le gap ne s'ouvre pas (G trop faible devant
     l'ecart des niveaux), il n'y a pas d'appariement : Delta = 0.
-    Retourne (Delta, energie BCS sans le terme -G sum v^4).
+    Retourne (Delta, energie BCS sans le terme -G sum v^4, lambda, v^2) ;
+    sans gap : (0, None, None, None).
     """
     from scipy.optimize import brentq
 
@@ -130,12 +131,12 @@ def _bcs(eps, n_paires, G):
 
     D_min, D_max = 1e-4, 20.0
     if gap(D_min) <= 0:
-        return 0.0, None
+        return 0.0, None, None, None
     D = D_max if gap(D_max) > 0 else brentq(gap, D_min, D_max, xtol=1e-8)
     lam = lam_de(D)
     E = np.sqrt((eps - lam) ** 2 + D * D)
     v2 = 0.5 * (1 - (eps - lam) / E)
-    return D, float(np.sum(2 * eps * v2) - D * D / G)
+    return D, float(np.sum(2 * eps * v2) - D * D / G), lam, v2
 
 
 def correction_appariement(lissage, n, hw, A, demi_fenetre=1.0):
@@ -146,14 +147,25 @@ def correction_appariement(lissage, n, hw, A, demi_fenetre=1.0):
     qui sort de l'appariement (c'est l'origine microscopique de l'effet
     pair-impair des masses).
     """
+    return appariement_details(lissage, n, hw, A, demi_fenetre)["correction"]
+
+
+def appariement_details(lissage, n, hw, A, demi_fenetre=1.0):
+    """Le calcul de correction_appariement, avec ses grandeurs intermediaires :
+    gap moyen Dt et force G du modele uniforme, niveaux de la fenetre eps
+    (MeV), gap BCS Delta, potentiel chimique lam, occupations v2, energie
+    d'appariement P et sa valeur moyenne P_moyen. correction = P - P_moyen."""
     Dt = 12.0 / np.sqrt(A)                         # gap moyen empirique (MeV)
     lam_t = lissage.fermi_lisse(n)
     rho = 0.5 * lissage.densite(lam_t) / hw         # densite de PAIRES, par MeV
     W = demi_fenetre * hw
+    r = dict(Dt=Dt, G=None, eps=None, Delta=0.0, lam=None, v2=None, P=0.0,
+             P_moyen=0.0, correction=0.0)
     if rho <= 0:
-        return 0.0
+        return r
     G = 1.0 / (rho * np.arcsinh(W / Dt))            # modele uniforme -> Delta = Delta~
     P_moyen = rho * W * (W - np.sqrt(W * W + Dt * Dt))   # ~ -rho Delta~^2 / 2
+    r.update(G=G, P_moyen=P_moyen, correction=-P_moyen)
 
     niv = lissage.niveaux * hw                      # MeV, niveaux de paires
     bloque = None
@@ -164,12 +176,17 @@ def correction_appariement(lissage, n, hw, A, demi_fenetre=1.0):
     if bloque is not None:
         dedans = dedans[dedans != bloque]
     if len(dedans) < 2:
-        return -P_moyen
+        return r
     eps = niv[dedans]
     paires_dessous = int(np.sum(dedans < n_paires))  # paires occupees dans la fenetre
+    r["eps"] = eps
     if paires_dessous == 0 or paires_dessous >= len(eps):
-        return -P_moyen
-    D, E_bcs = _bcs(eps, paires_dessous, G)
+        return r
+    D, E_bcs, lam, v2 = _bcs(eps, paires_dessous, G)
     E_sans = float(np.sum(2 * eps[:paires_dessous]))
     P = 0.0 if E_bcs is None else E_bcs - E_sans
-    return P - P_moyen
+    if v2 is None:                                  # pas de gap : occupations en marche
+        v2 = (np.arange(len(eps)) < paires_dessous).astype(float)
+        lam = 0.5 * (eps[paires_dessous - 1] + eps[paires_dessous])
+    r.update(Delta=D, lam=lam, v2=v2, P=P, correction=P - P_moyen)
+    return r

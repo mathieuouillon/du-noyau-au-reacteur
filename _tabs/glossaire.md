@@ -172,7 +172,20 @@ Spin-orbite
 $$\Omega$$
 : Projection du moment angulaire d'un nucléon sur l'axe de symétrie d'un
   noyau déformé, le seul bon nombre quantique qui reste. Dans un noyau
-  allongé, les orbitales de petit $$\Omega$$ sont les plus basses. ([leçon 5]({{ l5 }}))
+  allongé, les orbitales de petit $$\Omega$$ sont les plus basses. ([leçon 4]({{ l4 }}), [leçon 5]({{ l5 }}))
+
+Effet Jahn-Teller nucléaire
+: Une couche partiellement remplie lève sa dégénérescence en brisant la
+  symétrie : l'énergie de couches baisse **linéairement** avec la
+  déformation, alors que la goutte ne la fait payer que **quadratiquement**.
+  C'est le moteur de la déformation des noyaux à couche ouverte ; l'appariement
+  s'y oppose. ([leçon 4]({{ l4 }}))
+
+B(E2), moment quadrupolaire $$Q_0$$
+: Probabilité de la transition électrique quadrupolaire entre l'état
+  fondamental 0⁺ et le premier état 2⁺ d'un noyau pair-pair. Elle donne le
+  moment quadrupolaire intrinsèque, $$B(E2)\!\uparrow\, = \frac{5}{16\pi}\, e^2 Q_0^2$$,
+  la mesure la plus directe de la déformation. ([leçon 4]({{ l4 }}))
 
 Correction de couches (Strutinsky)
 : Différence entre la somme des énergies des niveaux occupés et la même somme
@@ -182,7 +195,8 @@ Correction de couches (Strutinsky)
 BCS
 : Théorie de l'appariement (Bardeen, Cooper, Schrieffer), transposée des
   supraconducteurs aux noyaux. Le **gap** $$\Delta$$ mesure l'appariement ; un
-  nucléon célibataire **bloque** son niveau. ([leçon 4]({{ l4 }}))
+  nucléon célibataire **bloque** son niveau. Dans les masses, le gap se lit
+  par la différence pair-impair $$\Delta^{(3)}$$. ([leçon 4]({{ l4 }}))
 
 Modèle macroscopique-microscopique, FRDM
 : Goutte déformable plus corrections de couches et d'appariement calculées à

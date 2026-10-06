@@ -47,6 +47,12 @@ pip install numpy scipy matplotlib sympy periodictable endf remotezip
   (leçon 4) ; environ 10 min, une seule fois.
 - `python etude_frdm.py` : `modele_frdm.png` et l'étude complète (leçon 4) ;
   environ 2 min.
+- `python etude_deformation.py` : les sections de détail de la leçon 4
+  (niveaux sphériques, pentes de Nilsson, gap déformé N = 152, correction de
+  couches, BCS face aux masses, samarium, moments quadrupolaires) et les dix
+  figures `deformation_*.png` ; quelques secondes. Lit `micro.npz` et
+  `be2_adopte.csv`, les B(E2) adoptés du NNDC (reconstruit depuis le site du
+  NNDC s'il manque).
 - `python galerie_orbitales.py` : `orbitales_nucleaires.png` et
   `orbitales_3d.json` (leçon 5).
 - `python etude_barrieres.py` : `barrieres_fission.png`, les barrières de la

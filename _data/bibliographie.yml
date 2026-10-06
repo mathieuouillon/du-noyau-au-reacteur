@@ -700,3 +700,39 @@ romano2015:
   pages: "90"
   annee: 2015
   doi: "10.1016/j.anucene.2014.07.048"
+pritychenko2016:
+  type: donnees
+  auteurs: "B. Pritychenko, M. Birch, B. Singh, M. Horoi"
+  titre: "Tables of E2 transition probabilities from the first 2+ states in even–even nuclei"
+  revue: "At. Data Nucl. Data Tables"
+  volume: "107"
+  pages: "1"
+  annee: 2016
+  doi: "10.1016/j.adt.2015.10.001"
+satula1998:
+  type: article
+  auteurs: "W. Satuła, J. Dobaczewski, W. Nazarewicz"
+  titre: "Odd-Even Staggering of Nuclear Masses: Pairing or Shape Effect?"
+  revue: "Phys. Rev. Lett."
+  volume: "81"
+  pages: "3599"
+  annee: 1998
+  doi: "10.1103/PhysRevLett.81.3599"
+jahn1937:
+  type: article
+  auteurs: "H.A. Jahn, E. Teller"
+  titre: "Stability of polyatomic molecules in degenerate electronic states. I. Orbital degeneracy"
+  revue: "Proc. R. Soc. Lond. A"
+  volume: "161"
+  pages: "220"
+  annee: 1937
+  doi: "10.1098/rspa.1937.0142"
+reinhard1984:
+  type: article
+  auteurs: "P.-G. Reinhard, E.W. Otten"
+  titre: "Transition to deformed shapes as a nuclear Jahn-Teller effect"
+  revue: "Nucl. Phys. A"
+  volume: "420"
+  pages: "173"
+  annee: 1984
+  doi: "10.1016/0375-9474(84)90437-8"
