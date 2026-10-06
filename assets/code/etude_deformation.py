@@ -95,8 +95,9 @@ def donnees_be2(chemin="be2_adopte.csv", source="adopted-entries.json"):
             f.write("# Pritychenko et al. ADNDT 107 (2016) 1, sinon Raman et al. ADNDT 78 (2001) 1\n")
             f.write("# B(E2) en e^2 b^2, E(2+) en keV ; beta2_table : valeur imprimee "
                     "(R0 = 1,2 A^(1/3) fm)\n")
-            w = csv.DictWriter(f, fieldnames=["Z", "N", "E2_keV", "BE2", "BE2_err",
-                                              "beta2_table", "reference"])
+            w = csv.DictWriter(f, lineterminator="\n",
+                               fieldnames=["Z", "N", "E2_keV", "BE2", "BE2_err",
+                                           "beta2_table", "reference"])
             w.writeheader()
             for k in sorted(garde):
                 w.writerow(garde[k])
