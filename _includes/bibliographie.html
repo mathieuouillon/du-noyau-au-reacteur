@@ -7,7 +7,7 @@
 <div class="biblio-bloc">
 {%- if page.sources %}
   <div class="biblio-sources">
-    <p class="biblio-groupe"><i class="fas fa-database fa-fw"></i> Sources des chiffres</p>
+    <p class="biblio-groupe">Sources des chiffres</p>
     {{ page.sources | markdownify }}
   </div>
 {%- endif %}
@@ -36,5 +36,5 @@
   {%- assign cle = item.cle | default: item -%}
   {%- unless biblio[cle] %}<p class="biblio-erreur">Référence inconnue : {{ cle }}</p>{% endunless -%}
 {%- endfor %}
-  <p class="biblio-tout"><a href="{{ '/bibliographie/' | relative_url }}"><i class="fas fa-book-open fa-fw"></i> Bibliographie complète du cours</a></p>
+  <p class="biblio-tout"><a href="{{ '/bibliographie/' | relative_url }}">Bibliographie complète du cours</a></p>
 </div>
