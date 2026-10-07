@@ -51,7 +51,7 @@ obtient la **forme du noyau**.
 <iframe src="{{ '/assets/visualisations/orbitales_3d.html' | relative_url }}" title="Orbitales nucléaires en 3D" loading="lazy" style="width:100%;height:640px;border:1px solid var(--main-border-color, #ddd);border-radius:6px;"></iframe>
 _Version 3D interactive : faites tourner le nuage. [Ouvrir en plein écran]({{ '/assets/visualisations/orbitales_3d.html' | relative_url }})._
 
-![Orbitales nucléaires]({{ '/assets/img/nucleaire/orbitales_nucleaires.png' | relative_url }})
+![Orbitales nucléaires](/assets/img/nucleaire/orbitales_nucleaires.png)
 
 ## De l'atome au noyau
 

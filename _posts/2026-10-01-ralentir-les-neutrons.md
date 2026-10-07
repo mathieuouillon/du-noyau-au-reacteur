@@ -46,7 +46,7 @@ doit en provoquer au moins une autre. Cette leçon reprend la suite de
 [`diffusion.py`]({{ '/assets/code/diffusion.py' | relative_url }}) résout ensuite le transport des neutrons
 ([annexe]({{ '/posts/solveur-de-diffusion/' | relative_url }})) et [`coeur.py`]({{ '/assets/code/coeur.py' | relative_url }}) conçoit le cœur ([leçon 8]({{ '/posts/neutronique-du-coeur/' | relative_url }})).
 
-![Courbe de liaison, ralentissement, courbe de modération et quatre facteurs]({{ '/assets/img/nucleaire/fission_bilan.png' | relative_url }})
+![Courbe de liaison, ralentissement, courbe de modération et quatre facteurs](/assets/img/nucleaire/fission_bilan.png)
 _Figure produite par `etude_fission.py` : efficacité de ralentissement (en haut à droite), courbe de modération (en bas à gauche) et quatre facteurs (en bas à droite)._
 
 ---

@@ -8,8 +8,8 @@ construit à partir du modèle officiel `chirpy-starter`.
 Prérequis : [git](https://git-scm.com) et la [CLI GitHub](https://cli.github.com).
 
 ```bash
-./publier.sh                 # site utilisateur : https://<vous>.github.io/
-./publier.sh noyau-reacteur  # site de projet : https://<vous>.github.io/noyau-reacteur/
+./publier.sh                 # site de projet : https://<vous>.github.io/du-noyau-au-reacteur/
+./publier.sh <nom-depot>     # autre nom : https://<vous>.github.io/<nom-depot>/
 ```
 
 Le script vous connecte à GitHub si besoin (`gh auth login`), remplace les

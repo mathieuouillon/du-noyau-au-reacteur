@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # publier.sh -- cree le depot GitHub et publie le site sur GitHub Pages avec gh.
 #
-#   ./publier.sh               -> depot <vous>.github.io, site a la racine
-#   ./publier.sh <nom-depot>   -> site de projet, https://<vous>.github.io/<nom-depot>/
+#   ./publier.sh               -> depot du-noyau-au-reacteur, https://<vous>.github.io/du-noyau-au-reacteur/
+#   ./publier.sh <nom-depot>   -> autre nom de depot, https://<vous>.github.io/<nom-depot>/
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -17,7 +17,7 @@ fi
 export UTIL NOM
 UTIL=$(gh api user --jq .login)
 NOM=$(gh api user --jq '.name // .login')
-DEPOT="${1:-$UTIL.github.io}"
+DEPOT="${1:-du-noyau-au-reacteur}"
 if [ "$DEPOT" = "$UTIL.github.io" ]; then export BASE=""; else export BASE="/$DEPOT"; fi
 echo "Compte : $UTIL   Depot : $DEPOT   Adresse : https://$UTIL.github.io$BASE/"
 

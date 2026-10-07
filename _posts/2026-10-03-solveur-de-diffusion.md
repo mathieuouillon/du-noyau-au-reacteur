@@ -40,7 +40,7 @@ A walkthrough of [`diffusion.py`]({{ '/assets/code/diffusion.py' | relative_url 
 `solve()`. Read it alongside the code.
 
 
-![Flux rapide, flux thermique et source de fission du cœur réfléchi]({{ '/assets/img/nucleaire/flux_maps.png' | relative_url }})
+![Flux rapide, flux thermique et source de fission du cœur réfléchi](/assets/img/nucleaire/flux_maps.png)
 _Flux rapide, flux thermique et source de fission du cœur réfléchi._
 
 ---

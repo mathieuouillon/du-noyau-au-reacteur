@@ -41,7 +41,7 @@ Document de synthèse accompagnant [`coeur.py`]({{ '/assets/code/coeur.py' | rel
 Tous les chiffres cités sont produits par le code, pas estimés.
 
 
-![Cartes de puissance : chargement uniforme ou zoné, grappes extraites ou insérées]({{ '/assets/img/nucleaire/cartes_puissance.png' | relative_url }})
+![Cartes de puissance : chargement uniforme ou zoné, grappes extraites ou insérées](/assets/img/nucleaire/cartes_puissance.png)
 _Cartes de puissance : chargement uniforme ou zoné, grappes extraites ou insérées._
 
 ---

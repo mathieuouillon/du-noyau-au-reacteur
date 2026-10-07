@@ -61,7 +61,7 @@ Cette leçon ouvre la partie II en la complétant. Cinq modèles de complexité 
 ajustés sur les **2367 masses mesurées** d'AME2020 (Z ≥ 8, N ≥ 8, sans les
 valeurs estimées `#`). Tous les chiffres sont produits par [`etude_modeles.py`]({{ '/assets/code/etude_modeles.py' | relative_url }}).
 
-![Comparaison des modèles de masse]({{ '/assets/img/nucleaire/modeles_masse.png' | relative_url }})
+![Comparaison des modèles de masse](/assets/img/nucleaire/modeles_masse.png)
 
 ---
 
@@ -259,7 +259,7 @@ davantage, une contribution négative lui coûte de la liaison.
 Toutes les figures de cette section sont produites par
 [`trace_termes.py`]({{ '/assets/code/trace_termes.py' | relative_url }}).
 
-![Les quatre termes de la goutte le long de la vallée de stabilité, en MeV par nucléon]({{ '/assets/img/nucleaire/termes_goutte.png' | relative_url }})
+![Les quatre termes de la goutte le long de la vallée de stabilité, en MeV par nucléon](/assets/img/nucleaire/termes_goutte.png)
 
 **(a) La goutte.** Le volume apporte une liaison constante, 15,5 MeV par
 nucléon. Les trois autres termes en retirent, chacun à sa façon : la
@@ -270,7 +270,7 @@ avec l'excès de neutrons de la vallée. Les courbes de surface et de Coulomb se
 croisent vers $$A \approx 150$$ : c'est leur duel qui donne au total $$B/A$$ son
 maximum, vers $$A \approx 60$$.
 
-![Corrections de M2 et appariement le long de la vallée de stabilité, en MeV]({{ '/assets/img/nucleaire/termes_m2.png' | relative_url }})
+![Corrections de M2 et appariement le long de la vallée de stabilité, en MeV](/assets/img/nucleaire/termes_m2.png)
 
 **(b) Les corrections de M2.** Échange coulombien et symétrie de surface
 **rendent** chacun jusqu'à 80 MeV aux noyaux les plus lourds. C'est beaucoup
@@ -280,7 +280,7 @@ symétrie de surface zigzague parce que l'excès de neutrons $$N - Z$$ de la
 vallée varie d'un $$A$$ à l'autre. Le terme de Wigner reste autour de −5 MeV,
 l'appariement entre 0 et 3 MeV, en alternance pair/impair.
 
-![Les trois termes de couches de M3 et leur somme le long de la vallée de stabilité]({{ '/assets/img/nucleaire/termes_couches.png' | relative_url }})
+![Les trois termes de couches de M3 et leur somme le long de la vallée de stabilité](/assets/img/nucleaire/termes_couches.png)
 
 **(c) Les couches.** Le terme $$a_1 S$$ pénalise l'éloignement des couches
 fermées, jusqu'à −34 MeV pour les actinides en milieu de couche ; les termes
@@ -288,7 +288,7 @@ $$a_2 S^2$$ et $$a_3\, x_p x_n$$ en rendent une partie. Leur somme vaut
 environ −12 MeV en milieu de couche et remonte exactement à zéro au plomb 208,
 doublement magique.
 
-![Écart RMS sur les masses mesurées quand on ajoute les termes un à un]({{ '/assets/img/nucleaire/termes_gain.png' | relative_url }})
+![Écart RMS sur les masses mesurées quand on ajoute les termes un à un](/assets/img/nucleaire/termes_gain.png)
 
 **(d) Ce que rapporte chaque terme.** On ajuste des modèles de plus en plus
 complets, en ajoutant les termes un à un dans l'ordre du tableau de M3 :
@@ -306,7 +306,7 @@ décrire les noyaux situés de part et d'autre de la vallée. Le gain attribué 
 chaque terme dépend donc de l'ordre dans lequel on les ajoute : ce graphique
 dit ce que chaque terme apporte **en plus des précédents**.
 
-![Contribution de six termes de M3 sur la carte (N, Z) des noyaux mesurés]({{ '/assets/img/nucleaire/termes_carte.png' | relative_url }})
+![Contribution de six termes de M3 sur la carte (N, Z) des noyaux mesurés](/assets/img/nucleaire/termes_carte.png)
 _Six termes sur la carte des noyaux, chacun avec sa propre échelle._
 
 La carte montre **où** chaque terme agit :

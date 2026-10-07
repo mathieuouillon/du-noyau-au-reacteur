@@ -202,7 +202,7 @@ quatre décimales des valeurs de référence.
 
 ## Vue d'ensemble : mesures brutes et modèle
 
-![Énergie de liaison par nucléon : mesures brutes et modèle de la goutte liquide]({{ '/assets/img/nucleaire/energie_liaison_modeles.png' | relative_url }})
+![Énergie de liaison par nucléon : mesures brutes et modèle de la goutte liquide](/assets/img/nucleaire/energie_liaison_modeles.png)
 
 *Généré par [`trace_liaison.py`]({{ '/assets/code/trace_liaison.py' | relative_url }}).*
 

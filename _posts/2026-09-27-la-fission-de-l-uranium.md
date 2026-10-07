@@ -94,7 +94,7 @@ passage de la barrière et le partage des fragments. Tous les chiffres sont prod
 La suite de ces deux scripts, qui ralentit les neutrons et assemble un réseau de
 réacteur, fait l'objet de la [leçon 7]({{ '/posts/ralentir-les-neutrons/' | relative_url }}).
 
-![Courbe de liaison, ralentissement, courbe de modération et quatre facteurs]({{ '/assets/img/nucleaire/fission_bilan.png' | relative_url }})
+![Courbe de liaison, ralentissement, courbe de modération et quatre facteurs](/assets/img/nucleaire/fission_bilan.png)
 _Figure produite par `etude_fission.py`. Le panneau en haut à gauche (courbe de liaison) concerne cette leçon ; les trois autres, la [leçon 7]({{ '/posts/ralentir-les-neutrons/' | relative_url }})._
 
 ---
@@ -185,7 +185,7 @@ composé est pair-pair) et les sections efficaces évaluées (JENDL-4.0) :
 | U-235 | 143 (impair) | U-236 | 6,546 | 5,67 | +0,88 | 585,1 b |
 | U-233 | 141 (impair) | U-234 | 6,845 | 5,50 | +1,35 | 531,3 b |
 
-![Section efficace de fission thermique en fonction de l'énergie apportée par le neutron, pour sept actinides]({{ '/assets/img/nucleaire/fission_seuil.png' | relative_url }})
+![Section efficace de fission thermique en fonction de l'énergie apportée par le neutron, pour sept actinides](/assets/img/nucleaire/fission_seuil.png)
 _Figure produite par [`sections_efficaces.py`]({{ '/assets/code/sections_efficaces.py' | relative_url }})._
 
 Entre 5,2 et 6,3 MeV d'énergie apportée, la fission par neutron lent gagne
@@ -254,7 +254,7 @@ qui compte devient $$\pi ƛ^2$$.
 
 (U-235 : $$R = 1{,}2\,A^{1/3}$$ = 7,41 fm, $$\pi R^2$$ = 1,72 b.)
 
-![Taille quantique du neutron comparée à la taille du noyau d'U-235]({{ '/assets/img/nucleaire/sections_taille.png' | relative_url }})
+![Taille quantique du neutron comparée à la taille du noyau d'U-235](/assets/img/nucleaire/sections_taille.png)
 
 Un neutron de fission (2 MeV) est plus petit que le noyau : sa section efficace
 ne peut guère dépasser l'aire géométrique, et la fission de l'U-235 moyennée
@@ -292,7 +292,7 @@ pendant leur ralentissement sans être capturés
 donne une capture de 1,230 b à 0,0253 eV, soit **46 %** de la valeur évaluée
 (2,683 b) : le reste vient des autres résonances.
 
-![Fission de l'U-235 et capture de l'U-238 entre 0,01 et 100 eV, évaluation ENDF/B-VIII.0 et modèle à une résonance]({{ '/assets/img/nucleaire/endf_resonances.png' | relative_url }})
+![Fission de l'U-235 et capture de l'U-238 entre 0,01 et 100 eV, évaluation ENDF/B-VIII.0 et modèle à une résonance](/assets/img/nucleaire/endf_resonances.png)
 _Figure produite par [`sections_endf.py`]({{ '/assets/code/sections_endf.py' | relative_url }}) : l'évaluation ENDF/B-VIII.0 reconstruite (voir plus bas), et le modèle à une seule résonance._
 
 La comparaison avec l'évaluation complète montre ce que le modèle saisit et ce
@@ -408,7 +408,7 @@ efficaces moyennes, utilisées telles quelles.
 Les écarts de quelques pour cent avec JENDL-4.0 sont des écarts entre deux
 évaluations, pas des erreurs de reconstruction.)
 
-![Fission de l'U-235, capture et fission de l'U-238 de 10⁻⁵ eV à 20 MeV, ENDF/B-VIII.0 à 293,6 K]({{ '/assets/img/nucleaire/endf_vue_ensemble.png' | relative_url }})
+![Fission de l'U-235, capture et fission de l'U-238 de 10⁻⁵ eV à 20 MeV, ENDF/B-VIII.0 à 293,6 K](/assets/img/nucleaire/endf_vue_ensemble.png)
 _Figure produite par [`sections_endf.py`]({{ '/assets/code/sections_endf.py' | relative_url }})._
 
 La vue d'ensemble résume toute la section :
@@ -442,7 +442,7 @@ Une résonance de largeur naturelle $$\Gamma$$ est étalée sur la largeur
 Doppler $$\Delta = \sqrt{4EkT/A}$$, soit 0,054 eV à 6,67 eV et 293,6 K, deux
 fois sa largeur naturelle (0,024 eV).
 
-![La résonance de l'U-238 à 6,67 eV à 0, 293,6, 900 et 1 800 K]({{ '/assets/img/nucleaire/endf_doppler.png' | relative_url }})
+![La résonance de l'U-238 à 6,67 eV à 0, 293,6, 900 et 1 800 K](/assets/img/nucleaire/endf_doppler.png)
 
 | température | pic de capture | largeur à mi-hauteur | aire entre 6,0 et 7,4 eV |
 |---|---|---|---|
@@ -527,7 +527,7 @@ favorable, l'énergie disponible ne culmine pas au partage symétrique :
 | A = 110 | A = 126 | 44 / 48 | 194,8 | 258,5 |
 | A = 118 | A = 118 | 46 / 46 | 193,2 | 258,8 |
 
-![Énergie disponible Q et répulsion coulombienne selon le partage de l'U-236]({{ '/assets/img/nucleaire/fission_partage.png' | relative_url }})
+![Énergie disponible Q et répulsion coulombienne selon le partage de l'U-236](/assets/img/nucleaire/fission_partage.png)
 _Figure produite par [`sections_efficaces.py`]({{ '/assets/code/sections_efficaces.py' | relative_url }})._
 
 Le maximum, 199,3 MeV, est atteint quand le fragment lourd est **¹³²Sn**,

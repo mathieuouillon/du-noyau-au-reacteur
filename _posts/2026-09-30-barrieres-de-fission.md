@@ -74,7 +74,7 @@ sur une famille de formes qui va de la sphère jusqu'à deux fragments, puis ave
 les couches, qui creusent dans la barrière un second puits : c'est la **double
 bosse** des actinides.
 
-![Barrières de fission : formes, surface d'énergie, barrière de la goutte, double bosse]({{ '/assets/img/nucleaire/barrieres_fission.png' | relative_url }})
+![Barrières de fission : formes, surface d'énergie, barrière de la goutte, double bosse](/assets/img/nucleaire/barrieres_fission.png)
 _Figure produite par `etude_barrieres.py`. En haut : la goutte liquide seule (U-236). En bas : la loi de Bohr et Wheeler, puis l'effet des couches._
 
 ---
